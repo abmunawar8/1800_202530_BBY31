@@ -59,6 +59,7 @@ elmo-hikes/
 
 
 ## Contributors
+
 - **Abdullah Munawar** - BCIT CST Student with a passion for coding, and loves problem solving to help others. Fun fact: Loves going on walks on a nice sunny or chilly day.
 - **Mischa Potter** - BCIT CST Student who enjoys making code work! Fun facts: can solve a Rubik's cubes in under 30 seconds, is an identical twin.
 - **Xinwei Zhou** - BCIT CST Student with a passion for outdoor adventures and user-friendly applications. Fun fact: Like playing with computer games.
