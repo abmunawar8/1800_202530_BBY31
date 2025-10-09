@@ -1,1 +1,41 @@
+/* --- Hero Section --- */
+.hero-section {
+  overflow: hidden;
+}
+
+/* The image adjusts automatically to screen size */
+.hero-image {
+  height: auto;
+  object-fit: contain;
+}
+
+/* Text and button centered in image */
+.hero-content {
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: rgb(0, 247, 255);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.hero-btn {
+  font-size: 22px;
+  padding: 12px 30px;
+  margin-top: 15px;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-btn {
+    font-size: 18px;
+    padding: 10px 25px;
+  }
+}
 
