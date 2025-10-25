@@ -6,26 +6,119 @@
     <title>Home</title>
     <script type="module" src="./src/components/site-navbar.js"></script>
     <script type="module" src="./src/components/site-footer.js"></script>
-    
+    <script type="module" src="./src/components/main-footer.js"></script>
+    <script type="module" src="./src/components/main-navbar.js"></script>
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link href="styles/style.css" rel="stylesheet" />
+    <link rel="icon" href="./images/hand-shake.png" />
+
+    <!-- Google Icons (Material Design)-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <site-navbar></site-navbar>
+    <!-- Navbars -->
+    <main-navbar></main-navbar>
+
+    <!-- Welcome message -->
     <div>
-      <div class="container-fluid bg-light text-dark p-5">
-        <div class="container bg-light p-5">
-          <h1 class="display-4">
-            Good morning <span id="name-goes-here">friend </span>
-          </h1>
+      <div class="container-fluid">
+        <div class="container px-5 pt-3">
+          <h1>Ready to volunteer, <span id="name-goes-here"></span>?</h1>
           <hr />
-          <p>Quote of the day: The best view comes after the hardest climb.</p>
         </div>
       </div>
     </div>
 
+    <!-- Cards start here -->
+    <div class="container">
+      <div class="col d-flex justify-content-center my-4">
+        <!-- --------------- -->
+        <!-- Individual Card -->
+        <!-- --------------- -->
+        <div class="card">
+          <div class="row g-0">
+            <div class="col-4">
+              <img
+                src="./images/250x250image.png"
+                class="rounded-start img-fluid"
+                alt="dummy image"
+              />
+            </div>
+            <div class="col-8">
+              <div class="card-body custom-card">
+                <div class="card-left">
+                  <h5 class="card-title">Volunteering Listing Name</h5>
+                  <p class="card-text">
+                    Distance <span id="distance-here"></span><br />
+                    Skills <span id="skills-here"></span><br />
+                  </p>
+                  <p class="card-text">
+                    <small class="text-body-secondary"
+                      >Last updated 3 mins ago</small
+                    >
+                  </p>
+                </div>
+                <div class="card-right">
+                  <span class="material-icons-outlined">clear</span>
+                  <span class="material-icons-outlined">thumb_up</span>
+                  <span class="material-icons-outlined">bookmark_border</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- --------------- -->
+
+      <!-- --------------- -->
+      <!-- Individual Card -->
+      <!-- --------------- -->
+      <div class="col d-flex justify-content-center mb-4">
+        <div class="card">
+          <div class="row g-0">
+            <div class="col-4">
+              <img
+                src="./images/250x250image.png"
+                class="rounded-start img-fluid"
+                alt="dummy image"
+              />
+            </div>
+            <div class="col-8">
+              <div class="card-body custom-card">
+                <div class="card-left">
+                  <h5 class="card-title">Volunteering Listing Name</h5>
+                  <p class="card-text">
+                    Distance <span></span><br />
+                    Skills <span></span><br />
+                  </p>
+                  <p class="card-text">
+                    <small class="text-body-secondary"
+                      >Last updated 3 mins ago</small
+                    >
+                  </p>
+                </div>
+                <div class="card-right">
+                  <span class="material-icons-outlined">clear</span>
+                  <span class="material-icons-outlined">thumb_up</span>
+                  <span class="material-icons-outlined">bookmark_border</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- --------------- -->
+
+    <!-- Footers -->
+    <main-footer></main-footer>
     <site-footer></site-footer>
 
     <script type="module" src="/src/app.js"></script>

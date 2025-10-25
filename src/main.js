@@ -20,7 +20,7 @@ function showDashboard() {
 
     // Update the welcome message with their name/email.
     if (nameElement) {
-      nameElement.textContent = `${name}!`;
+      nameElement.textContent = `${name}`;
     }
   });
 }
