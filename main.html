@@ -1,14 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-</head>
-<body>
-  <site-navbar></site-navbar>
-  <script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <script type="module" src="./src/components/site-navbar.js"></script>
+    <script type="module" src="./src/components/site-footer.js"></script>
     
-  </script>
-</body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <site-navbar></site-navbar>
+    <div>
+      <div class="container-fluid bg-light text-dark p-5">
+        <div class="container bg-light p-5">
+          <h1 class="display-4">
+            Good morning <span id="name-goes-here">friend </span>
+          </h1>
+          <hr />
+          <p>Quote of the day: The best view comes after the hardest climb.</p>
+        </div>
+      </div>
+    </div>
+
+    <site-footer></site-footer>
+
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>

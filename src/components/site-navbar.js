@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 
-import { auth } from "/src/firebaseConfig.js";
-import { logoutUser } from "/src/authentication.js";
+import { auth } from "../firebaseConfig.js";
+import { logoutUser } from "../authentication.js";
 
 class SiteNavbar extends HTMLElement {
   constructor() {
@@ -37,12 +37,17 @@ class SiteNavbar extends HTMLElement {
             <li class="nav-item">
               <a class="nav-link" href="#">News</a>
             </li>
-            <button class="btn btn-outline-success" onclick="location.href = 'login.html'">Login</button>
+            <button
+              class="btn btn-outline-success"
+              onclick="location.href = 'login.html'"
+            >
+              Login
+            </button>
           </ul>
         </div>
       </div>
     </nav>
-        `;
+    `;
   }
   renderAuthControls() {
     const authControls = this.querySelector("#authControls");
