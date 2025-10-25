@@ -27,6 +27,29 @@
   margin-top: 15px;
 }
 
+/* Custom card with icons css */
+.custom-card {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 80% 20%;
+}
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 20px;
+
+}
+
+/* Main bottom footer custom styling */
+.main-footer {
+  width: 85%;
+}
+.main-footer-icons {
+  font-size: 40pt;
+}
+
 /* Responsive adjustment for smaller screens */
 @media (max-width: 768px) {
   .hero-title {
