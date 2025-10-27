@@ -92,7 +92,7 @@ export function checkAuthState() {
         const displayName = user.displayName || user.email;
         $("#welcomeMessage").text(`Hello, ${displayName}!`);
       } else {
-        window.location.href = "index.html";
+        window.location.href = "index.html"; 
       }
     }
   });
