@@ -6,7 +6,7 @@ class MainFooter extends HTMLElement {
     >
       <span class="material-icons main-footer-icons">sell</span>
       <span class="material-icons main-footer-icons">home</span>
-      <span class="material-icons main-footer-icons">account_circle</span>
+      <span class="material-icons main-footer-icons" onclick="location.href = 'account.html'">account_circle</span>
     </div>
     `;
   }
