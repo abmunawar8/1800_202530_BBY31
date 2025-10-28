@@ -46,8 +46,66 @@
 .main-footer {
   width: 85%;
 }
+
 .main-footer-icons {
   font-size: 40pt;
+}
+
+/* Styling for the filters */
+.all-filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10px;
+  font-size: 22px;
+}
+
+/* Hiding the checkbox used as a toggle */
+.toggle-checkbox {
+  display: none;
+}
+
+/* Styling the label as a triangle button */
+.toggle-label {
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  display: inline-block;
+  width: 250px;
+  border-bottom: 2px solid black;
+  /* Solid bottom border */
+  padding: 5px 0;
+}
+
+/* The triangle symbol */
+.toggle-label::before {
+  content: "▶";
+  /* right-pointing triangle */
+  display: inline-block;
+  width: 1em;
+  margin-right: 8px;
+  transition: transform 0.2s;
+}
+
+/* Rotating the triangle when it's checked */
+.toggle-checkbox:checked+.toggle-label::before {
+  transform: rotate(90deg);
+}
+
+/* Showing/hiding the checkbox list */
+.toggle-checkbox:checked~.checkbox-list {
+  display: block;
+}
+
+/* The checkbox list */
+.checkbox-list {
+  display: none;
+  margin-left: 1.5em;
+  margin-top: 0.5em;
 }
 
 /* Responsive adjustment for smaller screens */
@@ -61,4 +119,3 @@
     padding: 10px 25px;
   }
 }
-
