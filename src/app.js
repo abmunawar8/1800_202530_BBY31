@@ -17,11 +17,8 @@ function sayHello() {
   // TODO: implement your logic here
 }
 
-if (window.location.pathname.endsWith("login.html")) {
-  checkSignedInFromRegisterButton();
-}
-
 function checkSignedInFromRegisterButton() {
+  location.href = "login.html";
   onAuthReady((user) => {
     if (!user) {
       // If no user is signed in → redirect back to login page.
