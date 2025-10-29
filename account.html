@@ -15,7 +15,6 @@
 
     <!-- Custom JS components -->
     <script type="module" src="./src/components/main-footer.js"></script>
-    <script type="module" src="./src/components/main-navbar.js"></script>
 
     <!-- Google Icons (Material Design)-->
     <link
@@ -26,14 +25,23 @@
   </head>
   <body>
     <!-- Content here -->
-    <main-navbar></main-navbar>
+    <div
+      class="container-fluid bg-success-subtle p-2 mt-3 d-flex justify-content-between border border-light rounded-5 main-footer"
+    >
+      <br /><br />
+    </div>
+
     <div class="container-fluid">
-      <div class="container px-5 pt-3 d-flex flex-column justify-content-center">
-        <h1>Account</h1>
-        <span class="material-icons">account_circle</span>
-        <button class="btn btn-primary">Log out</button>
+      <div class="container px-5 d-flex flex-column align-items-center">
+        <h1 class="my-3">Account</h1>
+        <span class="material-icons profile-picture">account_circle</span>
+        <button class="btn btn-secondary my-3">Account Info</button>
+        <button class="btn btn-secondary my-3">Skills</button>
+        <button class="btn btn-secondary my-3">Support</button>
+        <button class="btn btn-secondary my-3">Log out</button>
       </div>
     </div>
+
     <main-footer></main-footer>
     <!-- Scripts here -->
     <script type="module" src="./src/app.js"></script>

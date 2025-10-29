@@ -108,6 +108,26 @@
   margin-top: 0.5em;
 }
 
+/* ------------- */
+/* account.html */
+/* ------------- */
+/* Profile picture width */
+.profile-picture {
+  font-size: 100pt;
+}
+
+.btn {
+  width: 200px;
+}
+/* ------------- */
+
+/* --------------------- */
+/* listing-homepage.html */
+/* --------------------- */
+.volunteer-listing-icons {
+  font-size: 35pt;
+}
+
 /* Responsive adjustment for smaller screens */
 @media (max-width: 768px) {
   .hero-title {
