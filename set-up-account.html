@@ -2,44 +2,68 @@
 <!-- author: Xinwei Zhou -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Customize your account</title>
-  <!-- Use the <link> tag to link an external CSS file -->
-  <link rel="stylesheet" href="set-up-account.css" />
-</head>
-<body>
-  <main class="panel" role="main">
-    <h1>Hello !</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customize your account</title>
+    <!-- Use the <link> tag to link an external CSS file -->
+    <link rel="stylesheet" href="set-up-account.css" />
+    <link rel="icon" href="./images/hand-shake.png" />
+  </head>
+  <body>
+    <main class="panel" role="main">
+      <h1>Hello <span id="displayName"></span>!</h1>
 
-    <p class="subtitle">Customize your account</p>
+      <p class="subtitle">Customize your account.</p>
 
-    <h2>skills</h2>
+      <h2>Skills</h2>
 
-    <div class="skills" role="group" aria-labelledby="skills-heading">
-      <div class="skill">
-        <input id="skill-communication" type="checkbox" class="checkbox" aria-label="Communication"/>
-        <label for="skill-communication">Communication</label>
+      <div class="skills" role="group" aria-labelledby="skills-heading">
+        <div class="skill">
+          <input
+            id="skill-communication"
+            type="checkbox"
+            class="checkbox"
+            aria-label="Communication" />
+          <label for="skill-communication">Communication</label>
+        </div>
+        <div class="skill">
+          <input
+            id="skill-public-speaking"
+            type="checkbox"
+            class="checkbox"
+            aria-label="Public Speaking" />
+          <label for="skill-public-speaking">Public Speaking</label>
+        </div>
+        <div class="skill">
+          <input
+            id="skill-time-management"
+            type="checkbox"
+            class="checkbox"
+            aria-label="Time Management" />
+          <label for="skill-time-management">Time Management</label>
+        </div>
       </div>
-      <div class="skill">
-        <input id="skill-public-speaking" type="checkbox" class="checkbox" aria-label="Public Speaking"/>
-        <label for="skill-public-speaking">Public Speaking</label>
-      </div>
-      <div class="skill">
-        <input id="skill-time-management" type="checkbox" class="checkbox" aria-label="Time Management"/>
-        <label for="skill-time-management">Time Management</label>
-      </div>
-    </div>
 
-    <div class="section">
-      <h2>Location</h2>
-      <div class="location-input">
-        <input type="search" placeholder="Search" aria-label="Search location"/>
+      <div class="section">
+        <div class="location-input">
+          <div class="container mt-5">
+            <h2>Location</h2>
+            <input
+              type="text"
+              id="searchInput"
+              class="form-control"
+              placeholder="Search" />
+            <div id="suggestions" class="autocomplete-suggestions"></div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <a href="add-volunteer.html" class="footer-note footer-link">Add more volunteer experience</a>
-  </main>
-</body>
+      <br>
+      <!-- <a href="add-volunteer.html" class="footer-note footer-link"
+        >Add more volunteer experience</a
+      > -->
+      <input class="btn btn-primary" type="submit" formaction="main.html" onclick="location.href = 'main.html'">
+    </main>
+    <script type="module" src="./src/location-autocomplete.js"></script>
+  </body>
 </html>

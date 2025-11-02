@@ -23,8 +23,8 @@ function joinTodayButton() {
   }
   onAuthReady((user) => {
     if (user) {
-      // If user is signed in → redirect back to the home page.
-      location.href = "index.html";
+      // If user is signed in → redirect back to main.html.
+      location.href = "main.html";
       return;
     } else {
       location.href = "login.html";
