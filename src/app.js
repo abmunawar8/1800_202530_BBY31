@@ -14,20 +14,25 @@ import { onAuthReady } from "./authentication.js";
 
 // This is an example function. Replace it with your own logic.
 function sayHello() {
-  // TODO: implement your logic here
+  console.log("hello");
 }
 
-function checkSignedInFromRegisterButton() {
-  location.href = "login.html";
+function joinTodayButton() {
+  () => {
+    registerBtn.removeEventListener("click", joinTodayButton)
+  }
   onAuthReady((user) => {
-    if (!user) {
-      // If no user is signed in → redirect back to login page.
+    if (user) {
+      // If user is signed in → redirect back to the home page.
       location.href = "index.html";
       return;
     } else {
-      location.href = "main.html";
+      location.href = "login.html";
     }
   });
 }
+if (document.body.contains(document.getElementById("register-btn"))) {
+  const registerBtn = document.getElementById("register-btn");
+  registerBtn.addEventListener("click", joinTodayButton);
 
-document.addEventListener("DOMContentLoaded", sayHello);
+}
