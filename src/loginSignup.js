@@ -30,7 +30,8 @@ function initAuthUI() {
     const toLoginBtn = document.getElementById('toLogin');
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
-    const redirectUrl = 'main.html';
+    let redirectUrl = "main.html";
+
 
     // --- Helper Functions ---
     // Toggle element visibility
@@ -68,6 +69,7 @@ function initAuthUI() {
         setVisible(loginView, false);
         setVisible(signupView, true);
         signupView?.querySelector('input')?.focus();
+        redirectUrl = "set-up-account.html";
     });
 
     toLoginBtn?.addEventListener('click', (e) => {
