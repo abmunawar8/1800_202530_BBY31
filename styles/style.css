@@ -1,3 +1,6 @@
+/* --------------------- */
+/* index.html */
+/* --------------------- */
 /* --- Hero Section --- */
 .hero-section {
   overflow: hidden;
@@ -26,6 +29,9 @@
   padding: 12px 30px;
   margin-top: 15px;
 }
+/* --------------------- */
+/* main.html */
+/* --------------------- */
 
 /* Custom card with icons css */
 .custom-card {
@@ -42,6 +48,10 @@
 
 }
 
+.card-width {
+  width: 60%;
+}
+
 /* Main bottom footer custom styling */
 .main-footer {
   width: 85%;
@@ -51,7 +61,13 @@
   font-size: 40pt;
 }
 
-/* Styling for the filters */
+.main-footer-icons:hover {
+  cursor: pointer;
+}
+
+/* --------------------- */
+/* filter.html */
+/* --------------------- */
 .all-filters {
   display: flex;
   flex-direction: column;
