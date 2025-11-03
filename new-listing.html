@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Create New Volunteer Listing</title>
+  <link rel="stylesheet" href="new-listing.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Header buttons -->
+    <div class="header">
+      <button type="reset" form="listingForm" class="btn cancel-btn">Cancel</button>
+      <button type="submit" form="listingForm" class="btn done-btn">Done</button>
+    </div>
+
+    <h1>New Listing</h1>
+
+    <!-- File upload section (no preview) -->
+    <div class="file-upload">
+      <p><strong>Upload files (max 10)</strong></p>
+      <input type="file" name="files" id="files" multiple>
+    </div>
+
+    <!-- Main form -->
+    <form id="listingForm" action="/upload" method="post" enctype="multipart/form-data">
+      <div class="form-grid">
+        <input type="text" name="listing_name" placeholder="Listing Name" required class="col-span-2" />
+
+        <input type="text" name="address" placeholder="Address" class="col-span-2" />
+        <input type="text" name="city" placeholder="City" />
+
+        <input type="text" name="frequency" placeholder="Frequency, e.g. every Friday" />
+        <input type="text" name="date" placeholder="Date (starting and ending)" />
+
+        <input type="text" name="skills" placeholder="Skills Required" class="col-span-2" />
+        <textarea name="description" placeholder="Description" class="col-span-2"></textarea>
+      </div>
+
+      <button type="submit" class="btn submit-btn">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
