@@ -1,4 +1,4 @@
-# Elmo Hikes
+# Volunteering Made Easy
 
 ## Overview
 
