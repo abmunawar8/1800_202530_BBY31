@@ -4,6 +4,7 @@ import { db, auth } from "./firebaseConfig.js";
 import {
   doc,
   onSnapshot,
+  setDoc,
   getDoc,
   getDocs,
   collection,
@@ -38,6 +39,29 @@ function showDashboard() {
 async function showVolunteerListings() {
   const querySnapshot = await getDocs(collection(db, "listings"));
   let eachListing = 1;
+  setTimeout(querySnapshot.forEach((doc) => {
+    addNewVolunteeringCard();
+
+    let getIdName = "card-title" + eachListing;
+    let cardTitle = document.getElementById(getIdName);
+    cardTitle.innerHTML = doc.data().name;
+
+    const cardImg = document.getElementById("card-img" + eachListing);
+    cardImg.setAttribute("src", "./images/250x250image.png");
+
+    getIdName = "card-distance" + eachListing;
+    cardTitle = document.getElementById(getIdName);
+    cardTitle.innerHTML = doc.data().address;
+
+    getIdName = "card-date-added" + eachListing;
+    cardTitle = document.getElementById(getIdName);
+    const date = new Date(doc.data().dateAdded.seconds * 1000)
+    let dateString = date.toISOString().substring(0, 10);
+    cardTitle.innerHTML = dateString;
+
+    eachListing++;
+  }), 1000);
+  
   setTimeout(
     querySnapshot.forEach((doc) => {
       addNewVolunteeringCard();
@@ -79,7 +103,7 @@ function addNewVolunteeringCard() {
 
   const cardHTML =
     `
-      <div class="card card-width">
+      <div class="card">
         <div class="row g-0">
           <div class="col-4">
             <img
@@ -114,7 +138,7 @@ function addNewVolunteeringCard() {
               <div class="card-right">
                 <span class="material-icons-outlined">clear</span>
                 <span class="material-icons-outlined">thumb_up</span>
-                <span class="material-icons-outlined">bookmark_border</span>
+                <span class="material-icons-outlined" id="bookmark` + cardNumber + `">bookmark_border</span>
               </div>
             </div>
           </div>
@@ -137,8 +161,48 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
     // Toggle only if it’s the bookmark icon
     if (icon.textContent === "bookmark_border") {
       icon.textContent = "bookmark";
+      saveListing();
     } else if (icon.textContent === "bookmark") {
       icon.textContent = "bookmark_border";
     }
   }
 });
+
+async function findSpecificListing() {
+  var listingDoc;
+  const querySnapshot = await getDocs(collection(db, "listings"));
+  let count = 1;
+  let x = querySnapshot.forEach( async (doc) => {
+    let currentIcon = document.getElementById("bookmark" + count);
+    console.log(currentIcon);
+    if (currentIcon.textContent == "bookmark") {
+      listingDoc = doc.data();
+    }
+    count++;
+  })
+  return listingDoc;
+}
+
+async function saveListing() {
+  const user = auth.currentUser;
+  try {
+    const listing = await findSpecificListing();
+    console.log(listing.docID);
+    const userDoc = doc(db, "users", user.uid);
+    const savedListings = collection(userDoc, "saved-listings");
+    await setDoc(doc(savedListings, listing.docID), {
+      listing
+    });
+    console.log("works");
+
+    // await setDoc(doc(savedListings, listing.docID), {
+    //   name: listing.name,
+    //   email: listing.contact-email,
+    //   address: listing.address,
+    //   city: listing.city
+    // });
+  } catch (error) {
+  console.log("failed to get document", error);
+  }
+}
+
