@@ -59,7 +59,6 @@ async function showVolunteerListings() {
 
     eachListing++;
   }), 1000);
-  
 }
 
 function addNewVolunteeringCard() {
