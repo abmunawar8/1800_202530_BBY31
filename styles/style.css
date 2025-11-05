@@ -144,6 +144,12 @@
   font-size: 35pt;
 }
 
+/* account-info.html */
+#account-info-box {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
 /* Responsive adjustment for smaller screens */
 @media (max-width: 768px) {
   .hero-title {
