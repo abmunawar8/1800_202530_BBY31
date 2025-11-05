@@ -108,3 +108,19 @@ function addNewVolunteeringCard() {
 }
 
 showDashboard();
+
+// Handle bookmark toggle clicks
+document.getElementById("cards-here").addEventListener("click", (e) => {
+  // Check if the clicked element is a Material icon
+  if (e.target.classList.contains("material-icons-outlined")) {
+    const icon = e.target;
+
+    // Toggle only if it’s the bookmark icon
+    if (icon.textContent === "bookmark_border") {
+      icon.textContent = "bookmark";
+    } else if (icon.textContent === "bookmark") {
+      icon.textContent = "bookmark_border";
+    }
+  }
+});
+
