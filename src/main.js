@@ -167,14 +167,13 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
     }
   }
 });
-
+// ------------------------------
 async function findSpecificListing() {
   var listingDoc;
   const querySnapshot = await getDocs(collection(db, "listings"));
   let count = 1;
-  let x = querySnapshot.forEach( async (doc) => {
+  querySnapshot.forEach( async (doc) => {
     let currentIcon = document.getElementById("bookmark" + count);
-    console.log(currentIcon);
     if (currentIcon.textContent == "bookmark") {
       listingDoc = doc.data();
     }
@@ -182,7 +181,7 @@ async function findSpecificListing() {
   })
   return listingDoc;
 }
-
+// ---------------------------------
 async function saveListing() {
   const user = auth.currentUser;
   try {
@@ -193,14 +192,6 @@ async function saveListing() {
     await setDoc(doc(savedListings, listing.docID), {
       listing
     });
-    console.log("works");
-
-    // await setDoc(doc(savedListings, listing.docID), {
-    //   name: listing.name,
-    //   email: listing.contact-email,
-    //   address: listing.address,
-    //   city: listing.city
-    // });
   } catch (error) {
   console.log("failed to get document", error);
   }
