@@ -1,0 +1,163 @@
+/* Base styling: mobile first */
+:root {
+  --bg: #f7f7f7;
+  --text: #111;
+  --muted: #555;
+  --border: #ccc;
+  --panel: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "PingFang SC", "Noto Sans CJK SC", "Microsoft Yahei", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  line-height: 1.4;
+}
+
+/* Main container */
+.container {
+  background: var(--panel);
+  width: 100%;
+  max-width: 380px;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
+}
+
+/* Header buttons */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* General button styles */
+.btn {
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+/* Specific button colors */
+.cancel-btn {
+  background: #f2f2f2;
+  border-color: #aaa;
+}
+
+.done-btn {
+  background: #000;
+  color: #fff;
+}
+
+/* Page title */
+h1 {
+  text-align: center;
+  font-size: 22px;
+  margin: 12px 0 16px;
+  font-weight: 700;
+}
+
+/* File upload area */
+.file-upload {
+  border: 2px dashed #999;
+  border-radius: 10px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--muted);
+  margin-bottom: 18px;
+  text-align: center;
+  padding: 14px;
+}
+
+.file-upload input {
+  margin-top: 10px;
+}
+
+/* Input and textarea styles */
+input[type="text"], textarea, input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Form grid layout (single column on mobile) */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.col-span-2 {
+  grid-column: 1 / -1;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  margin-top: 14px;
+}
+
+/* === Responsive Breakpoints === */
+
+/* Small tablet: slightly larger layout */
+@media (min-width: 480px) {
+  .container { max-width: 520px; padding: 24px; }
+  h1 { font-size: 24px; }
+}
+
+/* Tablet: switch to two-column grid */
+@media (min-width: 768px) {
+  body { padding: 32px; }
+  .container { max-width: 760px; }
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+  }
+  .file-upload { min-height: 140px; }
+  .header { gap: 16px; }
+}
+
+/* Desktop: wider layout, larger font sizes */
+@media (min-width: 1024px) {
+  .container { max-width: 920px; padding: 28px; }
+  h1 { font-size: 26px; }
+  .btn { font-size: 16px; padding: 10px 20px; }
+  input[type="text"], textarea, input[type="file"] { font-size: 16px; padding: 14px; }
+  .file-upload { min-height: 160px; }
+}
+
+/* Large desktop: limit readability width */
+@media (min-width: 1440px) {
+  .container { max-width: 1000px; }
+}
