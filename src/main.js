@@ -47,7 +47,7 @@ async function showVolunteerListings() {
     cardTitle.innerHTML = doc.data().name;
 
     const cardImg = document.getElementById("card-img" + eachListing);
-    cardImg.setAttribute("src", "./images/250x250image.png");
+    cardImg.setAttribute("src", doc.data().photoURL);
 
     getIdName = "card-distance" + eachListing;
     cardTitle = document.getElementById(getIdName);
@@ -62,31 +62,6 @@ async function showVolunteerListings() {
     eachListing++;
   }), 1000);
   
-  setTimeout(
-    querySnapshot.forEach((doc) => {
-      addNewVolunteeringCard();
-
-      let getIdName = "card-title" + eachListing;
-      let cardTitle = document.getElementById(getIdName);
-      cardTitle.innerHTML = doc.data().name;
-
-      const cardImg = document.getElementById("card-img" + eachListing);
-      cardImg.setAttribute("src", "./images/250x250image.png");
-
-      getIdName = "card-distance" + eachListing;
-      cardTitle = document.getElementById(getIdName);
-      cardTitle.innerHTML = doc.data().address;
-
-      getIdName = "card-date-added" + eachListing;
-      cardTitle = document.getElementById(getIdName);
-      const date = new Date(doc.data().dateAdded.seconds * 1000);
-      let dateString = date.toISOString().substring(0, 10);
-      cardTitle.innerHTML = dateString;
-
-      eachListing++;
-    }),
-    1000
-  );
 }
 
 function addNewVolunteeringCard() {
@@ -167,6 +142,7 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
     }
   }
 });
+
 // ------------------------------
 async function findSpecificListing() {
   var listingDoc;
