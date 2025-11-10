@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saved Listings</title>
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Global CSS (same as account.html) -->
+  <link href="styles/style.css" rel="stylesheet" />
+  <link rel="icon" href="./images/hand-shake.png" />
+
+  <!-- Custom JS components -->
+  <script type="module" src="./src/components/main-footer.js"></script>
+
+  <!-- Google Material Icons -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+TwoTone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <!-- Top green rounded bar (same as account.html) -->
+  <div
+    class="container-fluid bg-success-subtle p-2 mt-3 d-flex justify-content-between border border-light rounded-5 top-navbar"
+  >
+    <br /><br />
+  </div>
+
+  <!-- Main content -->
+  <div class="container-fluid">
+    <div class="container px-5 d-flex flex-column align-items-center">
+
+      <!-- Back button -->
+      <button
+        class="btn btn-secondary my-3"
+        onclick="history.back()"
+      >
+        Back
+      </button>
+
+      <!-- Page title -->
+      <h1 class="my-3">Saved</h1>
+
+      <!-- Saved list mount point -->
+<div id="saved-listings" class="w-100" style="max-width: 600px;"></div>
+
+<!-- Template for a saved card (hidden) -->
+<template id="saved-card-tpl">
+  <div class="card saved-card shadow-sm border-0 mb-3 p-3">
+    <div class="d-flex align-items-center justify-content-between">
+      <!-- Left: image + info -->
+      <div class="d-flex align-items-center">
+        <img class="me-3 saved-card-img" alt="listing image"
+             style="width:72px;height:72px;object-fit:cover;border-radius:8px;background:#6b757c;color:white;display:block"/>
+        <div>
+          <h5 class="mb-1 fw-bold saved-card-title"></h5>
+          <p class="mb-0 text-muted saved-card-sub"></p>
+        </div>
+      </div>
+
+      <!-- Right: actions -->
+      <div class="d-flex flex-column align-items-center">
+        <span class="material-icons my-1 action-close" style="cursor:pointer;">close</span>        
+      </div>
+    </div>
+  </div>
+</template>
+
+  <!-- Bottom navigation bar (same component as account.html) -->
+  <main-footer></main-footer>
+
+  <!-- App JS -->
+  <script type="module" src="./src/app.js"></script>
+  <script type="module" src="./src/saved-listings.js"></script>
+
+</body>
+</html>
