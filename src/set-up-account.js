@@ -20,21 +20,23 @@ function addSkillBtnListeners() {
 
 addSkillBtnListeners();
 
-document.getElementById("submit-btn").addEventListener("click", saveSkillsInfo);
 function saveSkillsInfo() {
   const user = auth.currentUser;
   let skillBtns = document.getElementsByClassName("skill-btn");
   for (let i = 0; i < skillBtns.length; i++) {
     let currentBtn = document.getElementById(skillBtns[i].id);
+    const userDoc = doc(db, "users", user.uid);
+    const userSkills = collection(userDoc, "user-skills");
     if (currentBtn.dataset.clicked == "true") {
-      localStorage.setItem(currentBtn.id, "true");
-      const userDoc = doc(db, "users", user.uid);
-      const userSkills = collection(userDoc, "user-skills");
       setDoc(doc(userSkills, currentBtn.id), {
-        hasSkill: "true"
+      hasSkill: "true"
       });
     } else {
-      localStorage.setItem(currentBtn, "false");
+      setDoc(doc(userSkills, currentBtn.id), {
+      hasSkill: "false"
+      });
     }
   }
+  setTimeout(() => {window.location.assign("../main.html")}, 1500)
 }
+document.getElementById("submit-btn").addEventListener("click", saveSkillsInfo);
