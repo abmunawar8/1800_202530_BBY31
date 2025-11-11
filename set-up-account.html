@@ -15,39 +15,9 @@
       <h1>Hello <span id="displayName"></span>!</h1>
 
       <p class="subtitle">Customize your account.</p>
-
-      <h2>Skills</h2>
-
-      <div class="skills" role="group" aria-labelledby="skills-heading">
-        <div class="skill">
-          <input
-            id="skill-communication"
-            type="checkbox"
-            class="checkbox"
-            aria-label="Communication" />
-          <label for="skill-communication">Communication</label>
-        </div>
-        <div class="skill">
-          <input
-            id="skill-public-speaking"
-            type="checkbox"
-            class="checkbox"
-            aria-label="Public Speaking" />
-          <label for="skill-public-speaking">Public Speaking</label>
-        </div>
-        <div class="skill">
-          <input
-            id="skill-time-management"
-            type="checkbox"
-            class="checkbox"
-            aria-label="Time Management" />
-          <label for="skill-time-management">Time Management</label>
-        </div>
-      </div>
-
       <div class="section">
         <div class="location-input">
-          <div class="container mt-5">
+          <div class="container">
             <h2>Location</h2>
             <input
               type="text"
@@ -60,7 +30,7 @@
       </div>
       <br />
 
-      <form action="./src/set-up-account.js" id="skill-btns" method="post">
+      <form id="skill-btns">
         <fieldset>
           <legend>Pick some of your skills/traits that describe you:</legend>
           <div
@@ -157,8 +127,7 @@
           class="btn btn-primary w-25"
           type="submit"
           id="submit-btn"
-           />
-           <!-- onclick="location.href = 'main.html'" -->
+          />
       </div>
     </main>
     <script type="module" src="./src/location-autocomplete.js"></script>
