@@ -157,3 +157,23 @@ label {
 .autocomplete-suggestion:hover {
   background-color: #f8f9fa;
 }
+
+
+@keyframes hoverBigger {
+  
+}
+
+/* Skill buttons */
+.skill-btn {
+  user-select: none;
+  display: inline;
+  background-color: #dcdcdc;
+  border: 3px solid #888888;
+  border-radius: 20px;
+  margin: 4px 1px;
+  padding: 5px 6px;
+}
+
+.clicked {
+  background-color: aqua;
+}

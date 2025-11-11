@@ -8,8 +8,9 @@
 
 /* The image adjusts automatically to screen size */
 .hero-image {
-  height: auto;
-  object-fit: contain;
+  max-width: 500px;
+  /* height: auto; */
+  /* object-fit: contain; */
 }
 
 /* Text and button centered in image */
