@@ -39,7 +39,7 @@ function showDashboard() {
 async function showVolunteerListings() {
   const querySnapshot = await getDocs(collection(db, "listings"));
   let eachListing = 1;
-  setTimeout(querySnapshot.forEach((doc) => {
+  querySnapshot.forEach((doc) => {
     addNewVolunteeringCard();
 
     let getIdName = "card-title" + eachListing;
@@ -60,7 +60,7 @@ async function showVolunteerListings() {
     cardTitle.innerHTML = dateString;
 
     eachListing++;
-  }), 1000);
+  });
   
 }
 
@@ -162,7 +162,6 @@ async function saveListing() {
   const user = auth.currentUser;
   try {
     const listing = await findSpecificListing();
-    console.log(listing.docID);
     const userDoc = doc(db, "users", user.uid);
     const savedListings = collection(userDoc, "saved-listings");
     await setDoc(doc(savedListings, listing.docID), {

@@ -1,5 +1,5 @@
 <!-- index.html -->
-<!-- author: Xinwei Zhou -->
+<!-- author: Xinwei Zhou, Mischa Potter-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,12 +58,110 @@
           </div>
         </div>
       </div>
-      <br>
-      <!-- <a href="add-volunteer.html" class="footer-note footer-link"
-        >Add more volunteer experience</a
-      > -->
-      <input class="btn btn-primary" type="submit" formaction="main.html" onclick="location.href = 'main.html'">
+      <br />
+
+      <form action="./src/set-up-account.js" id="skill-btns" method="post">
+        <fieldset>
+          <legend>Pick some of your skills/traits that describe you:</legend>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasCommunication"
+            data-clicked="false">
+            Communication
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasComputerSkills"
+            data-clicked="false">
+            Computer Skills
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasCookingSkills"
+            data-clicked="false">
+            Cooking Skills
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasCustomerService"
+            data-clicked="false">
+            Customer Service
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasLift50Lbs"
+            data-clicked="false">
+            Lift 50 lbs
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasMentoring"
+            data-clicked="false">
+            Teaching/Mentoring
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasOrganized"
+            data-clicked="false">
+            Organized
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasPhysicalFitness"
+            data-clicked="false">
+            Physically Fit
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasPublicInteration"
+            data-clicked="false">
+            Public Interaction
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasTeamwork"
+            data-clicked="false">
+            Teamwork
+          </div>
+          <div
+            type="button"
+            class="skill-btn"
+            id="hasToolSkills"
+            data-clicked="false">
+            Tool Proficiency
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Certifications</legend>
+          <div class="skill-btn" id="hasCprCertification" type="button" data-clicked="false">
+            CPR Certification
+          </div>
+          <div class="skill-btn" id="hasCriminalRecordCheck" type="button" data-clicked="false">
+            Criminal Record Check
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="d-flex flex-column justify-content-center">
+        <input
+          class="btn btn-primary w-25"
+          type="submit"
+          id="submit-btn"
+           />
+           <!-- onclick="location.href = 'main.html'" -->
+      </div>
     </main>
     <script type="module" src="./src/location-autocomplete.js"></script>
+    <script type="module" src="./src/set-up-account.js"></script>
   </body>
 </html>
