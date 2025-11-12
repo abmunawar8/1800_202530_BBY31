@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link href="styles/style.css" rel="stylesheet" />
+  <link rel="icon" href="./images/hand-shake.png" />
+
+  <!-- Custom JS components -->
+  <script type="module" src="./src/components/main-footer.js"></script>
+  <script type="module" src="./src/components/main-navbar.js"></script>
+  <script type="module" src="./src/components/site-footer.js"></script>
+  <script type="module" src="./src/components/listing-info-navbar.js"></script>
+
+  <!-- Google Icons (Material Design)-->
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet" />
+  <title>Listing Info</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <listing-info-navbar></listing-info-navbar>
+
+  <!-- Content here -->
+  <div class="container-fluid">
+    <main class="container py-4">
+      <h1 id="volunteerName">Loading...</h1>
+      <img id="volunteerImage" class="img-fluid rounded mt-3" src="" alt="Volunteer image">
+
+      <div class="volunteerDetails">
+        <div id="volunteerAddress">Loading...</div>
+        <div id="volunteerCity">Loading...</div>
+        <div id="volunteerPostalCode">Loading...</div>
+        <div id="volunteerDescription">Loading...</div>
+        <div id="volunteerSkills">Skills: This is for the next sprint</div>
+        <div id="volunteerEmail">Loading...</div>
+        <div id="volunteerPhoneNum">Loading...</div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Footers -->
+  <site-footer></site-footer>
+
+  <!-- External JS Scripts -->
+  <script type="module" src="./src/app.js"></script>
+  <script type="module" src="/src/listing-info.js"></script>
+</body>
+
+</html>
