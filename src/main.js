@@ -42,6 +42,15 @@ async function showVolunteerListings() {
   querySnapshot.forEach((doc) => {
     addNewVolunteeringCard();
 
+    const cardContainer = document.querySelector(
+      `#cards-here > .col:nth-child(${eachListing})`
+    );
+
+    if (cardContainer) {
+      const readMoreLink = cardContainer.querySelector(".read-more");
+      readMoreLink.href = `listing-info.html?docID=${doc.id}`;
+    }
+
     let getIdName = "card-title" + eachListing;
     let cardTitle = document.getElementById(getIdName);
     cardTitle.innerHTML = doc.data().name;
@@ -109,6 +118,7 @@ function addNewVolunteeringCard() {
     `"></span></small
                   >
                 </p>
+                <a class="btn btn-primary read-more" href="#">Read More</a>
               </div>
               <div class="card-right">
                 <span class="material-icons-outlined">clear</span>

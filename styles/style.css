@@ -187,6 +187,15 @@ body {
   padding-bottom: 25px;
 }
 
+#volunteerName {
+  text-align: center;
+}
+
+.volunteerDetails {
+  padding-top: 30px;
+  font-size: 25px;
+}
+
 /* Responsive adjustment for smaller screens */
 @media (max-width: 768px) {
   .hero-title {
