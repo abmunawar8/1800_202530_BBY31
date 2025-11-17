@@ -1,45 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Create New Volunteer Listing</title>
-  <link rel="stylesheet" href="./styles/new-listing.css" />
-  <link rel="icon" href="./images/hand-shake.png" />
-</head>
-<body>
-  <div class="container">
-    <!-- Header buttons -->
-    <div class="header">
-      <button form="listingForm" class="btn cancel-btn" onclick="window.history.back()">Cancel</button>
-      <button type="submit" form="listingForm" class="btn done-btn">Done</button>
-    </div>
-
-    <h1>New Listing</h1>
-
-    <!-- File upload section (no preview) -->
-    <div class="file-upload">
-      <p><strong>Upload files (max 10)</strong></p>
-      <input type="file" name="files" id="files" multiple>
-    </div>
-
-    <!-- Main form -->
-    <form id="listingForm" action="/upload" method="post" enctype="multipart/form-data">
-      <div class="form-grid">
-        <input type="text" name="listing_name" placeholder="Listing Name" required class="col-span-2" />
-
-        <input type="text" name="address" placeholder="Address" class="col-span-2" />
-        <input type="text" name="city" placeholder="City" />
-
-        <input type="text" name="frequency" placeholder="Frequency, e.g. every Friday" />
-        <input type="text" name="date" placeholder="Date (starting and ending)" />
-
-        <input type="text" name="skills" placeholder="Skills Required" class="col-span-2" />
-        <textarea name="description" placeholder="Description" class="col-span-2"></textarea>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Create New Volunteer Listing</title>
+    <link rel="stylesheet" href="./styles/new-listing.css" />
+    <link rel="icon" href="./images/hand-shake.png" />
+    <script type="module" src="./src/new-listing.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header buttons -->
+      <div class="header">
+        <button class="btn cancel-btn" onclick="window.history.back()">Cancel</button>
+        <button class="btn done-btn" id="done-btn" type="button">Done</button>
       </div>
 
-      <button type="submit" class="btn submit-btn">Submit</button>
-    </form>
-  </div>
-</body>
+      <h1>New Listing</h1>
+
+      <!-- File upload section (no preview) -->
+      <div class="file-upload">
+        <img id="mypic-goes-here"/>
+        <strong>Upload one image (&lt; 500kb)</strong>
+        <input type="file" name="files" id="files" />
+      </div>
+
+      <!-- Main form -->
+      <form id="listingForm">
+        <div class="form-grid">
+          <input type="text" name="listing_name" placeholder="Listing Name" required class="col-span-2" id="listingName"/>
+
+          <input type="text" name="address" placeholder="Address" class="col-span-2" id="address" />
+          <input type="text" name="city" placeholder="City" id="city" />
+
+          <input type="text" name="frequency" placeholder="Frequency, e.g. every Friday" id="frequency"/>
+          <input type="text" name="sdate" placeholder="Date (starting)" id="sdate"/>
+          <input type="text" name="edate" placeholder="Date (ending)" id="edate"/>
+          <input type="text" name="email" placeholder="Contact Email" id="email">
+          <input type="text" name="phone" placeholder="Phone number (optional)" id="phone">
+
+          <textarea name="description" placeholder="Description" class="col-span-2" id="description"></textarea>
+
+          <p class="col-span-2">Select some skills that your opportunity needs. This will help qualified volunteers find your listing.</p>
+          <div class="skill-btns col-span-2">
+            <div type="button" class="skill-btn" id="hasCommunication" data-clicked="false">Communication</div>
+            <div type="button" class="skill-btn" id="hasComputerSkills" data-clicked="false">Computer Skills</div>
+            <div type="button" class="skill-btn" id="hasCookingSkills" data-clicked="false">Cooking Skills</div>
+            <div type="button" class="skill-btn" id="hasCustomerService" data-clicked="false">Customer Service</div>
+            <div type="button" class="skill-btn" id="hasLift50Lbs" data-clicked="false">Lift 50 lbs</div>
+            <div type="button" class="skill-btn" id="hasMentoring" data-clicked="false">Teaching/Mentoring</div>
+            <div type="button" class="skill-btn" id="hasOrganized" data-clicked="false">Organized</div>
+            <div type="button" class="skill-btn" id="hasPhysicalSkills" data-clicked="false">Physically Fit</div>
+            <div type="button" class="skill-btn" id="hasPublicInteration" data-clicked="false">Public Interaction</div>
+            <div type="button" class="skill-btn" id="hasTeamwork" data-clicked="false">Teamwork</div>
+            <div type="button" class="skill-btn" id="hasToolSkills" data-clicked="false">Tool Proficiency</div>
+          </div>
+          <p>Certifications</p>
+          <div class="skill-btns col-span-2">
+            <div class="skill-btn" id="hasCprCertification" type="button" data-clicked="false">CPR Certification</div>
+            <div class="skill-btn" id="hasCriminalRecordCheck" type="button" data-clicked="false">Criminal Record Check</div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>

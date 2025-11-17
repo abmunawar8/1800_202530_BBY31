@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "Exo 2";
+  src: url("../fonts/Exo2-VariableFont_wght.ttf");
+}
+
+body {
+  font-family: "Exo 2";
+}
+
 /* --------------------- */
 /* index.html */
 /* --------------------- */
@@ -91,6 +100,7 @@
 /* ===== Prevent footer from covering content ===== */
 body {
   padding-bottom: 140px;  /* Adjust visually (100–160 recommended) */
+  font-family: "Exo 2";
 }
 
 /* ===== Responsive design for small screens ===== */

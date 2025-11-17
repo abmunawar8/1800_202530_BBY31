@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "Exo 2";
+  src: url("../fonts/Exo2-VariableFont_wght.ttf");
+}
 /* Base styling: mobile first */
 :root {
   --bg: #f7f7f7;
@@ -10,13 +14,12 @@
 * {
   box-sizing: border-box;
 }
-
-html, body {
-  height: 100%;
+input, textarea, button, input::file-selector-button {
+  font-family: "Exo 2";
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "PingFang SC", "Noto Sans CJK SC", "Microsoft Yahei", sans-serif;
+  font-family: "Exo 2";
   color: var(--text);
   background: var(--bg);
   display: flex;
@@ -29,7 +32,7 @@ body {
 .container {
   background: var(--panel);
   width: 100%;
-  max-width: 380px;
+  height: 100%;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
@@ -101,13 +104,13 @@ input[type="text"], textarea, input[type="file"] {
 
 textarea {
   min-height: 100px;
-  resize: vertical;
+  resize: none;
 }
 
 /* Form grid layout (single column on mobile) */
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 90vw;
   gap: 12px;
 }
 
@@ -131,9 +134,14 @@ textarea {
 /* === Responsive Breakpoints === */
 
 /* Small tablet: slightly larger layout */
+@media (max-width: 479px) {
+  .form-grid { grid-template-columns: 1fr;}
+  
+}
 @media (min-width: 480px) {
   .container { max-width: 520px; padding: 24px; }
   h1 { font-size: 24px; }
+  .form-grid { grid-template-columns: 1fr;}
 }
 
 /* Tablet: switch to two-column grid */
@@ -157,7 +165,33 @@ textarea {
   .file-upload { min-height: 160px; }
 }
 
-/* Large desktop: limit readability width */
-@media (min-width: 1440px) {
-  .container { max-width: 1000px; }
+
+/* Flexbox for the skill buttons */
+.skill-btns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+
+}
+
+/* Skill button styling */
+.skill-btn {
+  user-select: none;
+  display: inline;
+  background-color: #dcdcdc;
+  border: 3px solid #888888;
+  border-radius: 20px;
+  margin: 4px 1px;
+  padding: 5px 6px;
+}
+
+.clicked {
+  background-color: lightgreen;
+}
+
+/* File preview image styling */
+#myypic-goes-here {
+  height: 50% !important;
+  width: 50%;
 }

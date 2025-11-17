@@ -1,7 +1,12 @@
+@font-face {
+  font-family: "Exo 2";
+  src: url("../fonts/Exo2-VariableFont_wght.ttf");
+}
+
 /* --- Page layout --- */
 body {
   background-color: #ffffff;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Exo 2";
 }
 
 .page-wrap {
