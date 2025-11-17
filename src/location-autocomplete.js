@@ -4,7 +4,7 @@ import { checkAuthState } from "./authentication.js"
 
 checkAuthState();
 
-// Mock data
+// Cities in BC
 const preDefinedSuggestions = [
   "Abbotsford",
   "Burnaby",

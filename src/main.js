@@ -56,7 +56,9 @@ async function showVolunteerListings() {
     cardTitle.innerHTML = doc.data().name;
 
     const cardImg = document.getElementById("card-img" + eachListing);
-    cardImg.setAttribute("src", doc.data().photoURL);
+    let base64String = doc.data().photo1 + doc.data().photo2;
+    cardImg.src = `data:img/png;base64,${base64String}`;
+    
 
     getIdName = "card-distance" + eachListing;
     cardTitle = document.getElementById(getIdName);
@@ -64,8 +66,7 @@ async function showVolunteerListings() {
 
     getIdName = "card-date-added" + eachListing;
     cardTitle = document.getElementById(getIdName);
-    const date = new Date(doc.data().dateAdded.seconds * 1000)
-    let dateString = date.toISOString().substring(0, 10);
+    let dateString = doc.data().dateAdded;
     cardTitle.innerHTML = dateString;
 
     eachListing++;
@@ -175,7 +176,7 @@ async function saveListing() {
     const userDoc = doc(db, "users", user.uid);
     const savedListings = collection(userDoc, "saved-listings");
     await setDoc(doc(savedListings, listing.docID), {
-      listing
+      ...listing
     });
   } catch (error) {
   console.log("failed to get document", error);

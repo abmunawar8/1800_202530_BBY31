@@ -158,11 +158,6 @@ label {
   background-color: #f8f9fa;
 }
 
-
-@keyframes hoverBigger {
-  
-}
-
 /* Skill buttons */
 .skill-btn {
   user-select: none;
@@ -175,5 +170,5 @@ label {
 }
 
 .clicked {
-  background-color: aqua;
+  background-color: lightgreen;
 }

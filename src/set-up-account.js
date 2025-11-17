@@ -1,7 +1,7 @@
 import { auth, db } from "./firebaseConfig.js";
 import { collection, doc, setDoc } from "firebase/firestore";
 
-function addSkillBtnListeners() {
+export function addSkillBtnListeners() {
   let skillBtns = document.getElementsByClassName("skill-btn");
   for (let i = 0; i < skillBtns.length; i++) {
     let currentBtn = skillBtns[i];
@@ -39,4 +39,7 @@ function saveSkillsInfo() {
   }
   setTimeout(() => {window.location.assign("../main.html")}, 1500)
 }
-document.getElementById("submit-btn").addEventListener("click", saveSkillsInfo);
+
+if (document.getElementById("submit-btn")) {
+  document.getElementById("submit-btn").addEventListener("click", saveSkillsInfo);
+}

@@ -92,11 +92,12 @@ async function getListings(ids) {
     const snap = await getDocs(qRef);
     snap.forEach(d => {
       const v = d.data();
+      let photoName = v.photo1 + v.photo2;
       results.push({
         id: d.id,
         title: v.name || "Untitled",
         subtitle: v.city || "",
-        imageUrl: v.photoURL || ""
+        imageUrl: photoName || ""
       });
     });
   }
@@ -110,11 +111,12 @@ async function getListings(ids) {
       const ds = await getDoc(docRef);
       if (ds.exists()) {
         const v = ds.data();
+        let photoName = v.photo1 + v.photo2;
         results.push({
           id: ds.id,
           title: v.name || "Untitled",
           subtitle: v.city || "",
-          imageUrl: v.photoURL || ""
+          imageUrl: photoName || ""
         });
       }
     }

@@ -17,13 +17,15 @@ async function displayVolunteerInfo() {
 
         const volunteer = volunteerSnap.data();
         const name = volunteer.name;
-        const code = volunteer.code;
 
         // The detail constants
         const address = volunteer.address;
         const city = volunteer.city;
-        const postalCode = volunteer.postalCode;
+        const dateAdded = volunteer.dateAdded;
         const description = volunteer.description;
+        const frequency = volunteer.frequency;
+        const startDate = volunteer.startDate;
+        const endDate = volunteer.endDate;
         // const skills = volunteer.skills;
         const email = volunteer.contactEmail;
         const phoneNum = volunteer.phoneNum;
@@ -31,13 +33,17 @@ async function displayVolunteerInfo() {
         // Update the page
         document.getElementById("volunteerName").textContent = name;
         const img = document.getElementById("volunteerImage");
-        img.src = `./images/${code}.png`;
+        let base64String = volunteer.photo1 + volunteer.photo2;
+        img.src = `data:img/png;base64,${base64String}`;
         img.alt = `${name} image`;
 
         document.getElementById("volunteerAddress").textContent = `Address: ${address}`;
         document.getElementById("volunteerCity").textContent = `City: ${city}`;
-        document.getElementById("volunteerPostalCode").textContent = `Postal Code: ${postalCode}`;
+        document.getElementById("volunteerDateAdded").textContent = `Date Added: ${dateAdded}`;
+        document.getElementById("volunteerDateStart").textContent = `Start Date: ${startDate}`;
+        document.getElementById("volunteerDateEnd").textContent = `End Date: ${endDate}`;
         document.getElementById("volunteerDescription").textContent = `Description: ${description}`;
+        document.getElementById("volunteerFrequency").textContent = `Frequency: ${frequency}`;
         // document.getElementById("volunteerSkills").textContent = `Skills: ${skills}`;
         document.getElementById("volunteerEmail").textContent = `Email: ${email}`;
         document.getElementById("volunteerPhoneNum").textContent = `Phone Number: ${phoneNum}`;
