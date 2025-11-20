@@ -33,6 +33,11 @@ function renderEmpty() {
 
 function createCard({ id, title, subtitle, imageUrl }) {
   const frag = tpl.content.cloneNode(true);
+
+  // --- NEW: set the Read More link using the listing ID ---
+  const readMoreBtn = frag.querySelector(".read-more");
+  readMoreBtn.href = `listing-info.html?docID=${id}`;
+
   const card = frag.querySelector(".saved-card");
   card.dataset.id = id;
 
