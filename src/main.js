@@ -39,39 +39,44 @@ function showDashboard() {
 async function showVolunteerListings() {
   const querySnapshot = await getDocs(collection(db, "listings"));
   let eachListing = 1;
-  querySnapshot.forEach((doc) => {
-    addNewVolunteeringCard();
+  querySnapshot.forEach(async (doc) => {
+    let checker = await checkForMatchingSkills(doc.ref);
+    // console.log(checker);
 
-    const cardContainer = document.querySelector(
-      `#cards-here > .col:nth-child(${eachListing})`
-    );
+    if (checker) {
+      addNewVolunteeringCard();
 
-    if (cardContainer) {
-      const readMoreLink = cardContainer.querySelector(".read-more");
-      readMoreLink.href = `listing-info.html?docID=${doc.id}`;
+      const cardContainer = document.querySelector(
+        `#cards-here > .col:nth-child(${eachListing})`
+      );
+
+      if (cardContainer) {
+        const readMoreLink = cardContainer.querySelector(".read-more");
+        readMoreLink.href = `listing-info.html?docID=${doc.id}`;
+      }
+
+      let getIdName = "card-title" + eachListing;
+      let cardTitle = document.getElementById(getIdName);
+      cardTitle.innerHTML = doc.data().name;
+
+      const cardImg = document.getElementById("card-img" + eachListing);
+      let base64String = doc.data().photo1 + doc.data().photo2;
+      cardImg.src = `data:img/png;base64,${base64String}`;
+
+
+      getIdName = "card-distance" + eachListing;
+      cardTitle = document.getElementById(getIdName);
+      cardTitle.innerHTML = doc.data().address;
+
+      getIdName = "card-date-added" + eachListing;
+      cardTitle = document.getElementById(getIdName);
+      let dateString = doc.data().dateAdded;
+      cardTitle.innerHTML = dateString;
+
+      eachListing++;
     }
-
-    let getIdName = "card-title" + eachListing;
-    let cardTitle = document.getElementById(getIdName);
-    cardTitle.innerHTML = doc.data().name;
-
-    const cardImg = document.getElementById("card-img" + eachListing);
-    let base64String = doc.data().photo1 + doc.data().photo2;
-    cardImg.src = `data:img/png;base64,${base64String}`;
-    
-
-    getIdName = "card-distance" + eachListing;
-    cardTitle = document.getElementById(getIdName);
-    cardTitle.innerHTML = doc.data().address;
-
-    getIdName = "card-date-added" + eachListing;
-    cardTitle = document.getElementById(getIdName);
-    let dateString = doc.data().dateAdded;
-    cardTitle.innerHTML = dateString;
-
-    eachListing++;
   });
-  
+
 }
 
 function addNewVolunteeringCard() {
@@ -136,6 +141,73 @@ function addNewVolunteeringCard() {
   cardNumber++;
 }
 
+async function checkForMatchingSkills(docRef) {
+  // const id = getDocIdFromUrl();
+
+  try {
+    // const volunteerRef = doc(db, "listings", id);
+    const volunteerSnap = await getDoc(docRef);
+
+    const volunteer = volunteerSnap.data();
+
+    // The detail constants
+    // A list of skill flags extracted from the 'volunteer' object.
+    const skillDetails = [
+      volunteer.hasCommunication,
+      volunteer.hasComputerSkills,
+      volunteer.hasCookingSkills,
+      volunteer.hasCprCertification,
+      volunteer.hasCriminalRecordCheck,
+      volunteer.hasCustomerService,
+      volunteer.hasLift50Lbs,
+      volunteer.hasMentoring,
+      volunteer.hasOrganized,
+      volunteer.hasPhysicalFitness,
+      volunteer.hasPublicInteration,
+      volunteer.hasTeamwork,
+      volunteer.hasToolSkills,
+    ];
+    // console.log(skillDetails);
+
+    const user = auth.currentUser;
+    if (!user) return [];
+
+    const skillsArray = []; // ← final result
+
+    const userDoc = doc(db, "users", user.uid);
+    const userSkillsCol = collection(userDoc, "user-skills");
+
+    const snapshot = await getDocs(userSkillsCol);
+
+    snapshot.forEach((skillDoc) => {
+      const skillId = skillDoc.id;                 // e.g. "cooking", "cleaning"
+      const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
+
+      // convert to real boolean
+      const hasSkill = hasSkillStr === "true";
+
+      // push structured entry into the list
+      skillsArray.push(hasSkill);
+    });
+
+    console.log(skillDetails);
+    console.log(skillsArray);
+
+    for (let i = 0; i < skillDetails.length; i++) {
+      if (skillDetails[i] === true && skillsArray[i] === true) {
+        // console.log(true);
+        return true;  // or break if you're inside a function
+      }
+    }
+
+    // console.log(false);
+    return false;
+  } catch (error) {
+    console.error("Error loading listing:", error);
+    document.getElementById("volunteerName").textContent = "Error loading listing.";
+  }
+}
+
 showDashboard();
 
 // Handle bookmark toggle clicks
@@ -159,7 +231,7 @@ async function findSpecificListing() {
   var listingDoc;
   const querySnapshot = await getDocs(collection(db, "listings"));
   let count = 1;
-  querySnapshot.forEach( async (doc) => {
+  querySnapshot.forEach(async (doc) => {
     let currentIcon = document.getElementById("bookmark" + count);
     if (currentIcon.textContent == "bookmark") {
       listingDoc = doc.data();
@@ -179,7 +251,7 @@ async function saveListing() {
       ...listing
     });
   } catch (error) {
-  console.log("failed to get document", error);
+    console.log("failed to get document", error);
   }
 }
 

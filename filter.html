@@ -32,7 +32,7 @@
     <!-- All the filters -->
     <div class="all-filters" id="all-filters">
       <!-- The first filter -->
-      <div class="filters" id="filter-1">
+      <div class="filters temp-hidden" id="filter-1">
         <!-- The first filter label-->
         <input type="checkbox" id="toggle-1" class="toggle-checkbox" />
         <label for="toggle-1" class="toggle-label" style="font-size: 25px"
@@ -66,74 +66,89 @@
 
         <!-- The second filter options -->
         <div class="checkbox-list">
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="administrative-office" />Administrative / Office</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="technical-it" />Technical / IT</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="creative-artistic" />Creative / Artistic</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="language-communication" />Language &amp;
-            Communication</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="teaching-mentoring" />Teaching / Mentoring</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="medical-health" />Medical / Health</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="trades-practical-skills" />Trades / Practical Skills</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="teamwork-collaboration" />Teamwork &amp;
-            Collaboration</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="leadership-management" />Leadership &amp; Management</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="problem-solving-critical-thinking" />Problem Solving &amp;
-            Critical Thinking</label
-          >
-        </div>
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="communication" />Communication</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="computer-skills" />Computer Skills</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="cooking-skills" />Cooking Skills</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="cpr-certification" />CPR Certification</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="criminal-record-check" />Criminal Record Check</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="customer-service" />Customer Service</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="lift-50-lbs" />Lift 50 lbs</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="teaching-mentoring" />Teaching / Mentoring</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="organized" />Organized</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="physically-fit" />Physically Fit</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="public-interaction" />Public Interaction</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="teamwork" />Teamwork</label
+          ><br />
+          <label
+            ><input
+              type="checkbox"
+              name="skills[]"
+              value="tool-proficiency" />Tool Proficiency</label
+          >
+        </div>
       </div>
 
       <!-- The third filter -->
-      <div class="filters" id="filter-3">
+      <div class="filters temp-hidden" id="filter-3">
         <!-- The third filter label-->
         <input type="checkbox" id="toggle-3" class="toggle-checkbox" />
         <label for="toggle-3" class="toggle-label" style="font-size: 25px"
@@ -236,7 +251,7 @@
       </div>
 
       <!-- The fourth filter -->
-      <div class="filters" id="filter-4">
+      <div class="filters hidden" id="filter-4">
         <!-- The fourth filter label-->
         <input type="checkbox" id="toggle-4" class="toggle-checkbox" />
         <label for="toggle-4" class="toggle-label" style="font-size: 25px"
@@ -310,7 +325,7 @@
       </div>
 
       <!-- The fifth filter -->
-      <div class="filters" id="filter-5">
+      <div class="filters hidden" id="filter-5">
         <!-- The fifth filter label-->
         <input type="checkbox" id="toggle-5" class="toggle-checkbox" />
         <label for="toggle-5" class="toggle-label" style="font-size: 25px"
@@ -413,7 +428,7 @@
       </div>
 
       <!-- The sixth filter -->
-      <div class="filters" id="filter-6">
+      <div class="filters temp-hidden" id="filter-6">
         <!-- The sixth filter label-->
         <input type="checkbox" id="toggle-6" class="toggle-checkbox" />
         <label for="toggle-6" class="toggle-label" style="font-size: 25px"
@@ -460,7 +475,7 @@
       </div>
 
       <!-- The seventh filter -->
-      <div class="filters" id="filter-7">
+      <div class="filters temp-hidden" id="filter-7">
         <!-- The seventh filter label-->
         <input type="checkbox" id="toggle-7" class="toggle-checkbox" />
         <label for="toggle-7" class="toggle-label" style="font-size: 25px"
@@ -491,6 +506,31 @@
           >
         </div>
       </div>
+
+      <!-- The eighth filter -->
+      <div class="filters temp-hidden" id="filter-8">
+        <!-- The first filter label-->
+        <input type="checkbox" id="toggle-8" class="toggle-checkbox" />
+        <label for="toggle-8" class="toggle-label" style="font-size: 25px"
+          >Date Added</label
+        >
+
+        <!-- The eighth filter options -->
+        <div class="checkbox-list">
+          <label
+            ><input
+              type="radio"
+              name="date_sort[]"
+              value="newest" />Newest</label
+          ><br />
+          <label
+            ><input
+              type="radio"
+              name="date_sort[]"
+              value="oldest" />Oldest</label
+          >
+        </div>
+      </div>
     </div>
 
     <!-- Footers -->
@@ -498,5 +538,6 @@
 
     <!-- External JS Scripts -->
     <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/filter.js"></script>
   </body>
 </html>

@@ -115,6 +115,14 @@ body {
 /* --------------------- */
 /* filter.html */
 /* --------------------- */
+.hidden {
+  display: none;
+}
+
+.temp-hidden {
+  display: none;
+}
+
 .all-filters {
   display: flex;
   flex-direction: column;

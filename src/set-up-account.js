@@ -1,5 +1,5 @@
 import { auth, db } from "./firebaseConfig.js";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
 
 export function addSkillBtnListeners() {
   let skillBtns = document.getElementsByClassName("skill-btn");
@@ -37,9 +37,28 @@ function saveSkillsInfo() {
       });
     }
   }
+  saveLocation(user.uid);
   setTimeout(() => {window.location.assign("../main.html")}, 1500)
 }
 
 if (document.getElementById("submit-btn")) {
   document.getElementById("submit-btn").addEventListener("click", saveSkillsInfo);
+}
+
+async function saveLocation(uid) {
+  const userLocation = document.getElementById('searchInput').value;
+  console.log(userLocation);
+  //b) update user's document in Firestore
+  await updateUserDocument2(uid, userLocation);
+}
+
+async function updateUserDocument2(uid, location) {
+  try {
+    console.log(location);
+    const userRef = doc(db, "users", uid);
+    await updateDoc(userRef, { location });
+    console.log("User document successfully updated!");
+  } catch (error) {
+    console.error("Error updating user document:", error);
+  }
 }
