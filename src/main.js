@@ -1,15 +1,9 @@
 import { getId } from "firebase/installations";
 import { onAuthReady } from "./authentication.js";
 import { db, auth } from "./firebaseConfig.js";
-import {
-  doc,
-  onSnapshot,
-  setDoc,
-  getDoc,
-  getDocs,
-  collection,
-} from "firebase/firestore";
+import { doc, onSnapshot, setDoc, getDoc, getDocs, collection } from "firebase/firestore";
 let cardNumber = 1;
+var displayedDocs = [];
 
 function showDashboard() {
   const nameElement = document.getElementById("name-goes-here"); // the <h1> element to display "Hello, {name}"
@@ -22,9 +16,7 @@ function showDashboard() {
     }
 
     const userDoc = await getDoc(doc(db, "users", user.uid));
-    const name = userDoc.exists()
-      ? userDoc.data().name
-      : user.displayName || user.email;
+    const name = userDoc.exists() ? userDoc.data().name : user.displayName || user.email;
 
     // Update the welcome message with their name/email.
     if (nameElement) {
@@ -44,11 +36,10 @@ async function showVolunteerListings() {
     // console.log(checker);
 
     if (checker) {
-      addNewVolunteeringCard();
+      displayedDocs[displayedDocs.length] = doc.data();
+      addNewVolunteeringCard(doc.data().docID);
 
-      const cardContainer = document.querySelector(
-        `#cards-here > .col:nth-child(${eachListing})`
-      );
+      const cardContainer = document.querySelector(`#cards-here > .col:nth-child(${eachListing})`);
 
       if (cardContainer) {
         const readMoreLink = cardContainer.querySelector(".read-more");
@@ -63,7 +54,6 @@ async function showVolunteerListings() {
       let base64String = doc.data().photo1 + doc.data().photo2;
       cardImg.src = `data:img/png;base64,${base64String}`;
 
-
       getIdName = "card-distance" + eachListing;
       cardTitle = document.getElementById(getIdName);
       cardTitle.innerHTML = doc.data().address;
@@ -76,24 +66,17 @@ async function showVolunteerListings() {
       eachListing++;
     }
   });
-
 }
 
-function addNewVolunteeringCard() {
+function addNewVolunteeringCard(docID) {
   const cardLocation = document.getElementById("cards-here");
-  let classesToAdd = [
-    "col",
-    "d-flex",
-    "justify-content-center",
-    "mb-4",
-    "mx-5",
-  ];
+  let classesToAdd = ["col", "d-flex", "justify-content-center", "mb-4", "mx-5"];
   const div = document.createElement("div");
   div.classList.add(...classesToAdd);
 
   const cardHTML =
     `
-      <div class="card">
+      <div class="card" data-docid="` + docID + `">
         <div class="row g-0">
           <div class="col-4">
             <img
@@ -129,7 +112,9 @@ function addNewVolunteeringCard() {
               <div class="card-right">
                 <span class="material-icons-outlined">clear</span>
                 <span class="material-icons-outlined">thumb_up</span>
-                <span class="material-icons-outlined" id="bookmark` + cardNumber + `">bookmark_border</span>
+                <span class="material-icons-outlined" id="bookmark` +
+    cardNumber +
+    `">bookmark_border</span>
               </div>
             </div>
           </div>
@@ -180,23 +165,21 @@ async function checkForMatchingSkills(docRef) {
     const snapshot = await getDocs(userSkillsCol);
 
     snapshot.forEach((skillDoc) => {
-      const skillId = skillDoc.id;                 // e.g. "cooking", "cleaning"
+      const skillId = skillDoc.id; // e.g. "cooking", "cleaning"
       const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
 
       // convert to real boolean
-      const hasSkill = hasSkillStr === "true";
+      const hasSkill = hasSkillStr == "true";
 
       // push structured entry into the list
       skillsArray.push(hasSkill);
     });
 
-    console.log(skillDetails);
-    console.log(skillsArray);
-
+    // checks for a match if the chosen document and the user skill has at least one of the same
     for (let i = 0; i < skillDetails.length; i++) {
       if (skillDetails[i] === true && skillsArray[i] === true) {
         // console.log(true);
-        return true;  // or break if you're inside a function
+        return true; // or break if you're inside a function
       }
     }
 
@@ -229,15 +212,22 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
 // ------------------------------
 async function findSpecificListing() {
   var listingDoc;
-  const querySnapshot = await getDocs(collection(db, "listings"));
   let count = 1;
-  querySnapshot.forEach(async (doc) => {
+  for (let i = 0; i < displayedDocs.length; i++) {
     let currentIcon = document.getElementById("bookmark" + count);
-    if (currentIcon.textContent == "bookmark") {
-      listingDoc = doc.data();
+    try {
+      if (currentIcon.innerText == "bookmark") {
+        console.log(currentIcon);
+        listingDoc = displayedDocs[i];
+        console.log(listingDoc)
+        break;
+      }
+    } catch (error) {
+      console.log(error);
     }
     count++;
-  })
+  }
+
   return listingDoc;
 }
 // ---------------------------------
@@ -245,13 +235,13 @@ async function saveListing() {
   const user = auth.currentUser;
   try {
     const listing = await findSpecificListing();
+    console.log(listing);
     const userDoc = doc(db, "users", user.uid);
     const savedListings = collection(userDoc, "saved-listings");
     await setDoc(doc(savedListings, listing.docID), {
-      ...listing
+      ...listing,
     });
   } catch (error) {
     console.log("failed to get document", error);
   }
 }
-
