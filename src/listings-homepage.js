@@ -85,7 +85,7 @@ async function deleteCreatedListing(docid, user) {
   }
 }
 
-// tries to remove the deleted listing from the DOM. NOT WORKING as of nov 26 2025
+// removes the deleted listing from the DOM so the user visibly sees it's deleted
 function removeFromDom(docid) {
   console.log("removeFromDom is running")
   let listing = document.querySelector("[data-docid='" + docid + "']");
