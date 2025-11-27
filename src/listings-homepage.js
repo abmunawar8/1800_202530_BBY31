@@ -8,6 +8,8 @@ const template = document.getElementById("created-listing-template");
 var user;
 var userDoc;
 var totalNumlistings;
+
+// loads in the user's created-listings
 onAuthStateChanged(auth, async (e) => {
   if (e) {
     user = e;
@@ -16,18 +18,23 @@ onAuthStateChanged(auth, async (e) => {
     let createdListings = await getDocs(createdListingsRef);
     totalNumlistings = createdListings.size;
     if (createdListings.size != 0) {
+      // looping through the users created listings subcollection
+      // uses a <template> for each card
       createdListings.forEach((d) => {
         let copy = template.content.cloneNode(true);
         let listingName = copy.getElementById("listing-name");
         listingName.innerText = d.data().name;
-        let docIdName = copy.querySelector(".mx-5");
+        let docIdName = copy.querySelector(".mb-4");
         docIdName.setAttribute("data-docid", d.data().docID);
         let base64String = d.data().photo1 + d.data().photo2;
         copy.getElementById("listing-image").src = `data:img/png;base64,${base64String}`;
-        copy.getElementById("delete-btn").addEventListener("click", async () => deleteCreatedListing(docIdName.dataset.docid, e));
+        copy.getElementById("delete-btn").addEventListener("click", async () => {
+          await deleteCreatedListing(docIdName.dataset.docid, e);
+        });
         container.append(copy);
       });
     } else {
+      // if there's no listings, just tell the user they should make one
       showNoListingText();
     }
   } else {
@@ -35,34 +42,54 @@ onAuthStateChanged(auth, async (e) => {
   }
 });
 
+// adds text that displays if the user hasn't created any listings
 function showNoListingText() {
   let p = document.createElement("p");
   p.innerText = "You haven't created any listings. Click on the Create Listing button to get started!";
+  p.setAttribute("class", "mx-5");
   container.append(p);
 }
 
+// deletes the listing from the three different spots where it could be stored:
+// from the main listings collection,
+// the current user's created-listings subcollection (because they made the listing)
+// and from all the other user's saved-listings subcollection
 async function deleteCreatedListing(docid, user) {
   deleteDoc(doc(db, "listings", docid));
   deleteDoc(doc(doc(db, "users", user.uid), "created-listings", docid));
+  // removes the deleted listing from the user's view
+  removeFromDom(docid);
+  // deleting document in every other user's saved listings subcollection
   let userDocs = await getDocs(collection(db, "users"));
-  userDocs.forEach((d) => {
-    let savedListingsRef = collection(d, "saved-listings");
-    if (savedListingsRef.size != 0) {
-      savedListingsRef.forEach((doc) => {
-        if (doc.docID == docid) {
-          () => {
+  userDocs.forEach(async (d) => {
+    try {
+      // gets ref to current user document we're checking
+      let userDocRef = doc(db, "users", d.id);
+      let savedListingsDocs = await getDocs(collection(userDocRef, "saved-listings"));
+      // savedListingsDocs != null && savedListingsDocs.size != 0
+      if (!savedListingsDocs.empty) {
+        savedListingsDocs.forEach((doc) => {
+          if (doc.docID == docid) {
             deleteDoc(doc(doc(db, "users", user.uid), "saved-listings", docid));
-          };
-        }
-      });
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   });
+
   totalNumlistings--;
-  let createdListing = document.querySelector("[data-docid=" + docid + "]");
-  console.log(createdListing);
-  // createdListing.remove();
-  // createdListing.innerHTML = "";
   if (totalNumlistings == 0) {
     showNoListingText();
   }
+}
+
+// tries to remove the deleted listing from the DOM. NOT WORKING as of nov 26 2025
+function removeFromDom(docid) {
+  console.log("removeFromDom is running")
+  let listing = document.querySelector("[data-docid='" + docid + "']");
+  console.log(listing);
+  listing.remove();
+  listing.innerHTML = "";
 }
