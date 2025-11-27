@@ -5,7 +5,8 @@ import { checkAuthState } from "./authentication.js"
 checkAuthState();
 
 // Cities in BC
-const preDefinedSuggestions = [
+// Export this so other files (like set-up-account.js) can use the same list
+export const preDefinedSuggestions = [
   "Abbotsford",
   "Burnaby",
   "Coquitlam",
