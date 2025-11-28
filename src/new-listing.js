@@ -5,6 +5,7 @@ import { addSkillBtnListeners } from "./set-up-account.js";
 var skillsJSON = {};
 
 async function saveListingInfo() {
+  alert("Your new listing is being created. This may take a while.");
   // Gets current user
   const user = auth.currentUser;
   // Create new subcollection

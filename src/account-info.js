@@ -22,10 +22,11 @@ function populateUserInfo() {
                 if (userSnap.exists()) {
                     const userData = userSnap.data();
 
-                    const { name = "", country = "", phoneNum = "" } = userData;
+                    const { name = "", country = "", location = "", phoneNum = "" } = userData;
 
                     document.getElementById("nameInput").value = name;
                     document.getElementById("countryInput").value = country;
+                    document.getElementById("locationInput").value = location;
                     document.getElementById("phoneInput").value = phoneNum;
                 } else {
                     console.log("No such document!");
@@ -66,10 +67,11 @@ async function saveUserInfo() {
     //a) get user entered values
     const userName = document.getElementById('nameInput').value;       //get the value of the field with id="nameInput"
     const userCountry = document.getElementById('countryInput').value;     //get the value of the field with id="countryInput"
+    const userLocation = document.getElementById('locationInput').value;     //get the value of the field with id="locationInput"
     const userPhoneNum = document.getElementById('phoneInput').value;       //get the value of the field with id="phoneInput"
 
     //b) update user's document in Firestore
-    await updateUserDocument(user.uid, userName, userCountry, userPhoneNum);
+    await updateUserDocument(user.uid, userName, userCountry, userLocation, userPhoneNum);
 
     //c) disable edit
     document.getElementById('personalInfoFields').disabled = true; 
@@ -81,10 +83,10 @@ async function saveUserInfo() {
 //   uid (string)  – user’s UID
 //   name, school, city (strings)
 //-------------------------------------------------------------
-async function updateUserDocument(uid, name, country, phoneNum) {
+async function updateUserDocument(uid, name, country, location, phoneNum) {
   try {
     const userRef = doc(db, "users", uid);
-    await updateDoc(userRef, { name, country, phoneNum });
+    await updateDoc(userRef, { name, country, location, phoneNum });
     console.log("User document successfully updated!");
   } catch (error) {
     console.error("Error updating user document:", error);

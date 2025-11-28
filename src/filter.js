@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const skillInputs = document.querySelectorAll("input[name='skills[]']");
     const skillBooleanList = Array.from(skillInputs).map((checkbox) => checkbox.checked);
 
-    console.log("Skill Booleans:", skillBooleanList);
+    // **console.log("Skill Booleans:", skillBooleanList);**
     // Example output: [true, false, false, true, ...]
 
 
@@ -43,15 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ⭐ Example: If you want to save or send them somewhere:
-    const filterResults = {
-      skills: skillBooleanList,
+    // const filterResults = {
+      // skills: skillBooleanList,
       // date_sort: dateSortSelection
-    };
+    // };
 
     // console.log("FINAL FILTER RESULTS:", filterResults);
-    console.log("FINAL FILTER RESULTS:", skillBooleanList);
+    // console.log("FINAL FILTER RESULTS:", skillBooleanList);
+
+    localStorage.setItem("skillsList", JSON.stringify(skillBooleanList));
 
     // You can redirect, send to backend, store in localStorage, etc.
-    // window.location.href = "main.html";
+    window.location.href = "main.html";
   });
 });
