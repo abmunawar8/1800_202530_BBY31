@@ -32,8 +32,22 @@ async function showVolunteerListings() {
   const querySnapshot = await getDocs(collection(db, "listings"));
   let eachListing = 1;
   querySnapshot.forEach(async (doc) => {
-    let checker = await checkForMatchingSkills(doc.ref);
+    let checker = true;
+    if (document.referrer.includes("filter.html")) {
+      // **console.log("Came from filter.html");**
+      const skillBooleanList = JSON.parse(localStorage.getItem("skillsList"));
+      checker = await filterForMatchingSkills(doc.ref,skillBooleanList);
+    } else {
+      // **console.log("Came from another page");**
+      checker = await checkForMatchingSkills(doc.ref);
+    }
+
+    
+    //let checker = await checkForMatchingSkills(doc.ref);
     // console.log(checker);
+    // console.log(document.referrer);
+    // const skillBooleanList = JSON.parse(localStorage.getItem("skillsList"));
+    // console.log("Skill Booleans:", skillBooleanList);
 
     if (checker) {
       displayedDocs[displayedDocs.length] = doc.data();
@@ -175,6 +189,9 @@ async function checkForMatchingSkills(docRef) {
       skillsArray.push(hasSkill);
     });
 
+    // **console.log("Listing Booleans:", skillDetails);**
+    // **console.log("Skill Booleans:", skillsArray);**
+
     // checks for a match if the chosen document and the user skill has at least one of the same
     for (let i = 0; i < skillDetails.length; i++) {
       if (skillDetails[i] === true && skillsArray[i] === true) {
@@ -184,6 +201,73 @@ async function checkForMatchingSkills(docRef) {
     }
 
     // console.log(false);
+    return false;
+  } catch (error) {
+    console.error("Error loading listing:", error);
+    document.getElementById("volunteerName").textContent = "Error loading listing.";
+  }
+}
+
+async function filterForMatchingSkills(docRef,skillsList) {
+  // const id = getDocIdFromUrl();
+
+  try {
+    // const volunteerRef = doc(db, "listings", id);
+    const volunteerSnap = await getDoc(docRef);
+
+    const volunteer = volunteerSnap.data();
+
+    // The detail constants
+    // A list of skill flags extracted from the 'volunteer' object.
+    const skillDetails = [
+      volunteer.hasCommunication,
+      volunteer.hasComputerSkills,
+      volunteer.hasCookingSkills,
+      volunteer.hasCprCertification,
+      volunteer.hasCriminalRecordCheck,
+      volunteer.hasCustomerService,
+      volunteer.hasLift50Lbs,
+      volunteer.hasMentoring,
+      volunteer.hasOrganized,
+      volunteer.hasPhysicalFitness,
+      volunteer.hasPublicInteration,
+      volunteer.hasTeamwork,
+      volunteer.hasToolSkills,
+    ];
+    // console.log(skillDetails);
+
+    const user = auth.currentUser;
+    if (!user) return [];
+
+    // const skillsArray = []; // ← final result
+
+    // const userDoc = doc(db, "users", user.uid);
+    // const userSkillsCol = collection(userDoc, "user-skills");
+
+    // const snapshot = await getDocs(userSkillsCol);
+
+    // snapshot.forEach((skillDoc) => {
+      // const skillId = skillDoc.id;                 // e.g. "cooking", "cleaning"
+      // const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
+
+      // convert to real boolean
+      // const hasSkill = hasSkillStr === "true";
+
+      // push structured entry into the list
+      // skillsArray.push(hasSkill);
+    // });
+
+    // **console.log("Listing Booleans:", skillDetails);**
+    // **console.log("Filter Booleans:", skillsList);**
+
+    for (let i = 0; i < skillDetails.length; i++) {
+      if (skillDetails[i] === true && skillsList[i] === true) {
+        // **console.log(true);**
+        return true;  // or break if you're inside a function
+      }
+    }
+
+    // **console.log(false);**
     return false;
   } catch (error) {
     console.error("Error loading listing:", error);
