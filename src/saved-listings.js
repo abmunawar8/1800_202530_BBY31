@@ -4,19 +4,8 @@
 import { auth, db } from "./firebaseConfig.js";
 
 // Firebase modular APIs
-import {
-  onAuthStateChanged
-} from "firebase/auth";
-import {
-  collection,
-  doc,
-  getDocs,
-  getDoc,
-  query,
-  where,
-  documentId,
-  deleteDoc
-} from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { collection, doc, getDocs, getDoc, query, where, documentId, deleteDoc } from "firebase/firestore";
 
 // ---------- DOM ----------
 const mount = document.getElementById("saved-listings");
@@ -42,29 +31,28 @@ function createCard({ id, title, subtitle, imageUrl }) {
   card.dataset.id = id;
 
   const img = frag.querySelector(".saved-card-img");
-  img.src = imageUrl || "https://via.placeholder.com/72?text=Img";
+  img.src = imageUrl || "";
   img.alt = title || "listing";
 
   frag.querySelector(".saved-card-title").textContent = title || "Untitled";
   frag.querySelector(".saved-card-sub").textContent = subtitle || "";
 
- // close = unsave and remove the listing card
-frag.querySelector(".action-close").addEventListener("click", async () => {
-  try {
-    // Remove this saved listing from Firestore
-    await unsave(card.dataset.id);
+  // close = unsave and remove the listing card
+  frag.querySelector(".action-close").addEventListener("click", async () => {
+    try {
+      // Remove this saved listing from Firestore
+      await unsave(card.dataset.id);
 
-    // Remove the card element from the page
-    card.remove();
+      // Remove the card element from the page
+      card.remove();
 
-    // If no cards remain, render the "empty" message
-    if (!mount.children.length) renderEmpty();
-  } catch (e) {
-    console.error(e);
-    alert("Failed to remove from saved. Please try again.");
-  }
-});
-
+      // If no cards remain, render the "empty" message
+      if (!mount.children.length) renderEmpty();
+    } catch (e) {
+      console.error(e);
+      alert("Failed to remove from saved. Please try again.");
+    }
+  });
 
   return frag;
 }
@@ -76,7 +64,7 @@ async function getSavedIds(uid) {
   const savedCol = collection(db, "users", uid, "saved-listings");
   const snap = await getDocs(savedCol);
   const ids = [];
-  snap.forEach(d => ids.push(d.id));
+  snap.forEach((d) => ids.push(d.id));
   return ids;
 }
 
@@ -84,10 +72,7 @@ async function getSavedIds(uid) {
 async function getListings(ids) {
   if (!ids.length) return [];
 
-  const chunk = (arr, size) =>
-    Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
-      arr.slice(i * size, i * size + size)
-    );
+  const chunk = (arr, size) => Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size));
 
   const chunks = chunk(ids, 10);
   const results = [];
@@ -95,33 +80,34 @@ async function getListings(ids) {
   for (const c of chunks) {
     const qRef = query(collection(db, "listings"), where(documentId(), "in", c));
     const snap = await getDocs(qRef);
-    snap.forEach(d => {
+    snap.forEach((d) => {
       const v = d.data();
-      let photoName = v.photo1 + v.photo2;
+      let photoName = `data:img/png;base64,` + v.photo1 + v.photo2;
       results.push({
         id: d.id,
         title: v.name || "Untitled",
         subtitle: v.city || "",
-        imageUrl: photoName || ""
+        imageUrl: photoName || "",
       });
     });
   }
 
   // In case some IDs are not found by 'in' (e.g., leftover single)
   if (results.length < ids.length) {
-    const found = new Set(results.map(r => r.id));
-    const missing = ids.filter(id => !found.has(id));
+    const found = new Set(results.map((r) => r.id));
+    const missing = ids.filter((id) => !found.has(id));
     for (const id of missing) {
       const docRef = doc(db, "listings", id);
       const ds = await getDoc(docRef);
       if (ds.exists()) {
         const v = ds.data();
         let photoName = v.photo1 + v.photo2;
+        alert(photoName.length);
         results.push({
           id: ds.id,
           title: v.name || "Untitled",
           subtitle: v.city || "",
-          imageUrl: photoName || ""
+          imageUrl: photoName || "",
         });
       }
     }

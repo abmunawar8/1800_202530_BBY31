@@ -12,15 +12,15 @@ import { auth, db } from "./firebaseConfig.js";
 // Form field IDs: nameInput, schoolInput, cityInput
 // -------------------------------------------------------------
 function populateUserInfo() {
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            try {
-                // reference to the user document
-                const userRef = doc(db, "users", user.uid);
-                const userSnap = await getDoc(userRef);
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        // reference to the user document
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
 
-                if (userSnap.exists()) {
-                    const userData = userSnap.data();
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
 
                     const { name = "", country = "", location = "", phoneNum = "" } = userData;
 
@@ -35,34 +35,40 @@ function populateUserInfo() {
                 console.error("Error getting user document:", error);
             }
         } else {
-            console.log("No user is signed in");
+          console.log("No such document!");
         }
-    });
+      } catch (error) {
+        console.error("Error getting user document:", error);
+      }
+    } else {
+      console.log("No user is signed in");
+    }
+  });
 }
 
-//call the function to run it 
+//call the function to run it
 populateUserInfo();
 
 //-------------------------------------------------------------
 // Function to enable editing of user info form fields
-//------------------------------------------------------------- 
-document.querySelector('#editButton').addEventListener('click', editUserInfo);
+//-------------------------------------------------------------
+document.querySelector("#editButton").addEventListener("click", editUserInfo);
 function editUserInfo() {
-    //Enable the form fields
-    document.getElementById('personalInfoFields').disabled = false;
+  //Enable the form fields
+  document.getElementById("personalInfoFields").disabled = false;
 }
 
 //-------------------------------------------------------------
 // Function to save updated user info from the profile form
 //-------------------------------------------------------------
-document.querySelector('#saveButton').addEventListener('click', saveUserInfo);   //Add event listener for save button
+document.querySelector("#saveButton").addEventListener("click", saveUserInfo); //Add event listener for save button
 async function saveUserInfo() {
-    const user = auth.currentUser;   // ✅ get the currently logged-in user
-    if (!user) {
-        alert("No user is signed in. Please log in first.");
-        return;
-    }
-    //enter code here
+  const user = auth.currentUser; // ✅ get the currently logged-in user
+  if (!user) {
+    alert("No user is signed in. Please log in first.");
+    return;
+  }
+  //enter code here
 
     //a) get user entered values
     const userName = document.getElementById('nameInput').value;       //get the value of the field with id="nameInput"
@@ -73,8 +79,8 @@ async function saveUserInfo() {
     //b) update user's document in Firestore
     await updateUserDocument(user.uid, userName, userCountry, userLocation, userPhoneNum);
 
-    //c) disable edit
-    document.getElementById('personalInfoFields').disabled = true; 
+  //c) disable edit
+  document.getElementById("personalInfoFields").disabled = true;
 }
 
 //-------------------------------------------------------------

@@ -15,8 +15,8 @@ async function saveListingInfo() {
   const querySnapshot = await getDocs(collection(db, "listings"));
   const docID = "listings" + (querySnapshot.size + 1);
   const inputImage = localStorage.getItem("inputImage") || "";
-  let imgPart1 = inputImage.substring(0, 500000)
-  let imgPart2 = inputImage.substring(500000, inputImage.size)
+  let imgPart1 = inputImage.substring(0, 500000);
+  let imgPart2 = inputImage.substring(500000, inputImage.size);
   // Get the skills buttons
   getSkills();
   // Get the date that it was added
@@ -54,7 +54,7 @@ async function saveListingInfo() {
   // let a = doc(db, "users", user.uid);
   let getCreatedListing = await getDocs(collection(db, "users", user.uid, "created-listings"));
   var data;
-  getCreatedListing.forEach( async (doc) => {
+  getCreatedListing.forEach(async (doc) => {
     if (doc.data().docID == docID) {
       data = doc.data();
     }
@@ -63,9 +63,7 @@ async function saveListingInfo() {
   await setDoc(doc(listingsRef, data.docID), {
     ...data,
   });
-  setTimeout(() => {
-    window.location.assign("../listings-homepage.html");
-  }, 1500);
+  window.location.assign("../listings-homepage.html");
 }
 
 document.getElementById("done-btn").addEventListener("click", saveListingInfo);
@@ -95,14 +93,14 @@ function uploadImage() {
       reader.onload = function (e) {
         var base64String = e.target.result.split(",")[1]; // Extract Base64 data
         var img = document.createElement("img");
-        img.onload = function(event) {
+        img.onload = function (event) {
           var canvas = document.createElement("canvas");
           var ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0, 250, 300);
           var dataurl = canvas.toDataURL(file.type);
           // document.getElementById("mypic-goes-here").src = e.target.result;
           document.getElementById("mypic-goes-here").src = dataurl;
-        }
+        };
         img.src = e.target.result;
         ///display the image for user to preview
         // Save to localStorage for now until Post is submitted

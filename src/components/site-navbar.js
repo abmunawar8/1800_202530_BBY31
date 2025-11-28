@@ -37,10 +37,10 @@ class SiteNavbar extends HTMLElement {
             <li class="nav-item">
               <a class="nav-link" href="#">News</a>
             </li>
+            </ul>
             <div id="authControls" class="auth-controls d-flex align-items-center gap-2 my-2 my-lg-0">
               <!-- populated by JS -->
-            </div>
-          </ul>
+            </div>        
         </div>
       </div>
     </nav>
@@ -50,17 +50,17 @@ class SiteNavbar extends HTMLElement {
     const authControls = this.querySelector("#authControls");
     console.log("loaded");
     // Initialize with invisible placeholder to maintain layout space
-    authControls.innerHTML = `<div class="btn btn-outline-light" style="visibility: hidden; min-width: 80px;">Log out</div>`;
+    authControls.innerHTML = `<div class="btn btn-outline-light" style="visibility: hidden; min-width: 70px; margin:8px;">Log out</div>`;
 
     onAuthStateChanged(auth, (user) => {
       let updatedAuthControl;
       if (user) {
-        updatedAuthControl = `<button class="btn btn-success" id="signOutBtn" type="button" style="min-width: 80px;">Log out</button>`;
+        updatedAuthControl = `<button class="btn btn-success" id="signOutBtn" type="button" style="min-width: 70px; padding:6px 10px; margin:8px;">Log out</button>`;
         authControls.innerHTML = updatedAuthControl;
         const signOutBtn = authControls.querySelector("#signOutBtn");
         signOutBtn?.addEventListener("click", logoutUser);
       } else {
-        updatedAuthControl = `<a class="btn btn-success" id="loginBtn" href="/login.html" style="min-width: 80px;">Log in</a>`;
+        updatedAuthControl = `<a class="btn btn-success" id="loginBtn" href="/login.html" style="min-width: 70px; padding:6px 10px; margin:8px;">Log in</a>`;
         authControls.innerHTML = updatedAuthControl;
       }
     });
