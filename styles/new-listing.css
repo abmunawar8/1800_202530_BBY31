@@ -14,7 +14,10 @@
 * {
   box-sizing: border-box;
 }
-input, textarea, button, input::file-selector-button {
+input,
+textarea,
+button,
+input::file-selector-button {
   font-family: "Exo 2";
 }
 
@@ -35,7 +38,7 @@ body {
   height: 100%;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 /* Header buttons */
@@ -94,7 +97,9 @@ h1 {
 }
 
 /* Input and textarea styles */
-input[type="text"], textarea, input[type="file"] {
+input[type="text"],
+textarea,
+input[type="file"] {
   width: 100%;
   padding: 12px;
   border-radius: 10px;
@@ -135,36 +140,66 @@ textarea {
 
 /* Small tablet: slightly larger layout */
 @media (max-width: 479px) {
-  .form-grid { grid-template-columns: 1fr;}
-  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 @media (min-width: 480px) {
-  .container { max-width: 520px; padding: 24px; }
-  h1 { font-size: 24px; }
-  .form-grid { grid-template-columns: 1fr;}
+  .container {
+    max-width: 520px;
+    padding: 24px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Tablet: switch to two-column grid */
 @media (min-width: 768px) {
-  body { padding: 32px; }
-  .container { max-width: 760px; }
+  body {
+    padding: 32px;
+  }
+  .container {
+    max-width: 760px;
+  }
   .form-grid {
     grid-template-columns: 1fr 1fr;
     gap: 14px 16px;
   }
-  .file-upload { min-height: 140px; }
-  .header { gap: 16px; }
+  .file-upload {
+    min-height: 140px;
+  }
+  .header {
+    gap: 16px;
+  }
 }
 
 /* Desktop: wider layout, larger font sizes */
 @media (min-width: 1024px) {
-  .container { max-width: 920px; padding: 28px; }
-  h1 { font-size: 26px; }
-  .btn { font-size: 16px; padding: 10px 20px; }
-  input[type="text"], textarea, input[type="file"] { font-size: 16px; padding: 14px; }
-  .file-upload { min-height: 160px; }
+  .container {
+    max-width: 920px;
+    padding: 28px;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  .btn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    font-size: 16px;
+    padding: 14px;
+  }
+  .file-upload {
+    min-height: 160px;
+  }
 }
-
 
 /* Flexbox for the skill buttons */
 .skill-btns {
@@ -172,7 +207,6 @@ textarea {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-
 }
 
 /* Skill button styling */

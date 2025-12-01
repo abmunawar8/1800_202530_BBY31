@@ -25,9 +25,9 @@ Developed for the COMP 1800 course, this project applies User-Centred Design pra
 
 Example:
 
-- **Frontend**: HTML, CSS, JavaScript
+- **Frontend**: HTML5, CSS3, JavaScript
 - **Build Tool**: [Vite](https://vitejs.dev/)
-- **Backend**: Firebase for hosting
+- **Backend**: Firebase for hosting and user authentication
 - **Database**: Firestore
 
 ---
@@ -118,7 +118,9 @@ Example:
 ## Acknowledgments
 
 - Code snippets were adapted from resources such as [Stack Overflow](https://stackoverflow.com/) and [MDN Web Docs](https://developer.mozilla.org/).
+- Code snippets were also taken and adapted from the COMP1800 demos and Tech Tips.
 - Icons sourced from [FontAwesome](https://fontawesome.com/) and images from [Unsplash](https://unsplash.com/).
+- The font, Exo2, was sourced from [Google Fonts](https://fonts.google.com/specimen/Exo+2).
 
 ---
 
@@ -127,10 +129,15 @@ Example:
 ### Limitations
 
 - Accessibility features can be further improved.
+- Currently, the user is only able to upload images that are smaller than 1MB when creating a new listing. This is due to Firestore only allowing documents to be up to 1MB.
 
 ### Future Work
 
 - Scrape web for volunteer opportunities (use API)
+- Use Google Firebase's "Storage" to store user images that are larger than 1MB
+- Create support documentation for how to use the app. Link this to the support button in account.html
+- Add the feature to search for listings
+- Let the user see volunteer listings that they don't have the skills for, but put them at the bottom of their feed
 
 ---
 

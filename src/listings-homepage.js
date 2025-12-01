@@ -3,8 +3,11 @@ import { doc, collection, getDocs, deleteDoc, getDoc } from "firebase/firestore"
 import { onAuthStateChanged } from "firebase/auth";
 
 const container = document.getElementById("container");
+
+// gets the listing template
 const template = document.getElementById("created-listing-template");
 
+// sets up global variables that will be accessed in multiple methods
 var user;
 var userDoc;
 var totalNumlistings;
@@ -17,6 +20,7 @@ onAuthStateChanged(auth, async (e) => {
     let createdListingsRef = collection(userDoc, "created-listings");
     let createdListings = await getDocs(createdListingsRef);
     totalNumlistings = createdListings.size;
+    // if the user has at least one created listing
     if (createdListings.size != 0) {
       // looping through the users created listings subcollection
       // uses a <template> for each card
@@ -78,7 +82,7 @@ async function deleteCreatedListing(docid, user) {
       console.log(error);
     }
   });
-
+  // if there was one listing and the user deleted it, then display the "create new listing" text
   totalNumlistings--;
   if (totalNumlistings == 0) {
     showNoListingText();
@@ -87,7 +91,7 @@ async function deleteCreatedListing(docid, user) {
 
 // removes the deleted listing from the DOM so the user visibly sees it's deleted
 function removeFromDom(docid) {
-  console.log("removeFromDom is running")
+  console.log("removeFromDom is running");
   let listing = document.querySelector("[data-docid='" + docid + "']");
   console.log(listing);
   listing.remove();

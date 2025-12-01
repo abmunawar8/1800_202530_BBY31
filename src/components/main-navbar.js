@@ -1,3 +1,5 @@
+// Main navbar that primarily exists on the Main Page
+// Appears as a light green circle that stays at the top of the screen (is not fixed in place)
 class MainNavbar extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `

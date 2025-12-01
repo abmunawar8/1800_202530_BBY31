@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-
 //--------------------------------------------------------------
 // If you have custom global styles, import them as well:
 //--------------------------------------------------------------
@@ -19,8 +18,8 @@ function sayHello() {
 
 function joinTodayButton() {
   () => {
-    registerBtn.removeEventListener("click", joinTodayButton)
-  }
+    registerBtn.removeEventListener("click", joinTodayButton);
+  };
   onAuthReady((user) => {
     if (user) {
       // If user is signed in → redirect back to main.html.
@@ -34,5 +33,4 @@ function joinTodayButton() {
 if (document.body.contains(document.getElementById("register-btn"))) {
   const registerBtn = document.getElementById("register-btn");
   registerBtn.addEventListener("click", joinTodayButton);
-
 }

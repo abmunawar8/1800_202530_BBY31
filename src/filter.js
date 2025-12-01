@@ -6,8 +6,8 @@ import { auth, db } from "./firebaseConfig.js";
 
 // Get the document ID from the URL
 function getDocIdFromUrl() {
-    const params = new URL(window.location.href).searchParams;
-    return params.get("docID");
+  const params = new URL(window.location.href).searchParams;
+  return params.get("docID");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,9 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   filterButton.addEventListener("click", () => {
     // 1. Check if at least ONE filter option is selected
-    const allInputs = document.querySelectorAll(
-      "input[type='checkbox'], input[type='radio']"
-    );
+    const allInputs = document.querySelectorAll("input[type='checkbox'], input[type='radio']");
 
     const anySelected = Array.from(allInputs).some((input) => input.checked);
 
@@ -33,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // **console.log("Skill Booleans:", skillBooleanList);**
     // Example output: [true, false, false, true, ...]
 
-
     // 3. Get the selected date_sort radio value
     const dateRadio = document.querySelector("input[name='date_sort[]']:checked");
     // const dateSortSelection = dateRadio ? dateRadio.value : null;
@@ -41,11 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // console.log("Date Sort Selection:", dateSortSelection);
     // Example output: "newest" or "oldest" or null
 
-
     // ⭐ Example: If you want to save or send them somewhere:
     // const filterResults = {
-      // skills: skillBooleanList,
-      // date_sort: dateSortSelection
+    // skills: skillBooleanList,
+    // date_sort: dateSortSelection
     // };
 
     // console.log("FINAL FILTER RESULTS:", filterResults);

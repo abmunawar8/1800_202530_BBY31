@@ -1,3 +1,6 @@
+// JavaScript reusable compoent for the site's footer
+// Found in index.html at the bottom
+// Uses template literals and Bootstrap to create the site footer
 class SiteFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `

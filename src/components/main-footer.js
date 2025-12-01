@@ -1,3 +1,7 @@
+// Main footer on most pages of the app
+// Appears as a light green circle that resizes depending on the user's device width
+// Floats on top of other elements (fixed position)
+// Is a reusable JavaScript component
 class MainFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `

@@ -2,13 +2,7 @@
 // Display and manage current user's skills on skills.html
 
 import { onAuthStateChanged } from "firebase/auth";
-import {
-  collection,
-  getDocs,
-  doc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, getDocs, doc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "/src/firebaseConfig.js";
 
 // All possible skills (ID must match Firestore document IDs)
@@ -23,7 +17,7 @@ const ALL_SKILLS = [
   { id: "hasMentoring", label: "Mentoring" },
   { id: "hasOrganized", label: "Organized" },
   { id: "hasPhysicalFitness", label: "Physical Fitness" },
-  { id: "hasPublicInteration", label: "Public Interaction" }, 
+  { id: "hasPublicInteration", label: "Public Interaction" },
   { id: "hasTeamwork", label: "Teamwork" },
   { id: "hasToolSkills", label: "Tool Skills" },
 ];
@@ -66,11 +60,10 @@ async function renderSkillsForUser(user) {
 
       activeSkillIds.add(skillId);
 
-      const skillMeta =
-        ALL_SKILLS.find((s) => s.id === skillId) || {
-          id: skillId,
-          label: skillId,
-        };
+      const skillMeta = ALL_SKILLS.find((s) => s.id === skillId) || {
+        id: skillId,
+        label: skillId,
+      };
 
       const frag = template.content.cloneNode(true);
 
@@ -87,9 +80,7 @@ async function renderSkillsForUser(user) {
 
       if (removeBtn) {
         removeBtn.dataset.skillId = skillId;
-        removeBtn.addEventListener("click", () =>
-          handleRemoveSkill(user, skillId)
-        );
+        removeBtn.addEventListener("click", () => handleRemoveSkill(user, skillId));
       }
 
       listMount.appendChild(frag);
@@ -99,8 +90,7 @@ async function renderSkillsForUser(user) {
     renderAvailableSkillsDropdown(activeSkillIds);
   } catch (error) {
     console.error("Failed to load skills:", error);
-    listMount.innerHTML =
-      "<p class='text-danger my-3'>Failed to load skills. Please try again later.</p>";
+    listMount.innerHTML = "<p class='text-danger my-3'>Failed to load skills. Please try again later.</p>";
   }
 }
 
@@ -165,7 +155,7 @@ async function handleAddSkill(user) {
 // Remove skill (set hasSkill = false)
 // -------------------------------
 async function handleRemoveSkill(user, skillId) {
-    if (!confirm("Remove this skill from your profile?")) return;
+  if (!confirm("Remove this skill from your profile?")) return;
 
   try {
     const skillDocRef = doc(db, "users", user.uid, "user-skills", skillId);
