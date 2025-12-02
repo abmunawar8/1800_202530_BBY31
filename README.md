@@ -138,6 +138,7 @@ Example:
 - Create support documentation for how to use the app. Link this to the support button in account.html
 - Add the feature to search for listings
 - Let the user see volunteer listings that they don't have the skills for, but put them at the bottom of their feed
+- Update the skill options that the user can select from to be more comprehensive
 
 ---
 
