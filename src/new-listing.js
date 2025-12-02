@@ -1,5 +1,31 @@
 import { auth, db } from "./firebaseConfig.js";
 import { collection, doc, setDoc, getDocs, getDoc } from "firebase/firestore";
+// import { addSkillBtnListeners } from "./set-up-account.js"
+
+export function addSkillBtnListeners() {
+  let skillBtns = document.getElementsByClassName("skill-btn");
+  for (let i = 0; i < skillBtns.length; i++) {
+    let currentBtn = skillBtns[i];
+    currentBtn.addEventListener("click", () => {
+      // Get the button element again by its id
+      let isClicked = document.getElementById(currentBtn.id);
+
+      // If button is NOT selected
+      if (isClicked.dataset.clicked == "false") {
+        // Add "clicked" style and mark it as selected
+        isClicked.setAttribute("class", "skill-btn clicked");
+        isClicked.dataset.clicked = "true";
+      } else {
+        // If button is already selected, remove the style
+        isClicked.setAttribute("class", "skill-btn");
+        isClicked.dataset.clicked = "false";
+      }
+    });
+  }
+}
+
+addSkillBtnListeners();
+console.log("hello");
 
 var hasUploadedFile = false;
 var skillsJSON = {};

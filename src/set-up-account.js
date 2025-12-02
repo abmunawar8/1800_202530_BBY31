@@ -9,7 +9,8 @@ import { preDefinedSuggestions } from "./location-autocomplete.js";
 // Also the data-clicked value changes between true/false.
 // ---------------------------------------------
 
-export function addSkillBtnListeners() {
+// export function addSkillBtnListeners() {
+function addSkillBtnListeners() {
   let skillBtns = document.getElementsByClassName("skill-btn");
   for (let i = 0; i < skillBtns.length; i++) {
     let currentBtn = skillBtns[i];
@@ -32,6 +33,7 @@ export function addSkillBtnListeners() {
 }
 
 addSkillBtnListeners();
+console.log("function ran");
 
 // --------------------------------------------------------
 // Helper: check if user location is a full valid city

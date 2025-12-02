@@ -6,7 +6,6 @@
     <title>Create New Volunteer Listing</title>
     <link rel="stylesheet" href="./styles/new-listing.css" />
     <link rel="icon" href="./images/hand-shake.png" />
-    <script type="module" src="./src/new-listing.js"></script>
   </head>
   <body>
     <div class="container">
@@ -15,32 +14,32 @@
         <button class="btn cancel-btn" onclick="window.history.back()">Cancel</button>
         <button class="btn done-btn" id="done-btn" type="button">Done</button>
       </div>
-
+      
       <h1>New Listing</h1>
-
+      
       <!-- File upload section (no preview) -->
       <div class="file-upload">
         <img id="mypic-goes-here" />
         <strong>Upload one image (&lt; 500kb)</strong>
         <input type="file" name="files" id="files" />
       </div>
-
+      
       <!-- Main form -->
       <form id="listingForm">
         <div class="form-grid">
           <input type="text" name="listing_name" placeholder="Listing Name" required class="col-span-2" id="listingName" />
-
+          
           <input type="text" name="address" placeholder="Address" class="col-span-2" id="address" />
           <input type="text" name="city" placeholder="City" id="city" />
-
+          
           <input type="text" name="frequency" placeholder="Frequency, e.g. every Friday" id="frequency" />
           <input type="text" name="sdate" placeholder="Date (starting)" id="sdate" />
           <input type="text" name="edate" placeholder="Date (ending)" id="edate" />
           <input type="text" name="email" placeholder="Contact Email" id="email" />
           <input type="text" name="phone" placeholder="Phone number (optional)" id="phone" />
-
+          
           <textarea name="description" placeholder="Description" class="col-span-2" id="description"></textarea>
-
+          
           <p class="col-span-2">Select some skills that your opportunity needs. This will help qualified volunteers find your listing.</p>
           <div class="skill-btns col-span-2">
             <div type="button" class="skill-btn" id="hasCommunication" data-clicked="false">Communication</div>
@@ -63,5 +62,7 @@
         </div>
       </form>
     </div>
+    <script type="module" src="./src/new-listing.js"></script>
   </body>
-</html>
+  </html>
+  
