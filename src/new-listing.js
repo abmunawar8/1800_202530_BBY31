@@ -1,9 +1,10 @@
 import { auth, db } from "./firebaseConfig.js";
 import { collection, doc, setDoc, getDocs, getDoc } from "firebase/firestore";
-import { addSkillBtnListeners } from "./set-up-account.js";
 
 var skillsJSON = {};
 
+// function that saves the fields the user entered into the new-listing.html form
+// and creates a new listing in the database with the correct info
 async function saveListingInfo() {
   alert("Your new listing is being created. This may take a while.");
   // Gets current user
@@ -23,6 +24,7 @@ async function saveListingInfo() {
   const now = new Date();
   const dateString = now.toDateString();
 
+  // sets the document with all the fields in the form
   await setDoc(doc(createdListings, docID), {
     address: document.getElementById("address").value,
     city: document.getElementById("city").value,
@@ -51,23 +53,34 @@ async function saveListingInfo() {
     photo2: imgPart2,
     docID: docID,
   });
-  // let a = doc(db, "users", user.uid);
+  // gets all the created listings
   let getCreatedListing = await getDocs(collection(db, "users", user.uid, "created-listings"));
   var data;
+  // if a listing in the created listings collection has the same docID as the
+  // listing that was just created, set the global variable data to the current
+  // doc's data
   getCreatedListing.forEach(async (doc) => {
     if (doc.data().docID == docID) {
       data = doc.data();
     }
   });
+  // add the created document to the listings collection
   let listingsRef = collection(db, "listings");
   await setDoc(doc(listingsRef, data.docID), {
     ...data,
   });
+
+  // redirects the user
   window.location.assign("../listings-homepage.html");
 }
 
+// adds an event listener to the done button, which calls the saveListingInfo function
 document.getElementById("done-btn").addEventListener("click", saveListingInfo);
 
+// loops through all the skill buttons
+// if the skill was clicked, add the skill name as a key value pair to a JSON
+// object set to true. If the skill wasn't clicked, still add it as a key value
+// pair but set it to false
 function getSkills() {
   let skillBtns = document.getElementsByClassName("skill-btn");
   for (let i = 0; i < skillBtns.length; i++) {
@@ -81,6 +94,8 @@ function getSkills() {
   }
 }
 
+// listens for an image that has been uploaded to the form
+// if the user uploads an image
 function uploadImage() {
   // Attach event listener to the file input
   // Function to handle file selection and Base64 encoding
@@ -94,6 +109,8 @@ function uploadImage() {
         var base64String = e.target.result.split(",")[1]; // Extract Base64 data
         var img = document.createElement("img");
         img.onload = function (event) {
+          // draws a small preview for the user so they know they uploaded
+          // the correct image
           var canvas = document.createElement("canvas");
           var ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0, 250, 300);

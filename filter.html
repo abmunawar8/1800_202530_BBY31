@@ -11,18 +11,14 @@
     <script type="module" src="./src/components/filter-navbar.js"></script>
 
     <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- CSS -->
     <link href="styles/style.css" rel="stylesheet" />
     <link rel="icon" href="./images/hand-shake.png" />
 
     <!-- Google Icons (Material Design)-->
-    <link
-      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-      rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" />
   </head>
 
   <body>
@@ -35,24 +31,12 @@
       <div class="filters temp-hidden" id="filter-1">
         <!-- The first filter label-->
         <input type="checkbox" id="toggle-1" class="toggle-checkbox" />
-        <label for="toggle-1" class="toggle-label" style="font-size: 25px"
-          >Distance</label
-        >
+        <label for="toggle-1" class="toggle-label" style="font-size: 25px">Distance</label>
 
         <!-- The first filter options -->
         <div class="checkbox-list">
-          <label
-            ><input
-              type="checkbox"
-              name="distance[]"
-              value="nearest-to-farthest" />Nearest to Farthest</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="distance[]"
-              value="farthest-to-nearest" />Farthest to Nearest</label
-          >
+          <label><input type="checkbox" name="distance[]" value="nearest-to-farthest" />Nearest to Farthest</label><br />
+          <label><input type="checkbox" name="distance[]" value="farthest-to-nearest" />Farthest to Nearest</label>
         </div>
       </div>
 
@@ -60,193 +44,49 @@
       <div class="filters" id="filter-2">
         <!-- The second filter label-->
         <input type="checkbox" id="toggle-2" class="toggle-checkbox" />
-        <label for="toggle-2" class="toggle-label" style="font-size: 25px"
-          >Skills</label
-        >
+        <label for="toggle-2" class="toggle-label" style="font-size: 25px">Skills</label>
 
         <!-- The second filter options -->
         <div class="checkbox-list">
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="communication" />Communication</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="computer-skills" />Computer Skills</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="cooking-skills" />Cooking Skills</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="cpr-certification" />CPR Certification</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="criminal-record-check" />Criminal Record Check</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="customer-service" />Customer Service</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="lift-50-lbs" />Lift 50 lbs</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="teaching-mentoring" />Teaching / Mentoring</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="organized" />Organized</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="physically-fit" />Physically Fit</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="public-interaction" />Public Interaction</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="teamwork" />Teamwork</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="skills[]"
-              value="tool-proficiency" />Tool Proficiency</label
-          >
-        </div>
+          <label><input type="checkbox" name="skills[]" value="communication" />Communication</label><br />
+          <label><input type="checkbox" name="skills[]" value="computer-skills" />Computer Skills</label><br />
+          <label><input type="checkbox" name="skills[]" value="cooking-skills" />Cooking Skills</label><br />
+          <label><input type="checkbox" name="skills[]" value="cpr-certification" />CPR Certification</label><br />
+          <label><input type="checkbox" name="skills[]" value="criminal-record-check" />Criminal Record Check</label><br />
+          <label><input type="checkbox" name="skills[]" value="customer-service" />Customer Service</label><br />
+          <label><input type="checkbox" name="skills[]" value="lift-50-lbs" />Lift 50 lbs</label><br />
+          <label><input type="checkbox" name="skills[]" value="teaching-mentoring" />Teaching / Mentoring</label><br />
+          <label><input type="checkbox" name="skills[]" value="organized" />Organized</label><br />
+          <label><input type="checkbox" name="skills[]" value="physically-fit" />Physically Fit</label><br />
+          <label><input type="checkbox" name="skills[]" value="public-interaction" />Public Interaction</label><br />
+          <label><input type="checkbox" name="skills[]" value="teamwork" />Teamwork</label><br />
+          <label><input type="checkbox" name="skills[]" value="tool-proficiency" />Tool Proficiency</label>
+        </div>
       </div>
 
       <!-- The third filter -->
       <div class="filters temp-hidden" id="filter-3">
         <!-- The third filter label-->
         <input type="checkbox" id="toggle-3" class="toggle-checkbox" />
-        <label for="toggle-3" class="toggle-label" style="font-size: 25px"
-          >Languages</label
-        >
+        <label for="toggle-3" class="toggle-label" style="font-size: 25px">Languages</label>
 
         <!-- The third filter options -->
         <div class="checkbox-list">
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="english" />English</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="mandarin-chinese" />Mandarin Chinese</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="hindi" />Hindi</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="spanish" />Spanish</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="french" />French</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="standard-arabic" />Standard Arabic</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="bengali" />Bengali</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="portuguese" />Portuguese</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="russian" />Russian</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="urdu" />Urdu</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="indonesian" />Indonesian</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="german" />German</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="japanese" />Japanese</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="punjabi" />Punjabi</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="languages[]"
-              value="marathi" />Marathi</label
-          >
+          <label><input type="checkbox" name="languages[]" value="english" />English</label><br />
+          <label><input type="checkbox" name="languages[]" value="mandarin-chinese" />Mandarin Chinese</label><br />
+          <label><input type="checkbox" name="languages[]" value="hindi" />Hindi</label><br />
+          <label><input type="checkbox" name="languages[]" value="spanish" />Spanish</label><br />
+          <label><input type="checkbox" name="languages[]" value="french" />French</label><br />
+          <label><input type="checkbox" name="languages[]" value="standard-arabic" />Standard Arabic</label><br />
+          <label><input type="checkbox" name="languages[]" value="bengali" />Bengali</label><br />
+          <label><input type="checkbox" name="languages[]" value="portuguese" />Portuguese</label><br />
+          <label><input type="checkbox" name="languages[]" value="russian" />Russian</label><br />
+          <label><input type="checkbox" name="languages[]" value="urdu" />Urdu</label><br />
+          <label><input type="checkbox" name="languages[]" value="indonesian" />Indonesian</label><br />
+          <label><input type="checkbox" name="languages[]" value="german" />German</label><br />
+          <label><input type="checkbox" name="languages[]" value="japanese" />Japanese</label><br />
+          <label><input type="checkbox" name="languages[]" value="punjabi" />Punjabi</label><br />
+          <label><input type="checkbox" name="languages[]" value="marathi" />Marathi</label>
         </div>
       </div>
 
@@ -254,73 +94,20 @@
       <div class="filters hidden" id="filter-4">
         <!-- The fourth filter label-->
         <input type="checkbox" id="toggle-4" class="toggle-checkbox" />
-        <label for="toggle-4" class="toggle-label" style="font-size: 25px"
-          >Genres</label
-        >
+        <label for="toggle-4" class="toggle-label" style="font-size: 25px">Genres</label>
 
         <!-- The fourth filter options -->
         <div class="checkbox-list">
-          <label
-            ><input
-              type="checkbox"
-              name="genres[]"
-              value="education-mentoring" />Education/Mentoring</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="genres[]"
-              value="health-wellness" />Health/Wellness</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="genres[]"
-              value="environment-conservation" />Environment/Conservation</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="genres[]"
-              value="social-services-humanitarian-aid" />Social
-            Services/Humanitarian Aid</label
-          ><br />
-          <label
-            ><input type="checkbox" name="genres[]" value="arts-culture" />Arts
-            &amp; Culture</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="genres[]"
-              value="animal-care-rescue" />Animal Care & Rescue</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="genres[]"
-              value="community-development-advocacy" />Community
-            Development</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="genres[]"
-              value="sports-recreation" />Sports &amp; Recreation</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="genres[]"
-              value="science-research" />Science &amp; Research</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="genres[]"
-              value="event-administrative-support" />Event/Administrative
-            Support</label
-          >
+          <label><input type="checkbox" name="genres[]" value="education-mentoring" />Education/Mentoring</label><br />
+          <label><input type="checkbox" name="genres[]" value="health-wellness" />Health/Wellness</label><br />
+          <label><input type="checkbox" name="genres[]" value="environment-conservation" />Environment/Conservation</label><br />
+          <label><input type="checkbox" name="genres[]" value="social-services-humanitarian-aid" />Social Services/Humanitarian Aid</label><br />
+          <label><input type="checkbox" name="genres[]" value="arts-culture" />Arts &amp; Culture</label><br />
+          <label><input type="checkbox" name="genres[]" value="animal-care-rescue" />Animal Care & Rescue</label><br />
+          <label><input type="checkbox" name="genres[]" value="community-development-advocacy" />Community Development</label><br />
+          <label><input type="checkbox" name="genres[]" value="sports-recreation" />Sports &amp; Recreation</label><br />
+          <label><input type="checkbox" name="genres[]" value="science-research" />Science &amp; Research</label><br />
+          <label><input type="checkbox" name="genres[]" value="event-administrative-support" />Event/Administrative Support</label>
         </div>
       </div>
 
@@ -328,102 +115,25 @@
       <div class="filters hidden" id="filter-5">
         <!-- The fifth filter label-->
         <input type="checkbox" id="toggle-5" class="toggle-checkbox" />
-        <label for="toggle-5" class="toggle-label" style="font-size: 25px"
-          >Accessibility</label
-        >
+        <label for="toggle-5" class="toggle-label" style="font-size: 25px">Accessibility</label>
 
         <!-- The fifth filter options -->
         <div class="checkbox-list">
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="remote" />Remote / Virtual</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="wheelchair" />Wheelchair Accessible</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="transportation" />Transit Accessible</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="flexible" />Flexible Schedule</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="cognitive" />Cognitive Friendly</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="sensory" />Sensory Friendly</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="techlight" />Low-Tech / Offline</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="social" />Social / Community</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="outdoor" />Outdoor / Nature</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="structured" />Structured Tasks</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="language" />Language Accessible</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="family" />Family Friendly</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="health" />Low-Exposure / Health Safe</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="skill" />Skill-Based</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="accessibility[]"
-              value="active" />Active / Movement</label
-          >
+          <label><input type="checkbox" name="accessibility[]" value="remote" />Remote / Virtual</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="wheelchair" />Wheelchair Accessible</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="transportation" />Transit Accessible</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="flexible" />Flexible Schedule</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="cognitive" />Cognitive Friendly</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="sensory" />Sensory Friendly</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="techlight" />Low-Tech / Offline</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="social" />Social / Community</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="outdoor" />Outdoor / Nature</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="structured" />Structured Tasks</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="language" />Language Accessible</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="family" />Family Friendly</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="health" />Low-Exposure / Health Safe</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="skill" />Skill-Based</label><br />
+          <label><input type="checkbox" name="accessibility[]" value="active" />Active / Movement</label>
         </div>
       </div>
 
@@ -431,46 +141,16 @@
       <div class="filters temp-hidden" id="filter-6">
         <!-- The sixth filter label-->
         <input type="checkbox" id="toggle-6" class="toggle-checkbox" />
-        <label for="toggle-6" class="toggle-label" style="font-size: 25px"
-          >Duration</label
-        >
+        <label for="toggle-6" class="toggle-label" style="font-size: 25px">Duration</label>
 
         <!-- The sixth filter options -->
         <div class="checkbox-list">
-          <label
-            ><input
-              type="checkbox"
-              name="duration[]"
-              value="one_time" />One-Time Event</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="duration[]"
-              value="short_term" />Short-Term (Days to Weeks)</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="duration[]"
-              value="medium_term" />Medium-Term (1 to 3 Months)</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="duration[]"
-              value="long_term" />Long-Term (3 to 12 Months)</label
-          ><br />
-          <label
-            ><input type="checkbox" name="duration[]" value="ongoing" />Ongoing
-            / Indefinite</label
-          ><br />
-          <label
-            ><input
-              type="checkbox"
-              name="duration[]"
-              value="flexible" />Flexible / On-Call</label
-          >
+          <label><input type="checkbox" name="duration[]" value="one_time" />One-Time Event</label><br />
+          <label><input type="checkbox" name="duration[]" value="short_term" />Short-Term (Days to Weeks)</label><br />
+          <label><input type="checkbox" name="duration[]" value="medium_term" />Medium-Term (1 to 3 Months)</label><br />
+          <label><input type="checkbox" name="duration[]" value="long_term" />Long-Term (3 to 12 Months)</label><br />
+          <label><input type="checkbox" name="duration[]" value="ongoing" />Ongoing / Indefinite</label><br />
+          <label><input type="checkbox" name="duration[]" value="flexible" />Flexible / On-Call</label>
         </div>
       </div>
 
@@ -478,32 +158,15 @@
       <div class="filters temp-hidden" id="filter-7">
         <!-- The seventh filter label-->
         <input type="checkbox" id="toggle-7" class="toggle-checkbox" />
-        <label for="toggle-7" class="toggle-label" style="font-size: 25px"
-          >Age Range</label
-        >
+        <label for="toggle-7" class="toggle-label" style="font-size: 25px">Age Range</label>
 
         <!-- The seventh filter options -->
         <div class="checkbox-list">
-          <label
-            ><input type="checkbox" name="age_range[]" value="youth" />Youth
-            (Under 13)</label
-          ><br />
-          <label
-            ><input type="checkbox" name="age_range[]" value="teens" />Teens (13
-            to 17)</label
-          ><br />
-          <label
-            ><input type="checkbox" name="age_range[]" value="adults" />Adults
-            (18 to 65)</label
-          ><br />
-          <label
-            ><input type="checkbox" name="age_range[]" value="seniors" />Seniors
-            (65+)</label
-          ><br />
-          <label
-            ><input type="checkbox" name="age_range[]" value="all_ages" />All
-            Ages</label
-          >
+          <label><input type="checkbox" name="age_range[]" value="youth" />Youth (Under 13)</label><br />
+          <label><input type="checkbox" name="age_range[]" value="teens" />Teens (13 to 17)</label><br />
+          <label><input type="checkbox" name="age_range[]" value="adults" />Adults (18 to 65)</label><br />
+          <label><input type="checkbox" name="age_range[]" value="seniors" />Seniors (65+)</label><br />
+          <label><input type="checkbox" name="age_range[]" value="all_ages" />All Ages</label>
         </div>
       </div>
 
@@ -511,24 +174,12 @@
       <div class="filters temp-hidden" id="filter-8">
         <!-- The first filter label-->
         <input type="checkbox" id="toggle-8" class="toggle-checkbox" />
-        <label for="toggle-8" class="toggle-label" style="font-size: 25px"
-          >Date Added</label
-        >
+        <label for="toggle-8" class="toggle-label" style="font-size: 25px">Date Added</label>
 
         <!-- The eighth filter options -->
         <div class="checkbox-list">
-          <label
-            ><input
-              type="radio"
-              name="date_sort[]"
-              value="newest" />Newest</label
-          ><br />
-          <label
-            ><input
-              type="radio"
-              name="date_sort[]"
-              value="oldest" />Oldest</label
-          >
+          <label><input type="radio" name="date_sort[]" value="newest" />Newest</label><br />
+          <label><input type="radio" name="date_sort[]" value="oldest" />Oldest</label>
         </div>
       </div>
     </div>

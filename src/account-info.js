@@ -18,22 +18,13 @@ function populateUserInfo() {
         // reference to the user document
         const userRef = doc(db, "users", user.uid);
         const userSnap = await getDoc(userRef);
-
         if (userSnap.exists()) {
           const userData = userSnap.data();
-
-                    const { name = "", country = "", location = "", phoneNum = "" } = userData;
-
-                    document.getElementById("nameInput").value = name;
-                    document.getElementById("countryInput").value = country;
-                    document.getElementById("locationInput").value = location;
-                    document.getElementById("phoneInput").value = phoneNum;
-                } else {
-                    console.log("No such document!");
-                }
-            } catch (error) {
-                console.error("Error getting user document:", error);
-            }
+          const { name = "", country = "", location = "", phoneNum = "" } = userData;
+          document.getElementById("countryInput").value = country;
+          document.getElementById("nameInput").value = name;
+          document.getElementById("locationInput").value = location;
+          document.getElementById("phoneInput").value = phoneNum;
         } else {
           console.log("No such document!");
         }
@@ -70,14 +61,14 @@ async function saveUserInfo() {
   }
   //enter code here
 
-    //a) get user entered values
-    const userName = document.getElementById('nameInput').value;       //get the value of the field with id="nameInput"
-    const userCountry = document.getElementById('countryInput').value;     //get the value of the field with id="countryInput"
-    const userLocation = document.getElementById('locationInput').value;     //get the value of the field with id="locationInput"
-    const userPhoneNum = document.getElementById('phoneInput').value;       //get the value of the field with id="phoneInput"
+  //a) get user entered values
+  const userName = document.getElementById("nameInput").value; //get the value of the field with id="nameInput"
+  const userCountry = document.getElementById("countryInput").value; //get the value of the field with id="countryInput"
+  const userLocation = document.getElementById("locationInput").value; //get the value of the field with id="locationInput"
+  const userPhoneNum = document.getElementById("phoneInput").value; //get the value of the field with id="phoneInput"
 
-    //b) update user's document in Firestore
-    await updateUserDocument(user.uid, userName, userCountry, userLocation, userPhoneNum);
+  //b) update user's document in Firestore
+  await updateUserDocument(user.uid, userName, userCountry, userLocation, userPhoneNum);
 
   //c) disable edit
   document.getElementById("personalInfoFields").disabled = true;

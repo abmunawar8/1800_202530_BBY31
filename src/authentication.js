@@ -10,13 +10,7 @@
 import { auth } from "/src/firebaseConfig.js";
 
 // Import specific functions from the Firebase Auth SDK
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  updateProfile,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
 
 // Import specific functions from Firestore
 import { db } from "/src/firebaseConfig.js";
@@ -55,11 +49,7 @@ export async function loginUser(email, password) {
 //   const user = await signupUser("Alice", "alice@email.com", "secret");
 // -------------------------------------------------------------
 export async function signupUser(name, email, password) {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const user = userCredential.user; // Get the user object
   await updateProfile(user, { displayName: name });
 

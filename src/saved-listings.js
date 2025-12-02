@@ -20,6 +20,7 @@ function renderEmpty() {
   `;
 }
 
+// creates a new saved listing card by copying the template in saved-listings.html
 function createCard({ id, title, subtitle, imageUrl }) {
   const frag = tpl.content.cloneNode(true);
 
@@ -27,13 +28,17 @@ function createCard({ id, title, subtitle, imageUrl }) {
   const readMoreBtn = frag.querySelector(".read-more");
   readMoreBtn.href = `listing-info.html?docID=${id}`;
 
+  // create the current card
   const card = frag.querySelector(".saved-card");
   card.dataset.id = id;
 
+  // set the image and title
   const img = frag.querySelector(".saved-card-img");
   img.src = imageUrl || "";
   img.alt = title || "listing";
 
+  // set the title and subtitle of the card if they exist
+  // otherwise set them to default values
   frag.querySelector(".saved-card-title").textContent = title || "Untitled";
   frag.querySelector(".saved-card-sub").textContent = subtitle || "";
 
@@ -102,7 +107,6 @@ async function getListings(ids) {
       if (ds.exists()) {
         const v = ds.data();
         let photoName = v.photo1 + v.photo2;
-        alert(photoName.length);
         results.push({
           id: ds.id,
           title: v.name || "Untitled",

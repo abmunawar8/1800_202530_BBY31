@@ -28,27 +28,31 @@ function showDashboard() {
   });
 }
 
+// reads the listings from the listings collection and displays them to the user
 async function showVolunteerListings() {
+  // gets a snapshot of all the docs in the listings collection in Firebase
   const querySnapshot = await getDocs(collection(db, "listings"));
   let eachListing = 1;
+  // iterates through each listing in the document
   querySnapshot.forEach(async (doc) => {
     let checker = true;
     if (document.referrer.includes("filter.html")) {
       // **console.log("Came from filter.html");**
       const skillBooleanList = JSON.parse(localStorage.getItem("skillsList"));
-      checker = await filterForMatchingSkills(doc.ref,skillBooleanList);
+      checker = await filterForMatchingSkills(doc.ref, skillBooleanList);
     } else {
       // **console.log("Came from another page");**
       checker = await checkForMatchingSkills(doc.ref);
     }
 
-    
     //let checker = await checkForMatchingSkills(doc.ref);
     // console.log(checker);
     // console.log(document.referrer);
     // const skillBooleanList = JSON.parse(localStorage.getItem("skillsList"));
     // console.log("Skill Booleans:", skillBooleanList);
 
+    // checker is a boolean that represents if the listing has at least one of the skills that the user has
+    // if the user does share a skill with the listing, then display the card
     if (checker) {
       displayedDocs[displayedDocs.length] = doc.data();
       addNewVolunteeringCard(doc.data().docID);
@@ -60,18 +64,25 @@ async function showVolunteerListings() {
         readMoreLink.href = `listing-info.html?docID=${doc.id}`;
       }
 
+      // sets the name of the listing
       let getIdName = "card-title" + eachListing;
       let cardTitle = document.getElementById(getIdName);
       cardTitle.innerHTML = doc.data().name;
 
+      // sets the image
       const cardImg = document.getElementById("card-img" + eachListing);
+      // since Firebase documents can only hold 1mb each, the base64 string was split into two strings
+      // the strings are concatenated back together and then the data is specified as a base64 string
+      // to make it properly show up
       let base64String = doc.data().photo1 + doc.data().photo2;
       cardImg.src = `data:img/png;base64,${base64String}`;
 
+      // card distance (address) is set
       getIdName = "card-distance" + eachListing;
       cardTitle = document.getElementById(getIdName);
       cardTitle.innerHTML = doc.data().address;
 
+      // date when the listing was created was set
       getIdName = "card-date-added" + eachListing;
       cardTitle = document.getElementById(getIdName);
       let dateString = doc.data().dateAdded;
@@ -82,6 +93,9 @@ async function showVolunteerListings() {
   });
 }
 
+// creates a new volunteering listing with data from the database
+// cardHTML is a template for each card
+// ...deconstructor adds all the classes in the classToAdd array to the template
 function addNewVolunteeringCard(docID) {
   const cardLocation = document.getElementById("cards-here");
   let classesToAdd = ["col", "d-flex", "justify-content-center", "mb-4", "mx-5"];
@@ -90,7 +104,9 @@ function addNewVolunteeringCard(docID) {
 
   const cardHTML =
     `
-      <div class="card" data-docid="` + docID + `">
+      <div class="card" data-docid="` +
+    docID +
+    `">
         <div class="row g-0">
           <div class="col-4">
             <img
@@ -135,8 +151,11 @@ function addNewVolunteeringCard(docID) {
         </div>
       </div>
   `;
+  // adds the template literal to the div's inner html
   div.innerHTML = cardHTML;
+  // adds the card at the end of the list
   cardLocation.append(div);
+  // increments the card number so the ids for the next card are correct
   cardNumber++;
 }
 
@@ -208,7 +227,7 @@ async function checkForMatchingSkills(docRef) {
   }
 }
 
-async function filterForMatchingSkills(docRef,skillsList) {
+async function filterForMatchingSkills(docRef, skillsList) {
   // const id = getDocIdFromUrl();
 
   try {
@@ -247,14 +266,14 @@ async function filterForMatchingSkills(docRef,skillsList) {
     // const snapshot = await getDocs(userSkillsCol);
 
     // snapshot.forEach((skillDoc) => {
-      // const skillId = skillDoc.id;                 // e.g. "cooking", "cleaning"
-      // const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
+    // const skillId = skillDoc.id;                 // e.g. "cooking", "cleaning"
+    // const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
 
-      // convert to real boolean
-      // const hasSkill = hasSkillStr === "true";
+    // convert to real boolean
+    // const hasSkill = hasSkillStr === "true";
 
-      // push structured entry into the list
-      // skillsArray.push(hasSkill);
+    // push structured entry into the list
+    // skillsArray.push(hasSkill);
     // });
 
     // **console.log("Listing Booleans:", skillDetails);**
@@ -263,7 +282,7 @@ async function filterForMatchingSkills(docRef,skillsList) {
     for (let i = 0; i < skillDetails.length; i++) {
       if (skillDetails[i] === true && skillsList[i] === true) {
         // **console.log(true);**
-        return true;  // or break if you're inside a function
+        return true; // or break if you're inside a function
       }
     }
 
@@ -294,6 +313,8 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
 });
 
 // ------------------------------
+// finds the specific listing based off the bookmark that user clicked
+// saves the listing to listingDoc, a global variable
 async function findSpecificListing() {
   var listingDoc;
   let count = 1;
@@ -303,7 +324,7 @@ async function findSpecificListing() {
       if (currentIcon.innerText == "bookmark") {
         console.log(currentIcon);
         listingDoc = displayedDocs[i];
-        console.log(listingDoc)
+        console.log(listingDoc);
         break;
       }
     } catch (error) {
@@ -316,7 +337,10 @@ async function findSpecificListing() {
 }
 // ---------------------------------
 async function saveListing() {
+  // gets the current user
   const user = auth.currentUser;
+  // tries to find the listing. If any await or document grabbing fails,
+  // log the error to the console
   try {
     const listing = await findSpecificListing();
     console.log(listing);
@@ -326,6 +350,6 @@ async function saveListing() {
       ...listing,
     });
   } catch (error) {
-    console.log("failed to get document", error);
+    console.log(error);
   }
 }

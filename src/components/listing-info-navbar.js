@@ -9,5 +9,5 @@ class ListingInfoNavbar extends HTMLElement {
     `;
   }
 }
- 
+
 customElements.define("listing-info-navbar", ListingInfoNavbar);

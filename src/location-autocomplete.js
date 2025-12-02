@@ -1,24 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-import { checkAuthState } from "./authentication.js"
+import { checkAuthState } from "./authentication.js";
 
 checkAuthState();
 
 // Cities in BC
 // Export this so other files (like set-up-account.js) can use the same list
-export const preDefinedSuggestions = [
-  "Abbotsford",
-  "Burnaby",
-  "Coquitlam",
-  "Delta",
-  "East Vancouver",
-  "North Vancouver",
-  "Richmond",
-  "Tsawwassen",
-  "Surrey",
-  "West Vancouver",
-  "Vancouver"
-];
+export const preDefinedSuggestions = ["Abbotsford", "Burnaby", "Coquitlam", "Delta", "East Vancouver", "North Vancouver", "Richmond", "Tsawwassen", "Surrey", "West Vancouver", "Vancouver"];
 
 // Get elements
 const searchInput = document.getElementById("searchInput");
@@ -30,10 +18,9 @@ searchInput.addEventListener("input", function () {
   suggestions.innerHTML = "";
 
   if (query) {
-    const filteredResults = preDefinedSuggestions.filter((item) =>
-      item.toLowerCase().includes(query)
-    );
-
+    const filteredResults = preDefinedSuggestions.filter((item) => item.toLowerCase().includes(query));
+    // if the text that the user types in has some of the characters in a the list
+    // of suggestions, then display the option in the dropdown
     filteredResults.forEach((result) => {
       const suggestionItem = document.createElement("div");
       suggestionItem.classList.add("autocomplete-suggestion");
@@ -53,4 +40,3 @@ document.addEventListener("click", function (event) {
     suggestions.innerHTML = "";
   }
 });
-

@@ -13,8 +13,7 @@ export function addSkillBtnListeners() {
   let skillBtns = document.getElementsByClassName("skill-btn");
   for (let i = 0; i < skillBtns.length; i++) {
     let currentBtn = skillBtns[i];
-    currentBtn.addEventListener("click", () =>{
-
+    currentBtn.addEventListener("click", () => {
       // Get the button element again by its id
       let isClicked = document.getElementById(currentBtn.id);
 
@@ -28,7 +27,7 @@ export function addSkillBtnListeners() {
         isClicked.setAttribute("class", "skill-btn");
         isClicked.dataset.clicked = "false";
       }
-    })
+    });
   }
 }
 
@@ -84,7 +83,7 @@ async function saveSkillsInfo() {
   }
 
   //Save skills
-  
+
   for (let i = 0; i < skillBtns.length; i++) {
     let currentBtn = document.getElementById(skillBtns[i].id);
     const userDoc = doc(db, "users", user.uid);
@@ -103,8 +102,8 @@ async function saveSkillsInfo() {
     // If location is not valid, do not redirect
     return;
   }
-  
-   // After saving, go to the main page  
+
+  // After saving, go to the main page
   setTimeout(() => {
     window.location.assign("../main.html");
   }, 1500);
@@ -138,9 +137,7 @@ async function saveLocation(uid) {
 
   // If user typed something but it is not a full valid city
   if (validLocation === null) {
-    alert(
-      "Please type or select a full city name (for example, 'North Vancouver') instead of only a partial word."
-    );
+    alert("Please type or select a full city name (for example, 'North Vancouver') instead of only a partial word.");
     return false;
   }
 
@@ -149,7 +146,6 @@ async function saveLocation(uid) {
   console.log("Saved location:", validLocation);
   return true;
 }
-
 
 // --------------------------------------------------------
 // This function updates the main user document in Firestore.

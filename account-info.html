@@ -1,72 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- CSS -->
+    <link href="styles/style.css" rel="stylesheet" />
+    <link rel="icon" href="./images/hand-shake.png" />
 
-  <!-- CSS -->
-  <link href="styles/style.css" rel="stylesheet" />
-  <link rel="icon" href="./images/hand-shake.png" />
+    <!-- Custom JS components -->
+    <script type="module" src="./src/components/main-footer.js"></script>
+    <script type="module" src="./src/components/main-navbar.js"></script>
+    <script type="module" src="./src/components/site-footer.js"></script>
 
-  <!-- Custom JS components -->
-  <script type="module" src="./src/components/main-footer.js"></script>
-  <script type="module" src="./src/components/main-navbar.js"></script>
-  <script type="module" src="./src/components/site-footer.js"></script>
+    <!-- Google Icons (Material Design)-->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" />
+    <title>Account Info</title>
+  </head>
 
-  <!-- Google Icons (Material Design)-->
-  <link
-    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-    rel="stylesheet" />
-  <title>Account Info</title>
-</head>
+  <body>
+    <!-- Content here -->
+    <div class="container-fluid bg-success-subtle p-2 mt-3 d-flex justify-content-between border border-light rounded-5 top-navbar"><br /><br /></div>
 
-<body>
-  <!-- Content here -->
-  <div
-    class="container-fluid bg-success-subtle p-2 mt-3 d-flex justify-content-between border border-light rounded-5 top-navbar">
-    <br /><br />
-  </div>
-
-  <div class="container-fluid" id="account-info-box">
-    <div class="container">
-      <h1>User Profile </h1>
-      <form>
-        <fieldset class="mb-3" id="personalInfoFields" disabled>
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
+    <div class="container-fluid" id="account-info-box">
+      <div class="container">
+        <h1>User Profile</h1>
+        <form>
+          <fieldset class="mb-3" id="personalInfoFields" disabled>
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" id="nameInput" class="form-control" placeholder="Enter your name" />
+            </div>
+            <div class="form-group">
+              <label>Country</label>
+              <input type="text" id="countryInput" class="form-control" placeholder="Enter your country" />
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" id="locationInput" class="form-control" placeholder="Enter your location" />
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="text" id="phoneInput" class="form-control" placeholder="Enter your phone number" />
+            </div>
+          </fieldset>
+          <div class="d-flex justify-content-end mt-5">
+            <button id="editButton" type="button" class="btn btn-secondary">Edit</button>
+            <span style="width: 10px"></span>
+            <button id="saveButton" type="button" class="btn btn-info">Save</button>
           </div>
-          <div class="form-group">
-            <label>Country</label>
-            <input type="text" id="countryInput" class="form-control" placeholder="Enter your country">
-          </div>
-          <div class="form-group">
-            <label>Location</label>
-            <input type="text" id="locationInput" class="form-control" placeholder="Enter your location">
-          </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" id="phoneInput" class="form-control" placeholder="Enter your phone number">
-          </div>
-        </fieldset>
-        <div class="d-flex justify-content-end mt-5">
-          <button id="editButton" type="button" class="btn btn-secondary">Edit</button>
-          <span style="width: 10px"></span>
-          <button id="saveButton" type="button" class="btn btn-info">Save</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- Footers -->
-  <main-footer></main-footer>
+    <!-- Footers -->
+    <main-footer></main-footer>
 
-  <!-- External JS Scripts -->
-  <script type="module" src="./src/app.js"></script>
-  <script type="module" src="/src/account-info.js"></script>
-</body>
-
+    <!-- External JS Scripts -->
+    <script type="module" src="./src/app.js"></script>
+    <script type="module" src="/src/account-info.js"></script>
+  </body>
 </html>
