@@ -132,7 +132,6 @@ async function handleAddSkill(user) {
   }
 
   try {
-    alert("Your skills are being updated. This may take a while.");
     const skillDocRef = doc(db, "users", user.uid, "user-skills", skillId);
     // Using setDoc with merge: true allows both creating and updating the document
     await setDoc(

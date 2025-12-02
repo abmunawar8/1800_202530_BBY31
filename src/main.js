@@ -198,11 +198,16 @@ async function checkForMatchingSkills(docRef) {
     const snapshot = await getDocs(userSkillsCol);
 
     snapshot.forEach((skillDoc) => {
-      const skillId = skillDoc.id; // e.g. "cooking", "cleaning"
+      // const skillId = skillDoc.id; // e.g. "cooking", "cleaning"
       const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
 
+      var hasSkill;
       // convert to real boolean
-      const hasSkill = hasSkillStr == "true";
+      if (typeof hasSkillStr == "boolean") {
+        hasSkill = hasSkillStr;
+      } else {
+        hasSkill = hasSkillStr == "true";
+      }
 
       // push structured entry into the list
       skillsArray.push(hasSkill);
@@ -322,9 +327,7 @@ async function findSpecificListing() {
     let currentIcon = document.getElementById("bookmark" + count);
     try {
       if (currentIcon.innerText == "bookmark") {
-        console.log(currentIcon);
         listingDoc = displayedDocs[i];
-        console.log(listingDoc);
         break;
       }
     } catch (error) {
@@ -343,7 +346,6 @@ async function saveListing() {
   // log the error to the console
   try {
     const listing = await findSpecificListing();
-    console.log(listing);
     const userDoc = doc(db, "users", user.uid);
     const savedListings = collection(userDoc, "saved-listings");
     await setDoc(doc(savedListings, listing.docID), {

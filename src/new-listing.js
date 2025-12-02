@@ -16,6 +16,7 @@ async function saveListingInfo() {
   const querySnapshot = await getDocs(collection(db, "listings"));
   const docID = "listings" + (querySnapshot.size + 1);
   const inputImage = localStorage.getItem("inputImage") || "";
+  // splits the base64 string into two strings so length of a string isn't an issue for Firebase
   let imgPart1 = inputImage.substring(0, 500000);
   let imgPart2 = inputImage.substring(500000, inputImage.size);
   // Get the skills buttons
