@@ -1,11 +1,16 @@
 import { auth, db } from "./firebaseConfig.js";
 import { collection, doc, setDoc, getDocs, getDoc } from "firebase/firestore";
 
+var hasUploadedFile = false;
 var skillsJSON = {};
 
 // function that saves the fields the user entered into the new-listing.html form
 // and creates a new listing in the database with the correct info
 async function saveListingInfo() {
+  if (!hasUploadedFile) {
+    alert("You must upload an image.");
+    return;
+  }
   alert("Your new listing is being created. This may take a while.");
   // Gets current user
   const user = auth.currentUser;
@@ -102,6 +107,7 @@ function uploadImage() {
   // Function to handle file selection and Base64 encoding
   document.getElementById("files").addEventListener("change", handleFileSelect);
   function handleFileSelect(e) {
+    hasUploadedFile = true;
     var file = e.target.files[0]; // Get the selected file
     if (file) {
       var reader = new FileReader(); // Create a FileReader to read the file
