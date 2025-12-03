@@ -89,7 +89,6 @@ h1 {
   width: 85%; /* Keep the same width */
   z-index: 9999; /* Stay above content */
   border-radius: 50px; /* Rounded appearance */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   background-color: var(--bs-success-bg-subtle, #d1e7dd); /* Consistent color */
 
   /* Ensure icons stay vertically centered (prevent layout overrides) */
@@ -113,14 +112,6 @@ h1 {
 body {
   padding-bottom: 140px; /* Adjust visually (100–160 recommended) */
   font-family: "Exo 2";
-}
-
-/* ===== Responsive design for small screens ===== */
-@media (max-width: 576px) {
-  .main-footer {
-    width: 95%;
-    bottom: 12px;
-  }
 }
 
 /* --------------------- */
