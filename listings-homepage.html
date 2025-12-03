@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- CSS -->
-    <link href="styles/style.css" rel="stylesheet" />
+    <!-- <link href="./styles/listings-homepage.css" rel="stylesheet" /> -->
     <link rel="icon" href="./images/hand-shake.png" />
 
     <!-- Custom JS components -->
@@ -28,16 +28,16 @@
     <div class="container-fluid" id="container"></div>
 
     <template id="created-listing-template">
-      <div class="col d-flex justify-content-center mb-4 mx-5">
+      <div class="d-flex justify-content-center mb-4 mx-5">
         <div class="card">
-          <div class="row">
-            <div class="col-8">
+          <div class="row row-cols-2 g-2">
+            <div>
               <div class="card-body">
-                <h4 class="card-title d-block" id="listing-name" data-docid=""></h4>
-                <span class="material-icons d-inline volunteer-listing-icons main-footer-icons" id="delete-btn">delete_forever</span>
+                <h4 class="card-title d-inline" id="listing-name" data-docid=""></h4>
+                <span class="material-icons volunteer-listing-icons main-footer-icons" id="delete-btn">delete_forever</span>
               </div>
             </div>
-            <div class="col-4">
+            <div>
               <img class="rounded-start img-fluid" alt="volunteering listing image" id="listing-image" />
             </div>
           </div>
