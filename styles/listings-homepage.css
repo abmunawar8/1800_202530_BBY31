@@ -1,219 +1,26 @@
-@font-face {
-  font-family: "Exo 2";
-  src: url("../fonts/Exo2-VariableFont_wght.ttf");
-}
-
-body {
-  font-family: "Exo 2";
-}
-
-/* --------------------- */
-/* index.html */
-/* --------------------- */
-/* --- Hero Section --- */
-.hero-section {
-  overflow: hidden;
-}
-
-/* The image adjusts automatically to screen size */
-.hero-image {
-  max-width: 500px;
-  /* height: auto; */
-  /* object-fit: contain; */
-}
-
-/* Text and button centered in image */
-.hero-content {
-  text-align: center;
-}
-
-.hero-title {
-  font-size: 48px;
-  font-weight: bold;
-  color: rgb(0, 247, 255);
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-}
-
-.hero-btn {
-  font-size: 22px;
-  padding: 12px 30px;
-  margin-top: 15px;
-}
-/* --------------------- */
-/* main.html */
-/* --------------------- */
-
-/* Custom card with icons css */
-
-.card-img {
-  width: 100%;
-  height: 100%;
-}
-
-/* ===== Top green rounded bar ===== */
-.top-navbar {
-  width: 85%;
-  border-radius: 50px;
-}
-
-h1 {
-  text-align: center;
-}
-
-/* ===== Floating green rounded footer at the bottom ===== */
-.main-footer {
-  position: fixed; /* Key: fixed position */
-  bottom: 20px; /* Distance from bottom of screen */
-  left: 50%;
-  transform: translateX(-50%); /* Center horizontally */
-  width: 85%; /* Keep the same width */
-  z-index: 9999; /* Stay above content */
-  border-radius: 50px; /* Rounded appearance */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  background-color: var(--bs-success-bg-subtle, #d1e7dd); /* Consistent color */
-
-  /* Ensure icons stay vertically centered (prevent layout overrides) */
+.card-body {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-/* ===== Icon styling and hover interaction ===== */
-.main-footer-icons {
-  font-size: 40pt;
-  color: #212529;
-  cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-.main-footer-icons:hover {
-  transform: scale(1.08);
-  color: #198754; /* Bootstrap “success” green */
-}
-
-/* ===== Prevent footer from covering content ===== */
-body {
-  padding-bottom: 140px; /* Adjust visually (100–160 recommended) */
-  font-family: "Exo 2";
-}
-
-/* ===== Responsive design for small screens ===== */
-@media (max-width: 576px) {
-  .main-footer {
-    width: 95%;
-    bottom: 12px;
-  }
-}
-
-/* --------------------- */
-/* filter.html */
-/* --------------------- */
-.hidden {
-  display: none;
-}
-
-.temp-hidden {
-  display: none;
-}
-
-.all-filters {
-  display: flex;
-  flex-direction: column;
-}
-
-.filters {
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 10px;
-  font-size: 22px;
-}
-
-/* Hiding the checkbox used as a toggle */
-.toggle-checkbox {
-  display: none;
-}
-
-/* Styling the label as a triangle button */
-.toggle-label {
-  cursor: pointer;
-  user-select: none;
-  font-size: 16px;
-  display: inline-block;
-  width: 250px;
-  border-bottom: 2px solid black;
-  /* Solid bottom border */
-  padding: 5px 0;
-}
-
-/* The triangle symbol */
-.toggle-label::before {
-  content: "▶";
-  /* right-pointing triangle */
-  display: inline-block;
-  width: 1em;
-  margin-right: 8px;
-  transition: transform 0.2s;
-}
-
-/* Rotating the triangle when it's checked */
-.toggle-checkbox:checked + .toggle-label::before {
-  transform: rotate(90deg);
-}
-
-/* Showing/hiding the checkbox list */
-.toggle-checkbox:checked ~ .checkbox-list {
-  display: block;
-}
-
-/* The checkbox list */
-.checkbox-list {
-  display: none;
-  margin-left: 1.5em;
-  margin-top: 0.5em;
-}
-
-/* ------------- */
-/* account.html */
-/* ------------- */
-/* Profile picture width */
-.profile-picture {
-  font-size: 100pt;
-}
-
-.btn {
-  width: 200px;
-}
-/* ------------- */
-
-/* --------------------- */
-/* listing-homepage.html */
-/* --------------------- */
-.volunteer-listing-icons {
-  font-size: 35pt;
-}
-
-/* account-info.html */
-#account-info-box {
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
-#volunteerName {
-  text-align: center;
-}
-
-.volunteerDetails {
-  padding-top: 30px;
-  font-size: 25px;
-}
-
-/* Responsive adjustment for smaller screens */
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 32px;
+  .img-fluid {
+    max-height: 150px;
   }
 
-  .hero-btn {
-    font-size: 18px;
-    padding: 10px 25px;
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .col-8 {
+    width: 100%;
+  }
+
+  .col-4 {
+    width: 100%;
+    max-height: 200px;
   }
   
 }
