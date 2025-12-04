@@ -32,6 +32,12 @@ function showDashboard() {
 async function showVolunteerListings() {
   // gets a snapshot of all the docs in the listings collection in Firebase
   const querySnapshot = await getDocs(collection(db, "listings"));
+
+  // 1️⃣ FETCH SAVED LIST ONCE HERE
+  // This waits for the array ["listings1", "listings4"] to load
+  const savedDocIDs = await getSavedListingIds(); 
+  // console.log("User's saved IDs:", savedDocIDs);
+
   let eachListing = 1;
   // iterates through each listing in the document
   querySnapshot.forEach(async (doc) => {
@@ -55,7 +61,9 @@ async function showVolunteerListings() {
     // if the user does share a skill with the listing, then display the card
     if (checker) {
       displayedDocs[displayedDocs.length] = doc.data();
-      addNewVolunteeringCard(doc.data().docID);
+      // console.log(doc.data().docID);
+      // 2️⃣ PASS THE SAVED LIST TO THE FUNCTION
+      addNewVolunteeringCard(doc.data().docID, savedDocIDs);
 
       const cardContainer = document.querySelector(`#cards-here > .col:nth-child(${eachListing})`);
 
@@ -96,11 +104,16 @@ async function showVolunteerListings() {
 // creates a new volunteering listing with data from the database
 // cardHTML is a template for each card
 // ...deconstructor adds all the classes in the classToAdd array to the template
-function addNewVolunteeringCard(docID) {
+function addNewVolunteeringCard(docID, savedDocIDs) {
   const cardLocation = document.getElementById("cards-here");
   let classesToAdd = ["col", "d-flex", "justify-content-center", "mb-4", "mx-5"];
   const div = document.createElement("div");
   div.classList.add(...classesToAdd);
+
+  // 4️⃣ DETERMINE ICON STRING SYNCHRONOUSLY
+  // If the docID is in our list, use 'bookmark', otherwise 'bookmark_border'
+  const iconString = savedDocIDs.includes(docID) ? "bookmark" : "bookmark_border";
+  // console.log(iconString);
 
   const cardHTML =
     `
@@ -137,7 +150,7 @@ function addNewVolunteeringCard(docID) {
                 <span class="material-icons-outlined">thumb_up</span>
                 <span class="material-icons-outlined" id="bookmark` +
     cardNumber +
-    `">bookmark_border</span>
+    `">${iconString}</span>
               </div>
             </div>
           </div>
@@ -294,6 +307,18 @@ async function filterForMatchingSkills(docRef, skillsList) {
 
 showDashboard();
 
+// Helper: Get ALL saved listing IDs for the user once
+async function getSavedListingIds() {
+  const user = auth.currentUser;
+  if (!user) return [];
+
+  const subCollectionRef = collection(db, "users", user.uid, "saved-listings");
+  const querySnapshot = await getDocs(subCollectionRef);
+  
+  // Return an array of strings: ["listings1", "listings2", ...]
+  return querySnapshot.docs.map(doc => doc.id);
+}
+
 // Handle bookmark toggle clicks
 document.getElementById("cards-here").addEventListener("click", (e) => {
   // Check if the clicked element is a Material icon
@@ -318,6 +343,7 @@ async function findSpecificListing() {
   let count = 1;
   for (let i = 0; i < displayedDocs.length; i++) {
     let currentIcon = document.getElementById("bookmark" + count);
+    // console.log("bookmark" + count);
     try {
       if (currentIcon.innerText == "bookmark") {
         listingDoc = displayedDocs[i];
@@ -328,7 +354,7 @@ async function findSpecificListing() {
     }
     count++;
   }
-
+  // console.log(listingDoc);
   return listingDoc;
 }
 // ---------------------------------

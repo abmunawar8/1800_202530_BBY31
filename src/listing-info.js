@@ -1,5 +1,12 @@
-import { db } from "./firebaseConfig.js";
-import { doc, getDoc } from "firebase/firestore";
+// import { db } from "./firebaseConfig.js";
+// import { doc, getDoc } from "firebase/firestore";
+
+import { getId } from "firebase/installations";
+import { onAuthReady } from "./authentication.js";
+import { db, auth } from "./firebaseConfig.js";
+import { doc, onSnapshot, setDoc, getDoc, getDocs, collection } from "firebase/firestore";
+
+let currentVolunteerData = null;
 
 // Get the document ID from the URL
 function getDocIdFromUrl() {
@@ -15,7 +22,9 @@ async function displayVolunteerInfo() {
     const volunteerRef = doc(db, "listings", id);
     const volunteerSnap = await getDoc(volunteerRef);
 
-    const volunteer = volunteerSnap.data();
+    currentVolunteerData = volunteerSnap.data();
+    // console.log(currentVolunteerData);
+    const volunteer = currentVolunteerData;
     const name = volunteer.name;
     // The detail constants
     const address = volunteer.address;
@@ -28,6 +37,8 @@ async function displayVolunteerInfo() {
     const skills = volunteer.skills;
     const email = volunteer.contactEmail;
     const phoneNum = volunteer.phoneNum;
+
+    const docName = volunteer.docID;
 
     const numVolunteerFields = Object.keys(volunteer);
     let skillsString = "";
@@ -100,9 +111,67 @@ async function displayVolunteerInfo() {
     document.getElementById("volunteerSkills").textContent = "Skills: " + skillsString;
     document.getElementById("volunteerEmail").textContent = `Email: ${email}`;
     document.getElementById("volunteerPhoneNum").textContent = `Phone Number: ${phoneNum}`;
+
+    // 1️⃣ FETCH SAVED LIST ONCE HERE
+    // This waits for the array ["listings1", "listings4"] to load
+    const savedDocIDs = await getSavedListingIds();
+    // console.log("User's saved IDs:", savedDocIDs);
+
+    // 4️⃣ DETERMINE ICON STRING SYNCHRONOUSLY
+    // If the docID is in our list, use 'bookmark', otherwise 'bookmark_border'
+    const iconString = savedDocIDs.includes(docName) ? "bookmark" : "bookmark_border";
+    // console.log(iconString);
+
+    document.getElementById("saveIconText").textContent = `${iconString}`;
   } catch (error) {
     console.error("Error loading listing:", error);
     document.getElementById("volunteerName").textContent = "Error loading listing.";
+  }
+}
+
+// Helper: Get ALL saved listing IDs for the user once
+async function getSavedListingIds() {
+  const user = auth.currentUser;
+  if (!user) return [];
+
+  const subCollectionRef = collection(db, "users", user.uid, "saved-listings");
+  const querySnapshot = await getDocs(subCollectionRef);
+
+  // Return an array of strings: ["listings1", "listings2", ...]
+  return querySnapshot.docs.map(doc => doc.id);
+}
+
+// Handle bookmark toggle clicks
+document.getElementById("saveListingOption").addEventListener("click", (e) => {
+  // Check if the clicked element is a Material icon
+  if (e.target.classList.contains("material-icons-outlined")) {
+    const icon = e.target;
+
+    // Toggle only if it’s the bookmark icon
+    if (icon.textContent === "bookmark_border") {
+      icon.textContent = "bookmark";
+      saveListing();
+    } else if (icon.textContent === "bookmark") {
+      icon.textContent = "bookmark_border";
+    }
+  }
+});
+
+// ---------------------------------
+async function saveListing() {
+  // gets the current user
+  const user = auth.currentUser;
+  // tries to find the listing. If any await or document grabbing fails,
+  // log the error to the console
+  try {
+    const listing = currentVolunteerData;
+    const userDoc = doc(db, "users", user.uid);
+    const savedListings = collection(userDoc, "saved-listings");
+    await setDoc(doc(savedListings, listing.docID), {
+      ...listing,
+    });
+  } catch (error) {
+    console.log(error);
   }
 }
 
