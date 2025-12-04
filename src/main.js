@@ -110,7 +110,7 @@ function addNewVolunteeringCard(docID) {
         <div class="row g-0">
           <div class="col-4">
             <img
-              class="rounded-start img-fluid"
+              class="rounded-top card-img"
               alt="dummy image" 
               id="card-img` +
     cardNumber +
@@ -125,19 +125,12 @@ function addNewVolunteeringCard(docID) {
                 <p class="card-text">
                   <b>Address:</b> <span id="card-distance` +
     cardNumber +
-    `"></span><br />
-                  <b>Skills:</b> <span id="card-skills` +
-    cardNumber +
-    `">To be implemented next sprint</span><br />
-                </p>
-                <p class="card-text">
-                  <small class="text-body-secondary"
+    `"></span></br><small class="text-body-secondary"
                     >Date Added: <span id="card-date-added` +
     cardNumber +
-    `"></span></small
-                  >
+    `"></span></small>
                 </p>
-                <a class="btn btn-primary read-more" href="#">Read More</a>
+                <a class="btn btn-primary read-more w-75" href="#">Read More</a>
               </div>
               <div class="card-right">
                 <span class="material-icons-outlined">clear</span>

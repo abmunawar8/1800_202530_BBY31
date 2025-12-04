@@ -147,13 +147,12 @@ Example:
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Image Credits
--index photo.jpg  Photo by <a href="https://unsplash.com/@a_kehmeier?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Austin Kehmeier</a> on <a href="https://unsplash.com/photos/view-of-two-persons-hands-lyiKExA4zQA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
--listing 1.jpg  Photo by <a href="https://unsplash.com/@everdrop?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">everdrop GmbH</a> on <a href="https://unsplash.com/photos/a-woman-is-cleaning-a-kitchen-sink-with-a-rag-SqOMDOQb3ws?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+- index photo.jpg Photo by [Austin Kehmeier](https://unsplash.com/@a_kehmeier?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/view-of-two-persons-hands-lyiKExA4zQA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
--listing 2.jpg  Photo by <a href="https://unsplash.com/@krispaparo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kristina Paparo</a> on <a href="https://unsplash.com/photos/two-man-and-woman-standing-on-doorway-IIY5YxY8WKY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+- listing 1.jpg Photo by [everdrop GmbH](https://unsplash.com/@everdrop?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-woman-is-cleaning-a-kitchen-sink-with-a-rag-SqOMDOQb3ws?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
--listing 3.jpg  Photo by <a href="https://unsplash.com/@samuelyongbo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Samuel Yongbo Kwon</a> on <a href="https://unsplash.com/photos/a-group-of-people-walking-down-a-sidewalk-in-a-park-LMBwJd0xZxc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-  
--listing 4.jpg  Photo by <a href="https://unsplash.com/@rybakoph?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Anton Rybakov</a> on <a href="https://unsplash.com/photos/man-in-white-button-up-shirt-holding-white-ceramic-plate-oT4ZgWJP5cA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-      
+- listing 2.jpg Photo by [Kristina Paparo](https://unsplash.com/@krispaparo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/two-man-and-woman-standing-on-doorway-IIY5YxY8WKY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
+- listing 3.jpg Photo by [Samuel Yongbo Kwon](https://unsplash.com/@samuelyongbo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-group-of-people-walking-down-a-sidewalk-in-a-park-LMBwJd0xZxc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+- listing 4.jpg Photo by [Anton Rybakov](https://unsplash.com/@rybakoph?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/man-in-white-button-up-shirt-holding-white-ceramic-plate-oT4ZgWJP5cA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

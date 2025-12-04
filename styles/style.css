@@ -44,6 +44,7 @@ body {
 /* --------------------- */
 
 /* Custom card with icons css */
+
 .custom-card {
   display: grid;
   grid-template-rows: 100%;
@@ -54,17 +55,29 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-left: 20px;
+  align-items: end;
+  margin-right: 10px;
 }
 
-/* .card-width {
-  width: 60%;
-} */
+.card-left {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+}
 
 /* ===== Top green rounded bar ===== */
 .top-navbar {
   width: 85%;
   border-radius: 50px;
+}
+
+h1 {
+  text-align: center;
 }
 
 /* ===== Floating green rounded footer at the bottom ===== */
@@ -76,7 +89,6 @@ body {
   width: 85%; /* Keep the same width */
   z-index: 9999; /* Stay above content */
   border-radius: 50px; /* Rounded appearance */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   background-color: var(--bs-success-bg-subtle, #d1e7dd); /* Consistent color */
 
   /* Ensure icons stay vertically centered (prevent layout overrides) */
@@ -100,14 +112,6 @@ body {
 body {
   padding-bottom: 140px; /* Adjust visually (100–160 recommended) */
   font-family: "Exo 2";
-}
-
-/* ===== Responsive design for small screens ===== */
-@media (max-width: 576px) {
-  .main-footer {
-    width: 95%;
-    bottom: 12px;
-  }
 }
 
 /* --------------------- */
@@ -222,6 +226,21 @@ body {
     font-size: 18px;
     padding: 10px 25px;
   }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .col-8 {
+    width: 100%;
+  }
+
+  .col-4 {
+    width: 100%;
+    max-height: 200px;
+  }
+  
 }
 
 /* saved-listings.html */

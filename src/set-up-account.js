@@ -106,9 +106,8 @@ async function saveSkillsInfo() {
   }
 
   // After saving, go to the main page
-  setTimeout(() => {
-    window.location.assign("../main.html");
-  }, 1500);
+  alert("Creating your account. This may take a second.")
+  window.location.assign("../main.html");
 }
 
 // Prevent form autofill submission
@@ -133,7 +132,6 @@ async function saveLocation(uid) {
   }
 
   const raw = input.value;
-  console.log("User typed location:", raw);
 
   const validLocation = getValidLocationOrNull(raw);
 
@@ -145,7 +143,6 @@ async function saveLocation(uid) {
 
   // If empty string "" is allowed, we also save it (you can change this rule later)
   await updateUserDocument2(uid, validLocation);
-  console.log("Saved location:", validLocation);
   return true;
 }
 
