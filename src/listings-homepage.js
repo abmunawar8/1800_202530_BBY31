@@ -50,7 +50,8 @@ onAuthStateChanged(auth, async (e) => {
 function showNoListingText() {
   let p = document.createElement("p");
   p.innerText = "You haven't created any listings. Click on the Create Listing button to get started!";
-  p.setAttribute("class", "mx-5");
+  let classesToAdd = ["mx-5", "text-center"]
+  p.classList.add(...classesToAdd);
   container.append(p);
 }
 

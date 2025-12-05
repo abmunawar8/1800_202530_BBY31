@@ -1,28 +1,26 @@
-import { getId } from "firebase/installations";
 import { onAuthReady } from "./authentication.js";
 import { db, auth } from "./firebaseConfig.js";
-import { doc, onSnapshot, setDoc, getDoc, getDocs, collection } from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore";
 let cardNumber = 1;
 var displayedDocs = [];
 
+// The main function that displays listings to the user
+// If there's a user, call showVolunteerListings, which handles
+// the brunt of the reading from the database
 function showDashboard() {
   const nameElement = document.getElementById("name-goes-here"); // the <h1> element to display "Hello, {name}"
-
   onAuthReady(async (user) => {
     if (!user) {
       // If no user is signed in → redirect back to login page.
       location.href = "index.html";
       return;
     }
-
     const userDoc = await getDoc(doc(db, "users", user.uid));
     const name = userDoc.exists() ? userDoc.data().name : user.displayName || user.email;
-
     // Update the welcome message with their name/email.
     if (nameElement) {
       nameElement.textContent = `${name}`;
     }
-
     // shows the appropriate volunteer listings depending on what skills the user has
     showVolunteerListings();
   });
@@ -104,48 +102,37 @@ function addNewVolunteeringCard(docID, savedDocIDs) {
   // 4️⃣ DETERMINE ICON STRING SYNCHRONOUSLY -> If the docID is in our list, use 'bookmark'
   const iconString = savedDocIDs.includes(docID) ? "bookmark" : "bookmark_border";
 
+  // Template literal that represents each listing card
+  // cardNumber is concatenated to programmatically differentiate IDs
   const cardHTML =
-    `
-      <div class="card" data-docid="` +
-    docID +
-    `">
-        <div class="row g-0">
-          <div class="col-4">
-            <img
-              class="rounded-top card-img"
-              alt="dummy image" 
-              id="card-img` +
-    cardNumber +
-    `"/>
-          </div>
-          <div class="col-8">
-            <div class="card-body custom-card">
-              <div class="card-left">
-                <h5 class="card-title"><span id="card-title` +
-    cardNumber +
-    `"></span></h5>
+    `<div class="card" data-docid="` + docID + `">
+      <div class="row g-0">
+        <div class="col-4">
+          <img
+            class="rounded-top card-img"
+            alt="dummy image" 
+            id="card-img` + cardNumber + `"/>
+        </div>
+        <div class="col-8">
+          <div class="card-body custom-card">
+            <div class="card-left">
+              <h5 class="card-title"><span id="card-title` + cardNumber + `"></span></h5>
                 <p class="card-text">
-                  <b>Address:</b> <span id="card-distance` +
-    cardNumber +
-    `"></span></br><small class="text-body-secondary"
-                    >Date Added: <span id="card-date-added` +
-    cardNumber +
-    `"></span></small>
+                  <b>Address:</b> <span id="card-distance` + cardNumber +`"></span></br>
+                  <small class="text-body-secondary">Date Added: <span id="card-date-added` + cardNumber + `"></span></small>
                 </p>
                 <a class="btn btn-primary read-more w-75" href="#">Read More</a>
               </div>
               <div class="card-right">
                 <span class="material-icons-outlined">clear</span>
                 <span class="material-icons-outlined">thumb_up</span>
-                <span class="material-icons-outlined" id="bookmark` +
-    cardNumber +
-    `">${iconString}</span>
+                <span class="material-icons-outlined" id="bookmark` + cardNumber + `">${iconString}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-  `;
+    </div>`;
   // adds the template literal to the div's inner html
   div.innerHTML = cardHTML;
   // adds the card at the end of the list
@@ -154,10 +141,14 @@ function addNewVolunteeringCard(docID, savedDocIDs) {
   cardNumber++;
 }
 
+// Looks through the current listing document's skills (as pointed to by docRef)
+// and checks to see if the current user has at least one of the skills.
+// If they do, return true, false otherwise.
+// This function gets called if the user is on main.html. A similar function
+// is called if the user is on filter.html.
 async function checkForMatchingSkills(docRef) {
   try {
     const volunteerSnap = await getDoc(docRef);
-
     const volunteer = volunteerSnap.data();
 
     // The detail constants
@@ -190,7 +181,6 @@ async function checkForMatchingSkills(docRef) {
 
     // obtains the current skills that the user has
     snapshot.forEach((skillDoc) => {
-      // const skillId = skillDoc.id; // e.g. "cooking", "cleaning"
       const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
 
       var hasSkill;
@@ -219,11 +209,14 @@ async function checkForMatchingSkills(docRef) {
   }
 }
 
+// Returns true if a document (given by the path docRef) has at least
+// one of the skills in skillsList. Returns false otherwise.
+// Returns an empty array of skills if there's no user.
+// This function is similar to checkForMatchingSkills. However, this
+// function is designed for filter.html.
 async function filterForMatchingSkills(docRef, skillsList) {
   try {
-    // const volunteerRef = doc(db, "listings", id);
     const volunteerSnap = await getDoc(docRef);
-
     const volunteer = volunteerSnap.data();
 
     // The detail constants
@@ -260,8 +253,6 @@ async function filterForMatchingSkills(docRef, skillsList) {
   }
 }
 
-showDashboard();
-
 // Helper: Get ALL saved listing IDs for the user once
 async function getSavedListingIds() {
   const user = auth.currentUser;
@@ -271,7 +262,7 @@ async function getSavedListingIds() {
   const querySnapshot = await getDocs(subCollectionRef);
 
   // Return an array of strings: ["listings1", "listings2", ...]
-  return querySnapshot.docs.map(doc => doc.id);
+  return querySnapshot.docs.map((doc) => doc.id);
 }
 
 // Handle bookmark toggle clicks
@@ -298,7 +289,6 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
   }
 });
 
-// ------------------------------
 // finds the specific listing based off the bookmark that user clicked
 // saves the listing to listingDoc, a global variable
 async function findSpecificListing(titleText) {
@@ -336,3 +326,6 @@ async function saveListing(titleText) {
     console.log(error);
   }
 }
+
+// Starts the entire chain of functions to display listings to the user
+showDashboard();

@@ -1,23 +1,18 @@
-// src/pages/saved-listings.js
-
-// Import initialized Firebase services
 import { auth, db } from "./firebaseConfig.js";
-
-// Firebase modular APIs
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDocs, getDoc, query, where, documentId, deleteDoc } from "firebase/firestore";
 
-// ---------- DOM ----------
 const mount = document.getElementById("saved-listings");
 const tpl = document.getElementById("saved-card-tpl");
 
+// Tells the user if they have no saved listings by replacing
+// the innerHTML of the DOM element that will be mounted to the page
 function renderEmpty() {
   mount.innerHTML = `
     <div class="text-center text-muted py-5">
       <div class="mb-2">You have no saved listings yet.</div>
-      <div class="small">Go explore and tap the bookmark icon to save one.</div>
-    </div>
-  `;
+      <div class="small">Click the bookmark icon on the main page or while reading more about a volunteer listing to save one.</div>
+    </div>`;
 }
 
 // creates a new saved listing card by copying the template in saved-listings.html
@@ -62,8 +57,6 @@ function createCard({ id, title, subtitle, imageUrl }) {
   return frag;
 }
 
-// ---------- Firestore helpers ----------
-
 // Get saved listing IDs from /users/{uid}/saved (doc IDs are listingIds)
 async function getSavedIds(uid) {
   const savedCol = collection(db, "users", uid, "saved-listings");
@@ -76,9 +69,7 @@ async function getSavedIds(uid) {
 // Batch fetch listings by IDs from /listings (chunk size 10 for 'in' query)
 async function getListings(ids) {
   if (!ids.length) return [];
-
   const chunk = (arr, size) => Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size));
-
   const chunks = chunk(ids, 10);
   const results = [];
 
@@ -116,7 +107,6 @@ async function getListings(ids) {
       }
     }
   }
-
   return results;
 }
 
@@ -128,7 +118,6 @@ async function unsave(listingId) {
   await deleteDoc(ref);
 }
 
-// ---------- Main ----------
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     mount.innerHTML = `
