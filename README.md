@@ -34,14 +34,14 @@ Example:
 
 ## Usage
 
-1. Open your browser and visit `http://localhost:5173`.
+1. Open your browser and visit `https://comp1800-202530-bby31.web.app/`.
 2. Navigate to the center of the page and click `Join Today`.
 3. Click the signup link under the login button to make a new account.
 4. Fill in the details to create a new account, and click sign up.
 5. Click the specific skills that you currently have, and click confirm.
 6. Browse the list of volunteer opportunities displayed on the main page.
 7. Click the bookmark icon to save a listing for later.
-8. View your saved listings in the account section located in the bottom navbar.
+8. View your saved listings on the account page located in the bottom navbar.
 
 ---
 
@@ -49,6 +49,8 @@ Example:
 
 ```
 1800_202530_BBY31/
+├── .firebase/
+│   │── hosting.ZGIzdA.cache
 ├── .vscode/
 │   │── launch.json
 │   │── settings.json
@@ -68,6 +70,7 @@ Example:
 │   │── filter.js
 │   │── firebaseConfig.js
 │   │── listing-info.js
+│   │── listings-homepage.js
 │   │── location-autocomplete.js
 │   │── loginSignup.js
 │   │── main.js
@@ -77,6 +80,7 @@ Example:
 │   │── set-up-account.js
 │   ├── skills.js
 ├── styles/
+│   │── listings-homepage.css
 │   │── new-listing.css
 │   │── saved-listings.css
 │   │── set-up-account.css
@@ -84,8 +88,14 @@ Example:
 ├── node_modules/
 ├── .env
 ├── .gitignore
+├── dist/
 ├── images/
 ├── fonts/
+├── .firebaserc
+├── firebase.json
+├── firebase.indexes.json
+├── firestore.rules
+├── index-photo.jpg
 ├── account-info.html
 ├── account.html
 ├── filter.html
@@ -103,6 +113,7 @@ Example:
 ├── package-lock.json
 ├── package.json
 ├── README.md
+├── vite.config.js/
 ```
 
 ---

@@ -31,15 +31,15 @@ async function showVolunteerListings() {
   // gets a snapshot of all the docs in the listings collection in Firebase
   const querySnapshot = await getDocs(collection(db, "listings"));
 
-  // 1️⃣ FETCH SAVED LIST ONCE HERE
-  // This waits for the array ["listings1", "listings4"] to load
+  // 1️⃣ FETCH SAVED LIST ONCE HERE -> This waits for the saved IDs to load
   const savedDocIDs = await getSavedListingIds();
-  // console.log("User's saved IDs:", savedDocIDs);
 
   let eachListing = 1;
   // iterates through each listing in the document
   querySnapshot.forEach(async (doc) => {
     let checker = true;
+
+    // checks whether the last page the user was on was filter.html
     if (document.referrer.includes("filter.html")) {
       const skillBooleanList = JSON.parse(localStorage.getItem("skillsList"));
       checker = await filterForMatchingSkills(doc.ref, skillBooleanList);
@@ -99,10 +99,8 @@ function addNewVolunteeringCard(docID, savedDocIDs) {
   const div = document.createElement("div");
   div.classList.add(...classesToAdd);
 
-  // 4️⃣ DETERMINE ICON STRING SYNCHRONOUSLY
-  // If the docID is in our list, use 'bookmark', otherwise 'bookmark_border'
+  // 4️⃣ DETERMINE ICON STRING SYNCHRONOUSLY -> If the docID is in our list, use 'bookmark'
   const iconString = savedDocIDs.includes(docID) ? "bookmark" : "bookmark_border";
-  // console.log(iconString);
 
   // Template literal that represents each listing card
   // cardNumber is concatenated to programmatically differentiate IDs
@@ -181,6 +179,7 @@ async function checkForMatchingSkills(docRef) {
 
     const snapshot = await getDocs(userSkillsCol);
 
+    // obtains the current skills that the user has
     snapshot.forEach((skillDoc) => {
       const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
 
@@ -202,6 +201,7 @@ async function checkForMatchingSkills(docRef) {
         return true; // or break if you're inside a function
       }
     }
+
     return false;
   } catch (error) {
     console.error("Error loading listing:", error);
@@ -239,11 +239,13 @@ async function filterForMatchingSkills(docRef, skillsList) {
 
     const user = auth.currentUser;
     if (!user) return [];
+
     for (let i = 0; i < skillDetails.length; i++) {
       if (skillDetails[i] === true && skillsList[i] === true) {
         return true; // or break if you're inside a function
       }
     }
+
     return false;
   } catch (error) {
     console.error("Error loading listing:", error);
@@ -269,27 +271,34 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
   if (e.target.classList.contains("material-icons-outlined")) {
     const icon = e.target;
 
+    // Find the parent card
+    const card = icon.closest(".card"); // adjust selector if needed
+
+    // Get the h5 text from the sibling .card-left
+    const titleText = card.querySelector(".card-left h5").textContent.trim();
+
     // Toggle only if it’s the bookmark icon
     if (icon.textContent === "bookmark_border") {
       icon.textContent = "bookmark";
-      saveListing();
+      saveListing(titleText);
     } else if (icon.textContent === "bookmark") {
       icon.textContent = "bookmark_border";
+      alert("To unsave a listing, please go to the saved listings page.");
+      icon.textContent = "bookmark";
     }
   }
 });
 
 // finds the specific listing based off the bookmark that user clicked
 // saves the listing to listingDoc, a global variable
-// a helper function for saveListing
-async function findSpecificListing() {
+async function findSpecificListing(titleText) {
   var listingDoc;
   let count = 1;
   for (let i = 0; i < displayedDocs.length; i++) {
     let currentIcon = document.getElementById("bookmark" + count);
-    // console.log("bookmark" + count);
+    let currentTitle = document.getElementById("card-title" + count).textContent;
     try {
-      if (currentIcon.innerText == "bookmark") {
+      if (currentIcon.innerText == "bookmark" && titleText === currentTitle) {
         listingDoc = displayedDocs[i];
         break;
       }
@@ -300,20 +309,19 @@ async function findSpecificListing() {
   }
   return listingDoc;
 }
-
-// Saves the clicked on listing to the current user's saved-listings collection
-async function saveListing() {
+// ---------------------------------
+async function saveListing(titleText) {
   // gets the current user
   const user = auth.currentUser;
   // tries to find the listing. If any await or document grabbing fails,
   // log the error to the console
   try {
-    const listing = await findSpecificListing();
+    const listing = await findSpecificListing(titleText);
     const userDoc = doc(db, "users", user.uid);
     const savedListings = collection(userDoc, "saved-listings");
     await setDoc(doc(savedListings, listing.docID), {
       ...listing,
-    });
+    })
   } catch (error) {
     console.log(error);
   }

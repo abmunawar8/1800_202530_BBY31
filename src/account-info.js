@@ -76,7 +76,7 @@ async function saveUserInfo() {
 // Updates the user document in Firestore with new values
 // Parameters:
 //   uid (string)  – user’s UID
-//   name, school, city (strings)
+//   name, location, phoneNum (strings)
 //-------------------------------------------------------------
 async function updateUserDocument(uid, name, location, phoneNum) {
   try {

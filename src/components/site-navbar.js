@@ -1,3 +1,6 @@
+// JavaScript reusable component for the site's navbar
+// Found in index.html at the top
+// Uses template literals and Bootstrap to create the site navbar
 import { onAuthStateChanged } from "firebase/auth";
 
 import { auth } from "../firebaseConfig.js";

@@ -1,4 +1,4 @@
-// Specific 
+// Custom javascript component only for the listings navbar
 class ListingsNavbar extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
