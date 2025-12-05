@@ -16,6 +16,8 @@ function sayHello() {
   console.log("hello");
 }
 
+// Function that controls the functionality of the join today button
+// On the main page
 function joinTodayButton() {
   () => {
     registerBtn.removeEventListener("click", joinTodayButton);
@@ -30,6 +32,7 @@ function joinTodayButton() {
     }
   });
 }
+
 if (document.body.contains(document.getElementById("register-btn"))) {
   const registerBtn = document.getElementById("register-btn");
   registerBtn.addEventListener("click", joinTodayButton);

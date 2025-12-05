@@ -1,9 +1,3 @@
-// import { db } from "./firebaseConfig.js";
-// import { doc, getDoc } from "firebase/firestore";
-import { collection, doc, getDocs } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "./firebaseConfig.js";
-
 // Get the document ID from the URL
 function getDocIdFromUrl() {
   const params = new URL(window.location.href).searchParams;
@@ -23,29 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please select at least one filter option.");
       return;
     }
-
     // 2. Build TRUE/FALSE list for skills checkboxes
     const skillInputs = document.querySelectorAll("input[name='skills[]']");
     const skillBooleanList = Array.from(skillInputs).map((checkbox) => checkbox.checked);
-
-    // **console.log("Skill Booleans:", skillBooleanList);**
     // Example output: [true, false, false, true, ...]
-
-    // 3. Get the selected date_sort radio value
-    const dateRadio = document.querySelector("input[name='date_sort[]']:checked");
-    // const dateSortSelection = dateRadio ? dateRadio.value : null;
-
-    // console.log("Date Sort Selection:", dateSortSelection);
-    // Example output: "newest" or "oldest" or null
-
-    // ⭐ Example: If you want to save or send them somewhere:
-    // const filterResults = {
-    // skills: skillBooleanList,
-    // date_sort: dateSortSelection
-    // };
-
-    // console.log("FINAL FILTER RESULTS:", filterResults);
-    // console.log("FINAL FILTER RESULTS:", skillBooleanList);
 
     localStorage.setItem("skillsList", JSON.stringify(skillBooleanList));
 

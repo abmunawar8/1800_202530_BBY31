@@ -1,28 +1,26 @@
-import { getId } from "firebase/installations";
 import { onAuthReady } from "./authentication.js";
 import { db, auth } from "./firebaseConfig.js";
-import { doc, onSnapshot, setDoc, getDoc, getDocs, collection } from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore";
 let cardNumber = 1;
 var displayedDocs = [];
 
+// The main function that displays listings to the user
+// If there's a user, call showVolunteerListings, which handles
+// the brunt of the reading from the database
 function showDashboard() {
   const nameElement = document.getElementById("name-goes-here"); // the <h1> element to display "Hello, {name}"
-
   onAuthReady(async (user) => {
     if (!user) {
       // If no user is signed in → redirect back to login page.
       location.href = "index.html";
       return;
     }
-
     const userDoc = await getDoc(doc(db, "users", user.uid));
     const name = userDoc.exists() ? userDoc.data().name : user.displayName || user.email;
-
     // Update the welcome message with their name/email.
     if (nameElement) {
       nameElement.textContent = `${name}`;
     }
-
     // shows the appropriate volunteer listings depending on what skills the user has
     showVolunteerListings();
   });
@@ -35,7 +33,7 @@ async function showVolunteerListings() {
 
   // 1️⃣ FETCH SAVED LIST ONCE HERE
   // This waits for the array ["listings1", "listings4"] to load
-  const savedDocIDs = await getSavedListingIds(); 
+  const savedDocIDs = await getSavedListingIds();
   // console.log("User's saved IDs:", savedDocIDs);
 
   let eachListing = 1;
@@ -43,25 +41,16 @@ async function showVolunteerListings() {
   querySnapshot.forEach(async (doc) => {
     let checker = true;
     if (document.referrer.includes("filter.html")) {
-      // **console.log("Came from filter.html");**
       const skillBooleanList = JSON.parse(localStorage.getItem("skillsList"));
       checker = await filterForMatchingSkills(doc.ref, skillBooleanList);
     } else {
-      // **console.log("Came from another page");**
       checker = await checkForMatchingSkills(doc.ref);
     }
-
-    //let checker = await checkForMatchingSkills(doc.ref);
-    // console.log(checker);
-    // console.log(document.referrer);
-    // const skillBooleanList = JSON.parse(localStorage.getItem("skillsList"));
-    // console.log("Skill Booleans:", skillBooleanList);
 
     // checker is a boolean that represents if the listing has at least one of the skills that the user has
     // if the user does share a skill with the listing, then display the card
     if (checker) {
       displayedDocs[displayedDocs.length] = doc.data();
-      // console.log(doc.data().docID);
       // 2️⃣ PASS THE SAVED LIST TO THE FUNCTION
       addNewVolunteeringCard(doc.data().docID, savedDocIDs);
 
@@ -115,48 +104,37 @@ function addNewVolunteeringCard(docID, savedDocIDs) {
   const iconString = savedDocIDs.includes(docID) ? "bookmark" : "bookmark_border";
   // console.log(iconString);
 
+  // Template literal that represents each listing card
+  // cardNumber is concatenated to programmatically differentiate IDs
   const cardHTML =
-    `
-      <div class="card" data-docid="` +
-    docID +
-    `">
-        <div class="row g-0">
-          <div class="col-4">
-            <img
-              class="rounded-top card-img"
-              alt="dummy image" 
-              id="card-img` +
-    cardNumber +
-    `"/>
-          </div>
-          <div class="col-8">
-            <div class="card-body custom-card">
-              <div class="card-left">
-                <h5 class="card-title"><span id="card-title` +
-    cardNumber +
-    `"></span></h5>
+    `<div class="card" data-docid="` + docID + `">
+      <div class="row g-0">
+        <div class="col-4">
+          <img
+            class="rounded-top card-img"
+            alt="dummy image" 
+            id="card-img` + cardNumber + `"/>
+        </div>
+        <div class="col-8">
+          <div class="card-body custom-card">
+            <div class="card-left">
+              <h5 class="card-title"><span id="card-title` + cardNumber + `"></span></h5>
                 <p class="card-text">
-                  <b>Address:</b> <span id="card-distance` +
-    cardNumber +
-    `"></span></br><small class="text-body-secondary"
-                    >Date Added: <span id="card-date-added` +
-    cardNumber +
-    `"></span></small>
+                  <b>Address:</b> <span id="card-distance` + cardNumber +`"></span></br>
+                  <small class="text-body-secondary">Date Added: <span id="card-date-added` + cardNumber + `"></span></small>
                 </p>
                 <a class="btn btn-primary read-more w-75" href="#">Read More</a>
               </div>
               <div class="card-right">
                 <span class="material-icons-outlined">clear</span>
                 <span class="material-icons-outlined">thumb_up</span>
-                <span class="material-icons-outlined" id="bookmark` +
-    cardNumber +
-    `">${iconString}</span>
+                <span class="material-icons-outlined" id="bookmark` + cardNumber + `">${iconString}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-  `;
+    </div>`;
   // adds the template literal to the div's inner html
   div.innerHTML = cardHTML;
   // adds the card at the end of the list
@@ -165,13 +143,14 @@ function addNewVolunteeringCard(docID, savedDocIDs) {
   cardNumber++;
 }
 
+// Looks through the current listing document's skills (as pointed to by docRef)
+// and checks to see if the current user has at least one of the skills.
+// If they do, return true, false otherwise.
+// This function gets called if the user is on main.html. A similar function
+// is called if the user is on filter.html.
 async function checkForMatchingSkills(docRef) {
-  // const id = getDocIdFromUrl();
-
   try {
-    // const volunteerRef = doc(db, "listings", id);
     const volunteerSnap = await getDoc(docRef);
-
     const volunteer = volunteerSnap.data();
 
     // The detail constants
@@ -191,7 +170,6 @@ async function checkForMatchingSkills(docRef) {
       volunteer.hasTeamwork,
       volunteer.hasToolSkills,
     ];
-    // console.log(skillDetails);
 
     const user = auth.currentUser;
     if (!user) return [];
@@ -204,7 +182,6 @@ async function checkForMatchingSkills(docRef) {
     const snapshot = await getDocs(userSkillsCol);
 
     snapshot.forEach((skillDoc) => {
-      // const skillId = skillDoc.id; // e.g. "cooking", "cleaning"
       const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
 
       var hasSkill;
@@ -219,18 +196,12 @@ async function checkForMatchingSkills(docRef) {
       skillsArray.push(hasSkill);
     });
 
-    // **console.log("Listing Booleans:", skillDetails);**
-    // **console.log("Skill Booleans:", skillsArray);**
-
     // checks for a match if the chosen document and the user skill has at least one of the same
     for (let i = 0; i < skillDetails.length; i++) {
       if (skillDetails[i] === true && skillsArray[i] === true) {
-        // console.log(true);
         return true; // or break if you're inside a function
       }
     }
-
-    // console.log(false);
     return false;
   } catch (error) {
     console.error("Error loading listing:", error);
@@ -238,13 +209,14 @@ async function checkForMatchingSkills(docRef) {
   }
 }
 
+// Returns true if a document (given by the path docRef) has at least
+// one of the skills in skillsList. Returns false otherwise.
+// Returns an empty array of skills if there's no user.
+// This function is similar to checkForMatchingSkills. However, this
+// function is designed for filter.html.
 async function filterForMatchingSkills(docRef, skillsList) {
-  // const id = getDocIdFromUrl();
-
   try {
-    // const volunteerRef = doc(db, "listings", id);
     const volunteerSnap = await getDoc(docRef);
-
     const volunteer = volunteerSnap.data();
 
     // The detail constants
@@ -264,48 +236,20 @@ async function filterForMatchingSkills(docRef, skillsList) {
       volunteer.hasTeamwork,
       volunteer.hasToolSkills,
     ];
-    // console.log(skillDetails);
 
     const user = auth.currentUser;
     if (!user) return [];
-
-    // const skillsArray = []; // ← final result
-
-    // const userDoc = doc(db, "users", user.uid);
-    // const userSkillsCol = collection(userDoc, "user-skills");
-
-    // const snapshot = await getDocs(userSkillsCol);
-
-    // snapshot.forEach((skillDoc) => {
-    // const skillId = skillDoc.id;                 // e.g. "cooking", "cleaning"
-    // const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
-
-    // convert to real boolean
-    // const hasSkill = hasSkillStr === "true";
-
-    // push structured entry into the list
-    // skillsArray.push(hasSkill);
-    // });
-
-    // **console.log("Listing Booleans:", skillDetails);**
-    // **console.log("Filter Booleans:", skillsList);**
-
     for (let i = 0; i < skillDetails.length; i++) {
       if (skillDetails[i] === true && skillsList[i] === true) {
-        // **console.log(true);**
         return true; // or break if you're inside a function
       }
     }
-
-    // **console.log(false);**
     return false;
   } catch (error) {
     console.error("Error loading listing:", error);
     document.getElementById("volunteerName").textContent = "Error loading listing.";
   }
 }
-
-showDashboard();
 
 // Helper: Get ALL saved listing IDs for the user once
 async function getSavedListingIds() {
@@ -314,9 +258,9 @@ async function getSavedListingIds() {
 
   const subCollectionRef = collection(db, "users", user.uid, "saved-listings");
   const querySnapshot = await getDocs(subCollectionRef);
-  
+
   // Return an array of strings: ["listings1", "listings2", ...]
-  return querySnapshot.docs.map(doc => doc.id);
+  return querySnapshot.docs.map((doc) => doc.id);
 }
 
 // Handle bookmark toggle clicks
@@ -335,9 +279,9 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
   }
 });
 
-// ------------------------------
 // finds the specific listing based off the bookmark that user clicked
 // saves the listing to listingDoc, a global variable
+// a helper function for saveListing
 async function findSpecificListing() {
   var listingDoc;
   let count = 1;
@@ -354,10 +298,10 @@ async function findSpecificListing() {
     }
     count++;
   }
-  // console.log(listingDoc);
   return listingDoc;
 }
-// ---------------------------------
+
+// Saves the clicked on listing to the current user's saved-listings collection
 async function saveListing() {
   // gets the current user
   const user = auth.currentUser;
@@ -374,3 +318,6 @@ async function saveListing() {
     console.log(error);
   }
 }
+
+// Starts the entire chain of functions to display listings to the user
+showDashboard();

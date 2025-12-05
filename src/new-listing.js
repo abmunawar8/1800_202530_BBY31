@@ -1,7 +1,13 @@
 import { auth, db } from "./firebaseConfig.js";
-import { collection, doc, setDoc, getDocs, getDoc } from "firebase/firestore";
-// import { addSkillBtnListeners } from "./set-up-account.js"
+import { collection, doc, setDoc, getDocs } from "firebase/firestore";
 
+// Global variables that track if the user has uploaded a file
+// and what skills are required for the listing
+var hasUploadedFile = false;
+var skillsJSON = {};
+
+// Adds event listeners for the skill buttons, which is reused
+// in set-up-account.js since the buttons are exactly the same
 export function addSkillBtnListeners() {
   let skillBtns = document.getElementsByClassName("skill-btn");
   for (let i = 0; i < skillBtns.length; i++) {
@@ -24,11 +30,8 @@ export function addSkillBtnListeners() {
   }
 }
 
+// Adds event listeners to the skill buttons
 addSkillBtnListeners();
-console.log("hello");
-
-var hasUploadedFile = false;
-var skillsJSON = {};
 
 // function that saves the fields the user entered into the new-listing.html form
 // and creates a new listing in the database with the correct info
@@ -52,6 +55,7 @@ async function saveListingInfo() {
   let imgPart2 = inputImage.substring(500000, inputImage.size);
   // Get the skills buttons
   getSkills();
+
   // Get the date that it was added
   const now = new Date();
   const dateString = now.toDateString();
@@ -161,4 +165,5 @@ function uploadImage() {
     }
   }
 }
+
 uploadImage();
