@@ -51,7 +51,6 @@ class SiteNavbar extends HTMLElement {
   }
   renderAuthControls() {
     const authControls = this.querySelector("#authControls");
-    console.log("loaded");
     // Initialize with invisible placeholder to maintain layout space
     authControls.innerHTML = `<div class="btn btn-outline-light" style="visibility: hidden; min-width: 70px; margin:8px;">Log out</div>`;
 
