@@ -52,6 +52,7 @@ class SiteNavbar extends HTMLElement {
     // Initialize with invisible placeholder to maintain layout space
     authControls.innerHTML = `<div class="btn btn-outline-light" style="visibility: hidden; min-width: 70px; margin:8px;">Log out</div>`;
 
+    // If a user is logged in, show "log out", otherwise show "log in"
     onAuthStateChanged(auth, (user) => {
       let updatedAuthControl;
       if (user) {
