@@ -95,7 +95,6 @@ Example:
 ├── firebase.json
 ├── firebase.indexes.json
 ├── firestore.rules
-├── index-photo.jpg
 ├── account-info.html
 ├── account.html
 ├── filter.html
