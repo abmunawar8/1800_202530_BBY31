@@ -1,6 +1,3 @@
-// import { db } from "./firebaseConfig.js";
-// import { doc, getDoc } from "firebase/firestore";
-
 import { getId } from "firebase/installations";
 import { onAuthReady } from "./authentication.js";
 import { db, auth } from "./firebaseConfig.js";
@@ -14,7 +11,7 @@ function getDocIdFromUrl() {
   return params.get("docID");
 }
 
-// Fetch the volunteer oppurtunity and display its name and image
+// Fetch the volunteer listing and display its name and image
 async function displayVolunteerInfo() {
   const id = getDocIdFromUrl();
 
@@ -23,9 +20,9 @@ async function displayVolunteerInfo() {
     const volunteerSnap = await getDoc(volunteerRef);
 
     currentVolunteerData = volunteerSnap.data();
-    // console.log(currentVolunteerData);
     const volunteer = currentVolunteerData;
     const name = volunteer.name;
+
     // The detail constants
     const address = volunteer.address;
     const city = volunteer.city;
@@ -112,15 +109,11 @@ async function displayVolunteerInfo() {
     document.getElementById("volunteerEmail").textContent = `Email: ${email}`;
     document.getElementById("volunteerPhoneNum").textContent = `Phone Number: ${phoneNum}`;
 
-    // 1️⃣ FETCH SAVED LIST ONCE HERE
-    // This waits for the array ["listings1", "listings4"] to load
+    // 1️⃣ FETCH SAVED LIST ONCE HERE -> This waits for the saved IDs to load
     const savedDocIDs = await getSavedListingIds();
-    // console.log("User's saved IDs:", savedDocIDs);
 
-    // 4️⃣ DETERMINE ICON STRING SYNCHRONOUSLY
-    // If the docID is in our list, use 'bookmark', otherwise 'bookmark_border'
+    // 4️⃣ DETERMINE ICON STRING SYNCHRONOUSLY -> If the docID is in our list, use 'bookmark'
     const iconString = savedDocIDs.includes(docName) ? "bookmark" : "bookmark_border";
-    // console.log(iconString);
 
     document.getElementById("saveIconText").textContent = `${iconString}`;
   } catch (error) {
@@ -153,6 +146,8 @@ document.getElementById("saveListingOption").addEventListener("click", (e) => {
       saveListing();
     } else if (icon.textContent === "bookmark") {
       icon.textContent = "bookmark_border";
+      alert("To unsave a listing, please go to the saved listings page.");
+      icon.textContent = "bookmark";
     }
   }
 });

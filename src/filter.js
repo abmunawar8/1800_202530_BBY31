@@ -1,5 +1,3 @@
-// import { db } from "./firebaseConfig.js";
-// import { doc, getDoc } from "firebase/firestore";
 import { collection, doc, getDocs } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebaseConfig.js";
@@ -19,37 +17,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const anySelected = Array.from(allInputs).some((input) => input.checked);
 
+    // 2. Check if they opened the skills filter dropdown
     if (!anySelected) {
       alert("Please select at least one filter option.");
       return;
     }
 
-    // 2. Build TRUE/FALSE list for skills checkboxes
+    // 3. Build TRUE/FALSE list for skills checkboxes
     const skillInputs = document.querySelectorAll("input[name='skills[]']");
     const skillBooleanList = Array.from(skillInputs).map((checkbox) => checkbox.checked);
 
-    // **console.log("Skill Booleans:", skillBooleanList);**
-    // Example output: [true, false, false, true, ...]
-
-    // 3. Get the selected date_sort radio value
+    // 4. Get the selected date_sort radio value
     const dateRadio = document.querySelector("input[name='date_sort[]']:checked");
-    // const dateSortSelection = dateRadio ? dateRadio.value : null;
 
-    // console.log("Date Sort Selection:", dateSortSelection);
-    // Example output: "newest" or "oldest" or null
-
-    // ⭐ Example: If you want to save or send them somewhere:
-    // const filterResults = {
-    // skills: skillBooleanList,
-    // date_sort: dateSortSelection
-    // };
-
-    // console.log("FINAL FILTER RESULTS:", filterResults);
-    // console.log("FINAL FILTER RESULTS:", skillBooleanList);
-
-    localStorage.setItem("skillsList", JSON.stringify(skillBooleanList));
-
-    // You can redirect, send to backend, store in localStorage, etc.
-    window.location.href = "main.html";
+    // 5. Check if they selected any filters at all
+    if (skillBooleanList.includes(true)) {
+      localStorage.setItem("skillsList", JSON.stringify(skillBooleanList));
+      window.location.href = "main.html";
+    } else {
+      alert("Please select at least one filter option.");
+    }
   });
 });

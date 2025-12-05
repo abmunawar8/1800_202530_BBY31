@@ -33,35 +33,26 @@ async function showVolunteerListings() {
   // gets a snapshot of all the docs in the listings collection in Firebase
   const querySnapshot = await getDocs(collection(db, "listings"));
 
-  // 1️⃣ FETCH SAVED LIST ONCE HERE
-  // This waits for the array ["listings1", "listings4"] to load
-  const savedDocIDs = await getSavedListingIds(); 
-  // console.log("User's saved IDs:", savedDocIDs);
+  // 1️⃣ FETCH SAVED LIST ONCE HERE -> This waits for the saved IDs to load
+  const savedDocIDs = await getSavedListingIds();
 
   let eachListing = 1;
   // iterates through each listing in the document
   querySnapshot.forEach(async (doc) => {
     let checker = true;
+
+    // checks whether the last page the user was on was filter.html
     if (document.referrer.includes("filter.html")) {
-      // **console.log("Came from filter.html");**
       const skillBooleanList = JSON.parse(localStorage.getItem("skillsList"));
       checker = await filterForMatchingSkills(doc.ref, skillBooleanList);
     } else {
-      // **console.log("Came from another page");**
       checker = await checkForMatchingSkills(doc.ref);
     }
-
-    //let checker = await checkForMatchingSkills(doc.ref);
-    // console.log(checker);
-    // console.log(document.referrer);
-    // const skillBooleanList = JSON.parse(localStorage.getItem("skillsList"));
-    // console.log("Skill Booleans:", skillBooleanList);
 
     // checker is a boolean that represents if the listing has at least one of the skills that the user has
     // if the user does share a skill with the listing, then display the card
     if (checker) {
       displayedDocs[displayedDocs.length] = doc.data();
-      // console.log(doc.data().docID);
       // 2️⃣ PASS THE SAVED LIST TO THE FUNCTION
       addNewVolunteeringCard(doc.data().docID, savedDocIDs);
 
@@ -110,10 +101,8 @@ function addNewVolunteeringCard(docID, savedDocIDs) {
   const div = document.createElement("div");
   div.classList.add(...classesToAdd);
 
-  // 4️⃣ DETERMINE ICON STRING SYNCHRONOUSLY
-  // If the docID is in our list, use 'bookmark', otherwise 'bookmark_border'
+  // 4️⃣ DETERMINE ICON STRING SYNCHRONOUSLY -> If the docID is in our list, use 'bookmark'
   const iconString = savedDocIDs.includes(docID) ? "bookmark" : "bookmark_border";
-  // console.log(iconString);
 
   const cardHTML =
     `
@@ -166,10 +155,7 @@ function addNewVolunteeringCard(docID, savedDocIDs) {
 }
 
 async function checkForMatchingSkills(docRef) {
-  // const id = getDocIdFromUrl();
-
   try {
-    // const volunteerRef = doc(db, "listings", id);
     const volunteerSnap = await getDoc(docRef);
 
     const volunteer = volunteerSnap.data();
@@ -191,7 +177,6 @@ async function checkForMatchingSkills(docRef) {
       volunteer.hasTeamwork,
       volunteer.hasToolSkills,
     ];
-    // console.log(skillDetails);
 
     const user = auth.currentUser;
     if (!user) return [];
@@ -203,6 +188,7 @@ async function checkForMatchingSkills(docRef) {
 
     const snapshot = await getDocs(userSkillsCol);
 
+    // obtains the current skills that the user has
     snapshot.forEach((skillDoc) => {
       // const skillId = skillDoc.id; // e.g. "cooking", "cleaning"
       const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
@@ -219,18 +205,13 @@ async function checkForMatchingSkills(docRef) {
       skillsArray.push(hasSkill);
     });
 
-    // **console.log("Listing Booleans:", skillDetails);**
-    // **console.log("Skill Booleans:", skillsArray);**
-
     // checks for a match if the chosen document and the user skill has at least one of the same
     for (let i = 0; i < skillDetails.length; i++) {
       if (skillDetails[i] === true && skillsArray[i] === true) {
-        // console.log(true);
         return true; // or break if you're inside a function
       }
     }
 
-    // console.log(false);
     return false;
   } catch (error) {
     console.error("Error loading listing:", error);
@@ -239,8 +220,6 @@ async function checkForMatchingSkills(docRef) {
 }
 
 async function filterForMatchingSkills(docRef, skillsList) {
-  // const id = getDocIdFromUrl();
-
   try {
     // const volunteerRef = doc(db, "listings", id);
     const volunteerSnap = await getDoc(docRef);
@@ -264,40 +243,16 @@ async function filterForMatchingSkills(docRef, skillsList) {
       volunteer.hasTeamwork,
       volunteer.hasToolSkills,
     ];
-    // console.log(skillDetails);
 
     const user = auth.currentUser;
     if (!user) return [];
 
-    // const skillsArray = []; // ← final result
-
-    // const userDoc = doc(db, "users", user.uid);
-    // const userSkillsCol = collection(userDoc, "user-skills");
-
-    // const snapshot = await getDocs(userSkillsCol);
-
-    // snapshot.forEach((skillDoc) => {
-    // const skillId = skillDoc.id;                 // e.g. "cooking", "cleaning"
-    // const hasSkillStr = skillDoc.data().hasSkill; // "true" or "false"
-
-    // convert to real boolean
-    // const hasSkill = hasSkillStr === "true";
-
-    // push structured entry into the list
-    // skillsArray.push(hasSkill);
-    // });
-
-    // **console.log("Listing Booleans:", skillDetails);**
-    // **console.log("Filter Booleans:", skillsList);**
-
     for (let i = 0; i < skillDetails.length; i++) {
       if (skillDetails[i] === true && skillsList[i] === true) {
-        // **console.log(true);**
         return true; // or break if you're inside a function
       }
     }
 
-    // **console.log(false);**
     return false;
   } catch (error) {
     console.error("Error loading listing:", error);
@@ -314,7 +269,7 @@ async function getSavedListingIds() {
 
   const subCollectionRef = collection(db, "users", user.uid, "saved-listings");
   const querySnapshot = await getDocs(subCollectionRef);
-  
+
   // Return an array of strings: ["listings1", "listings2", ...]
   return querySnapshot.docs.map(doc => doc.id);
 }
@@ -325,12 +280,20 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
   if (e.target.classList.contains("material-icons-outlined")) {
     const icon = e.target;
 
+    // Find the parent card
+    const card = icon.closest(".card"); // adjust selector if needed
+
+    // Get the h5 text from the sibling .card-left
+    const titleText = card.querySelector(".card-left h5").textContent.trim();
+
     // Toggle only if it’s the bookmark icon
     if (icon.textContent === "bookmark_border") {
       icon.textContent = "bookmark";
-      saveListing();
+      saveListing(titleText);
     } else if (icon.textContent === "bookmark") {
       icon.textContent = "bookmark_border";
+      alert("To unsave a listing, please go to the saved listings page.");
+      icon.textContent = "bookmark";
     }
   }
 });
@@ -338,14 +301,14 @@ document.getElementById("cards-here").addEventListener("click", (e) => {
 // ------------------------------
 // finds the specific listing based off the bookmark that user clicked
 // saves the listing to listingDoc, a global variable
-async function findSpecificListing() {
+async function findSpecificListing(titleText) {
   var listingDoc;
   let count = 1;
   for (let i = 0; i < displayedDocs.length; i++) {
     let currentIcon = document.getElementById("bookmark" + count);
-    // console.log("bookmark" + count);
+    let currentTitle = document.getElementById("card-title" + count).textContent;
     try {
-      if (currentIcon.innerText == "bookmark") {
+      if (currentIcon.innerText == "bookmark" && titleText === currentTitle) {
         listingDoc = displayedDocs[i];
         break;
       }
@@ -354,22 +317,21 @@ async function findSpecificListing() {
     }
     count++;
   }
-  // console.log(listingDoc);
   return listingDoc;
 }
 // ---------------------------------
-async function saveListing() {
+async function saveListing(titleText) {
   // gets the current user
   const user = auth.currentUser;
   // tries to find the listing. If any await or document grabbing fails,
   // log the error to the console
   try {
-    const listing = await findSpecificListing();
+    const listing = await findSpecificListing(titleText);
     const userDoc = doc(db, "users", user.uid);
     const savedListings = collection(userDoc, "saved-listings");
     await setDoc(doc(savedListings, listing.docID), {
       ...listing,
-    });
+    })
   } catch (error) {
     console.log(error);
   }

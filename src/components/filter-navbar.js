@@ -1,5 +1,4 @@
-// Custom javascript component only for the navbar
-
+// Custom javascript component only for the filter navbar
 class FilterNavbar extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `

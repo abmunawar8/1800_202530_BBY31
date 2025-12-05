@@ -1,3 +1,4 @@
+// Custom javascript component only for the listing-info navbar
 class ListingInfoNavbar extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
